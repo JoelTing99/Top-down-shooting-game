@@ -24,7 +24,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""id"": ""65a479b7-4ce6-431b-9f9a-437be9f6b517"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press(behavior=2)""
                 },
                 {
                     ""name"": ""Movement"",
@@ -156,8 +156,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""id"": ""cb817feb-9fe2-4a12-9e01-e9e384064962"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
+                    ""processors"": ""NormalizeVector2"",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""JoystickDirection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

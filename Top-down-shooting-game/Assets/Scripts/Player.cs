@@ -11,24 +11,30 @@ public class Player : MonoBehaviour
     private float Speed;
     [SerializeField]
     private bool MouseRotating;
+    [SerializeField]
+    private GameObject BulletPrefab;
+    [SerializeField]
+    private Transform FirePoint;
+    private bool IsShooting;
+    private bool ClickChack = true;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         Controls = new InputMaster();
-
+        if (MouseRotating)
+        {
+            Controls.Player.MouseDirection.performed += _ => MouseRotation();
+        }
+        else
+        {
+            Controls.Player.JoystickDirection.performed += _ => JoystickRotation();
+        }
+        Controls.Player.Shooting.performed += _ => Shooting();
     }
     private void FixedUpdate()
     {
         MoveMent();
-        if (MouseRotating)
-        {
-            MouseRotation();
-        }
-        else
-        {
-            JoystickRotation();
-        }
     }
 
     private void MoveMent()
@@ -53,6 +59,34 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0f, -TurnAngle, 0f));
         }
     }
+    private void Shooting()
+    {
+        if (!IsShooting)
+        {
+            if (ClickChack)
+            {
+                ClickChack = false;
+                IsShooting = true;
+                StartCoroutine(HoldShooting(0.5f));
+            }
+        }
+        else
+        {
+            IsShooting = false;
+            return;
+        }
+        
+    }
+    IEnumerator HoldShooting(float Cycle)
+    {
+        while (IsShooting)
+        {
+            Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
+            yield return new WaitForSeconds(Cycle);
+            ClickChack = true;
+        }
+    }
+    
     private void OnEnable()
     {
         Controls.Enable();
