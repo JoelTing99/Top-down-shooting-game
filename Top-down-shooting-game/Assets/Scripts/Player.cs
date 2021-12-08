@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 public class Player : MonoBehaviour
 {
@@ -17,7 +18,9 @@ public class Player : MonoBehaviour
     private Transform FirePoint;
     private bool IsShooting;
     private bool ClickChack = true;
-
+    [SerializeField]
+    private VisualEffect ShootingEffect;
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -67,7 +70,7 @@ public class Player : MonoBehaviour
             {
                 ClickChack = false;
                 IsShooting = true;
-                StartCoroutine(HoldShooting(0.5f));
+                StartCoroutine(HoldShooting(1f));
             }
         }
         else
@@ -82,9 +85,10 @@ public class Player : MonoBehaviour
         while (IsShooting)
         {
             Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
+            ShootingEffect.Play();
             yield return new WaitForSeconds(Cycle);
-            ClickChack = true;
         }
+        ClickChack = true;
     }
     
     private void OnEnable()

@@ -49,6 +49,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""0dfa3cb9-44e9-4806-9614-18c2b77e8eae"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -161,6 +169,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""JoystickDirection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c805d71f-2a9c-48b2-be14-45de069384ad"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""edfea961-947a-4dfc-9c46-1ef44b8f610e"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -201,6 +231,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_MouseDirection = m_Player.FindAction("MouseDirection ", throwIfNotFound: true);
         m_Player_JoystickDirection = m_Player.FindAction("JoystickDirection", throwIfNotFound: true);
+        m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -254,6 +285,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_MouseDirection;
     private readonly InputAction m_Player_JoystickDirection;
+    private readonly InputAction m_Player_Roll;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -262,6 +294,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @MouseDirection => m_Wrapper.m_Player_MouseDirection;
         public InputAction @JoystickDirection => m_Wrapper.m_Player_JoystickDirection;
+        public InputAction @Roll => m_Wrapper.m_Player_Roll;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -283,6 +316,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @JoystickDirection.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoystickDirection;
                 @JoystickDirection.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoystickDirection;
                 @JoystickDirection.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoystickDirection;
+                @Roll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
+                @Roll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
+                @Roll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -299,6 +335,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @JoystickDirection.started += instance.OnJoystickDirection;
                 @JoystickDirection.performed += instance.OnJoystickDirection;
                 @JoystickDirection.canceled += instance.OnJoystickDirection;
+                @Roll.started += instance.OnRoll;
+                @Roll.performed += instance.OnRoll;
+                @Roll.canceled += instance.OnRoll;
             }
         }
     }
@@ -327,5 +366,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnMouseDirection(InputAction.CallbackContext context);
         void OnJoystickDirection(InputAction.CallbackContext context);
+        void OnRoll(InputAction.CallbackContext context);
     }
 }
