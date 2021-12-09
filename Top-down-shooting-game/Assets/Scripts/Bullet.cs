@@ -23,11 +23,17 @@ public class Bullet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        HitEffect.SendEvent("Hit");
-        transform.SetParent(other.transform);
-        FlyEffect.Stop();
-        Speed = 0f;
-        Destroy(gameObject, 5f);
+        if (!other.CompareTag("Player"))
+        {
+            HitEffect.SendEvent("Hit");
+            if (!other.CompareTag("Wall"))
+            {
+                transform.SetParent(other.transform);
+            }
+            FlyEffect.Stop();
+            Speed = 0f;
+            Destroy(gameObject, 3f);
+        }
     }
 
 }

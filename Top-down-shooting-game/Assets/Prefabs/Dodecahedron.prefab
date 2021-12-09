@@ -740,6 +740,7 @@ GameObject:
   - component: {fileID: 6047809141855964029}
   - component: {fileID: 7378250632247943951}
   - component: {fileID: 6605289012993610215}
+  - component: {fileID: 6961537659521300580}
   m_Layer: 0
   m_Name: Dodecahedron
   m_TagString: Untagged
@@ -802,6 +803,28 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.95
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &6961537659521300580
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387778774856831431}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.9
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &7823395120701983326
 GameObject:
   m_ObjectHideFlags: 0
