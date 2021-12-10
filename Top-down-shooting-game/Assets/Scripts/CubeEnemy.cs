@@ -7,10 +7,11 @@ public class CubeEnemy : MonoBehaviour
 {
     private Transform Player;
     private NavMeshAgent NavMeshAgent;
-
+    private Animator Animator;
     private void Awake()
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
+        Animator = GetComponent<Animator>();
     }
 
     private void Update()
