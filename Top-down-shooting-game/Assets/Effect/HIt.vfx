@@ -17,9 +17,9 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: 503
+    x: 463
     y: -43
-    width: 1025
+    width: 1065
     height: 2219
 --- !u!114 &114350483966674976
 MonoBehaviour:
@@ -50,7 +50,7 @@ MonoBehaviour:
   m_ImportDependencies: []
   m_GraphVersion: 6
   m_ResourceVersion: 1
-  m_saved: 0
+  m_saved: 1
   m_SubgraphDependencies: []
   m_CategoryPath: 
 --- !u!2058629511 &8926484042661614527
@@ -127,7 +127,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614569}
   - {fileID: 8926484042661614580}
   - {fileID: 8926484042661614817}
-  m_UIPosition: {x: 949, y: 345}
+  m_UIPosition: {x: 940, y: 345}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -474,9 +474,9 @@ MonoBehaviour:
   - {fileID: 8926484042661614831}
   dataType: 0
   capacity: 20
-  stripCapacity: 16
-  particlePerStripCount: 16
-  m_Space: 0
+  stripCapacity: 1
+  particlePerStripCount: 20
+  m_Space: 1
 --- !u!114 &8926484042661614569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1783,7 +1783,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 503, y: 1033}
+  m_UIPosition: {x: 463, y: 345}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -1845,7 +1845,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614807}
   m_OutputSlots: []
   m_Label: 
-  m_Data: {fileID: 0}
+  m_Data: {fileID: 8926484042661614843}
   m_InputFlowSlot:
   - link: []
   m_OutputFlowSlot:
@@ -2789,3 +2789,29 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   m_Direction: 0
   m_LinkedSlots: []
+--- !u!114 &8926484042661614843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d78581a96eae8bf4398c282eb0b098bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 114350483966674976}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  title: 
+  m_Owners:
+  - {fileID: 8926484042661614806}
+  dataType: 0
+  capacity: 128
+  stripCapacity: 1
+  particlePerStripCount: 128
+  m_Space: 0

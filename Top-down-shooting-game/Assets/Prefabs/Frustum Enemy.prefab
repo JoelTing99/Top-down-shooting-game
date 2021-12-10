@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 4873398339560774453}
   - component: {fileID: 6650110223251420824}
   m_Layer: 0
-  m_Name: Frustum
+  m_Name: Frustum Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
