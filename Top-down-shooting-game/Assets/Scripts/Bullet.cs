@@ -19,17 +19,19 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
+
         transform.Translate(Vector3.forward * Speed * Time.deltaTime);
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player"))
+        if (!other.CompareTag("Player") || !other.CompareTag("Bullet"))
         {
-            HitEffect.SendEvent("Hit");
-            FlyEffect.Stop();
             Speed = 0f;
-            Destroy(gameObject, 3f);
+            FlyEffect.Stop();
+            HitEffect.SendEvent("Hit");
+            
             transform.SetParent(other.transform);
+            Destroy(gameObject, 10f);
         }
         else
         {

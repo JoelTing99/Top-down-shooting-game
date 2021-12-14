@@ -199,9 +199,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1647099161606688716}
-  - component: {fileID: 2143139704933762413}
   - component: {fileID: 4476636270800086370}
   - component: {fileID: 2834300963734715295}
+  - component: {fileID: 1801147180696471801}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Bullet
@@ -228,22 +228,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &2143139704933762413
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130338247805064566}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &4476636270800086370
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -272,6 +256,22 @@ MonoBehaviour:
   Speed: 20
   HitEffect: {fileID: 5517179927298023011}
   FlyEffect: {fileID: 7316272186648226263}
+--- !u!54 &1801147180696471801
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130338247805064566}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5278102330271855609
 GameObject:
   m_ObjectHideFlags: 0
