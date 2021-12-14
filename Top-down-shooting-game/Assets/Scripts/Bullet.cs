@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
             HitEffect.SendEvent("Hit");
             
             transform.SetParent(other.transform);
-            Destroy(gameObject, 10f);
+            Destroy(gameObject, 3f);
         }
         else
         {

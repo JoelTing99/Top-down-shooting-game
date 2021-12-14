@@ -11,9 +11,8 @@ public class CameraFollow : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(Vector3.Distance(Player.position, transform.position - new Vector3(0f, 8.5f, -2.5f)) >= 0.5)
-        {
-            transform.position = Vector3.Lerp(transform.position, Player.position + new Vector3(0f, 8.5f, -2.5f), 0.03f);
-        }
+        
+        transform.position = Vector3.Lerp(transform.position, Player.position + new Vector3(0f, 8.5f, -3f), 0.125f);
+        
     }
 }

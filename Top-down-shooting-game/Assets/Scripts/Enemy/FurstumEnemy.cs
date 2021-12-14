@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CubeEnemy : MonoBehaviour
+public class FurstumEnemy : MonoBehaviour
 {
     private Transform Player;
     private NavMeshAgent NavMeshAgent;
@@ -11,10 +11,11 @@ public class CubeEnemy : MonoBehaviour
     private void Awake()
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
-        Animator = GetComponent<Animator>();
+        //Animator = GetComponent<Animator>();
         Player = GameObject.FindWithTag("Player").transform;
         StartCoroutine(PathRenew());
     }
+
 
     private void Update()
     {
@@ -22,12 +23,11 @@ public class CubeEnemy : MonoBehaviour
         transform.LookAt(Player);
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 0.7f) && hit.collider.CompareTag("Player"))
         {
-            Animator.SetBool("IsAttack", true);
-            Debug.Log("Attacking");
+            //Animator.SetBool("IsAttack", true);
         }
         else
         {
-            Animator.SetBool("IsAttack", false);
+            //Animator.SetBool("IsAttack", false);
         }
     }
     private IEnumerator PathRenew()
