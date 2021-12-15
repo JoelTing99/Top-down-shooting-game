@@ -11,7 +11,7 @@ public class FurstumEnemy : MonoBehaviour
     private void Awake()
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
-        //Animator = GetComponent<Animator>();
+        Animator = GetComponent<Animator>();
         Player = GameObject.FindWithTag("Player").transform;
         StartCoroutine(PathRenew());
     }
@@ -23,11 +23,11 @@ public class FurstumEnemy : MonoBehaviour
         transform.LookAt(Player);
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 0.7f) && hit.collider.CompareTag("Player"))
         {
-            //Animator.SetBool("IsAttack", true);
+            Animator.SetBool("IsAttack", true);
         }
         else
         {
-            //Animator.SetBool("IsAttack", false);
+            Animator.SetBool("IsAttack", false);
         }
     }
     private IEnumerator PathRenew()

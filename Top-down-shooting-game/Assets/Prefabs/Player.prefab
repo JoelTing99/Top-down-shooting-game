@@ -84,6 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256bd888cc02a964ca5454dec0fc2a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RollCoolDownTime: 5
   Speed: 3
   MouseRotating: 1
   BulletPrefab: {fileID: 2130338247805064566, guid: 54d22de689ca97247a41ff10737a592e, type: 3}

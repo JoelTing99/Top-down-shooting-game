@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     private bool ClickChack = true;
     private bool RollIsCoolDown = true;
     [SerializeField]
+    private float RollCoolDownTime;
+    [SerializeField]
     private float Speed;
     [SerializeField]
     private bool MouseRotating;
@@ -125,13 +127,13 @@ public class Player : MonoBehaviour
             RollIsCoolDown = false;
             Vector3 Target = new Vector3(InputVector.x, 0, InputVector.y);
             rb.AddForce(Target * 1000 * Distance * Time.deltaTime, ForceMode.VelocityChange);
-            StartCoroutine(RollCoolDownCount());
+            StartCoroutine(RollCoolDownCount(RollCoolDownTime));
             RollEffect.SendEvent("Roll");
         }
     }
-    private IEnumerator RollCoolDownCount()
+    private IEnumerator RollCoolDownCount(float time)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(time);
         RollIsCoolDown = true;
     }
     private void OnEnable()
