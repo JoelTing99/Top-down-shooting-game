@@ -252,6 +252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3959129962705099034}
+  - component: {fileID: 3299249128188010794}
   - component: {fileID: 2070217971}
   - component: {fileID: 6938390457729740674}
   - component: {fileID: 4873398339560774453}
@@ -259,7 +260,7 @@ GameObject:
   - component: {fileID: 8606141508104935839}
   m_Layer: 0
   m_Name: Frustum Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,6 +285,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3299249128188010794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4447998514530927520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb73c0a84b0da214ba054444082449bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2070217971
 MonoBehaviour:
   m_ObjectHideFlags: 0
