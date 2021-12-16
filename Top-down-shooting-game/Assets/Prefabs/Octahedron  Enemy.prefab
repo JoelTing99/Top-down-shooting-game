@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7875148573659009112}
   - component: {fileID: 6743589571300120436}
   - component: {fileID: 8237276233241920856}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bottom3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 5657802022482716710}
   - component: {fileID: 8084718334469180112}
   - component: {fileID: 7946521022765669391}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bottom2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 5338897072582208192}
   - component: {fileID: 1455863676537276678}
   - component: {fileID: 5480618310039742552}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Top2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 831033778593182990}
   - component: {fileID: 7662469031413819491}
   - component: {fileID: 4427872030533537885}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bottom4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 8707345625687820816}
   - component: {fileID: 7032693437854627339}
   - component: {fileID: 1714720521}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Octahedron  Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -435,7 +435,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 2
-  m_Acceleration: 8
+  m_Acceleration: 1
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 5
@@ -489,7 +489,7 @@ GameObject:
   - component: {fileID: 2273260534451672787}
   - component: {fileID: 1073709785332607176}
   - component: {fileID: 6606699746577865593}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,7 +570,7 @@ GameObject:
   - component: {fileID: 5518962950575456849}
   - component: {fileID: 9730082952095858}
   - component: {fileID: 7100142880431888588}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -651,7 +651,7 @@ GameObject:
   - component: {fileID: 7103128883481107831}
   - component: {fileID: 3158991419204318313}
   - component: {fileID: 2591171396819601990}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Top3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -732,7 +732,7 @@ GameObject:
   - component: {fileID: 6075682310742172492}
   - component: {fileID: 6034367160351540398}
   - component: {fileID: 6280605140776131480}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Top4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

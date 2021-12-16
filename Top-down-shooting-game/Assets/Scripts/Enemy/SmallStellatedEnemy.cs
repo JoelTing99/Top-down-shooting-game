@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class FurstumEnemy : MonoBehaviour
+public class SmallStellatedEnemy : MonoBehaviour
 {
-
     private Animator Animator;
     [SerializeField]
     private bool IsAttacking;
@@ -13,8 +11,6 @@ public class FurstumEnemy : MonoBehaviour
     {
         Animator = GetComponent<Animator>();
     }
-
-
     private void Update()
     {
         Attact();
