@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-public class DodecahedronEnemy : MonoBehaviour
-{
 
+public class OctahedronEnemy : MonoBehaviour
+{
     private Animator Animator;
     [SerializeField]
     private bool IsAttacking;
@@ -20,7 +19,7 @@ public class DodecahedronEnemy : MonoBehaviour
     }
     private void Attact()
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 0.7f) && hit.collider.CompareTag("Player"))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 5f, 3))
         {
             Animator.SetBool("IsAttack", true);
         }
@@ -36,5 +35,10 @@ public class DodecahedronEnemy : MonoBehaviour
         {
 
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawSphere(transform.position, 5);
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2191048435470925428}
   - component: {fileID: 2191048435470925429}
   - component: {fileID: 919132149173462648}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 209904787164815135}
   - component: {fileID: 7124422779587996456}
   - component: {fileID: 7337539816904387777}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Side.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 5734819489987523656}
   - component: {fileID: 4196517254453258376}
   - component: {fileID: 7924947101623360049}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,7 +281,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2191048435472609023}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 5448375614351184705}
   - component: {fileID: 4177982632409354417}
   - component: {fileID: 7612371511899558424}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 8310773054434383588}
   - component: {fileID: 7902273701381145557}
   - component: {fileID: 1915656366851092235}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 1863919638887970222}
   - component: {fileID: 7827737557939987217}
   - component: {fileID: 80107489794931486}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Roll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +585,7 @@ GameObject:
   - component: {fileID: 5086159109336140503}
   - component: {fileID: 5908841523828647340}
   - component: {fileID: 7955132345872914294}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -666,7 +666,7 @@ GameObject:
   - component: {fileID: 8623497445744250305}
   - component: {fileID: 5522850365699783611}
   - component: {fileID: 3738762669422152364}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -747,7 +747,7 @@ GameObject:
   - component: {fileID: 7799805343646783299}
   - component: {fileID: 1457989388321983221}
   - component: {fileID: 2797869073460978703}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Shooting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -856,7 +856,7 @@ GameObject:
   - component: {fileID: 2403856420633607714}
   - component: {fileID: 8883078922903466360}
   - component: {fileID: 6616947893057997058}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
