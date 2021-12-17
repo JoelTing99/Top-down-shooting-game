@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyBullet : MonoBehaviour
 {
     private float Speed;
+    [HideInInspector]
+    public bool IsCharging;
     private void Awake()
     {
         transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
@@ -12,35 +14,36 @@ public class EnemyBullet : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+        if (IsCharging)
+        {
+            Charge();
+        }
+        else
+        {
+            return;
+        }
     }
 
     public void Charge()
     {
         Speed = 0f;
-        StartCoroutine(Charging());
-    }
-    public IEnumerator Charging()
-    {
-        while(transform.localScale.x < 0.3f || transform.localScale.y < 0.3f || transform.localScale.z < 0.3f)
+        if(transform.localScale.x < 0.3f || transform.localScale.y < 0.3f || transform.localScale.z < 0.3f)
         {
-            transform.localScale *= 1.1f;
-            yield return new WaitForSeconds(0.1f);
+            transform.localScale *= 1.01f;
         }
     }
     public void Fire()
     {
-        StartCoroutine(FireChountDown());
-    }
-    private IEnumerator FireChountDown()
-    {
-        yield return new WaitForSeconds(2f);
         Speed = 10f;
+        transform.SetParent(null);
     }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Wall") || other.CompareTag("Player"))
         {
             Destroy(gameObject);
         }
+        
     }
 }
