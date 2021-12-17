@@ -6,6 +6,7 @@ using UnityEngine.VFX;
 
 public class Player : MonoBehaviour
 {
+    private HealthSystem HealthSystem;
     private Rigidbody rb;
     private InputMaster Controls;
     private Animator Animator;
@@ -143,5 +144,18 @@ public class Player : MonoBehaviour
     private void OnDisable()
     {
         Controls.Disable();
+    }
+
+    public void SetHealthSystem(HealthSystem HealthSystem)
+    {
+        this.HealthSystem = HealthSystem;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            HealthSystem.Damage(10);
+        }
     }
 }
