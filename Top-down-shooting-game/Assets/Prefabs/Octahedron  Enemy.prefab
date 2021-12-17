@@ -339,7 +339,6 @@ GameObject:
   - component: {fileID: 4740192989120587511}
   - component: {fileID: 8707345625687820816}
   - component: {fileID: 7032693437854627339}
-  - component: {fileID: 1714720521}
   m_Layer: 7
   m_Name: Octahedron  Enemy
   m_TagString: Enemy
@@ -366,6 +365,7 @@ Transform:
   - {fileID: 5338897072582208192}
   - {fileID: 7103128883481107831}
   - {fileID: 6075682310742172492}
+  - {fileID: 727315708194702586}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -393,7 +393,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddcce880f0fe37340b1bfcd3aff9b012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsAttacking: 0
+  Bullet: {fileID: 6570467183387317317, guid: 96b26dfac01bd884ab48213f5ec8dab6, type: 3}
+  FirePoint: {fileID: 727315708194702586}
+  Fire: 0
+  Charging: 0
 --- !u!54 &3982701205227634988
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -465,19 +468,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1714720521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4758220319040203683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddcce880f0fe37340b1bfcd3aff9b012, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsAttacking: 0
 --- !u!1 &6610675003274531441
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,3 +792,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8136889433227741062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 727315708194702586}
+  m_Layer: 7
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &727315708194702586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8136889433227741062}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 1.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5279142933367337241}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
