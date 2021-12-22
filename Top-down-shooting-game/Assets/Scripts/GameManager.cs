@@ -6,15 +6,15 @@ public class GameManager : MonoBehaviour
 {
     private HealthSystem PlayerHealth;
     private Player Player;
-    private HealthBar HealthBar;
+    private PlayerHealthBar PlayerHealthBar;
 
     private void Awake()
     {
         PlayerHealth = new HealthSystem(100);
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        HealthBar = FindObjectOfType<HealthBar>();
+        PlayerHealthBar = FindObjectOfType<PlayerHealthBar>();
         Player.SetHealthSystem(PlayerHealth);
-        HealthBar.SetHealthSystem(PlayerHealth);
+        PlayerHealthBar.SetHealthSystem(PlayerHealth);
     }
 
     private void Update()

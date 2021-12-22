@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player") || !other.CompareTag("Bullet"))
+        if (!other.CompareTag("Player") || !other.CompareTag("Bullet") || !other.CompareTag("Wall"))
         {
             Speed = 0f;
             FlyEffect.Stop();

@@ -4,20 +4,37 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-
-public class HealthBar : MonoBehaviour
+public class PlayerHealthBar : MonoBehaviour
 {
+    private float TimerMax = 1f;
     private Image Bar;
+    private Image DamageBar;
+    private float Timer;
     private HealthSystem HealthSystem;
 
-    private void Start()
+    private void Awake()
     {
         Bar = transform.Find("Bar").GetComponent<Image>();
+        DamageBar = transform.Find("DamageBar").GetComponent<Image>();
+    }
+    private void Start()
+    {
+        SetHealth(HealthSystem.GetHealthPercent());
+        DamageBar.fillAmount = Bar.fillAmount;
         HealthSystem.OnDamaged += HealthSystem_OnDamaged;
+    }
+    private void Update()
+    {
+        Timer -= Time.deltaTime;
+        if (Timer <= 0 && Bar.fillAmount <= DamageBar.fillAmount)
+        {
+            DamageBar.fillAmount -= 0.3f * Time.deltaTime;
+        }
     }
 
     private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
     {
+        Timer = TimerMax;
         SetHealth(HealthSystem.GetHealthPercent());
     }
 
