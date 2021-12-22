@@ -6,8 +6,8 @@ using UnityEngine.VFX;
 
 public class Player : MonoBehaviour
 {
-    private HealthSystem HealthSystem;
     private Rigidbody rb;
+    private HealthSystem HealthSystem;
     private InputMaster Controls;
     private Animator Animator;
     private bool IsShooting;
@@ -145,17 +145,8 @@ public class Player : MonoBehaviour
     {
         Controls.Disable();
     }
-
     public void SetHealthSystem(HealthSystem HealthSystem)
     {
         this.HealthSystem = HealthSystem;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Bullet"))
-        {
-            HealthSystem.Damage(10);
-        }
     }
 }

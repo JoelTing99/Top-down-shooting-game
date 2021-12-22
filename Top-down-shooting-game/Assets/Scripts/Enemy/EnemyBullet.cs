@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    private HealthSystem HealthSystem;
     private float Speed;
     [HideInInspector]
     public bool IsCharging;
@@ -38,6 +37,7 @@ public class EnemyBullet : MonoBehaviour
         Speed = 10f;
         transform.SetParent(null);
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Wall") || other.CompareTag("Player"))
@@ -46,6 +46,4 @@ public class EnemyBullet : MonoBehaviour
         }
         
     }
-    
-
 }
