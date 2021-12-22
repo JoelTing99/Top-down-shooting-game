@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private HealthSystem HealthSystem;
+    private HealthSystem PlayerHealth;
     private Player Player;
+    private HealthBar HealthBar;
 
     private void Awake()
     {
-        HealthSystem = new HealthSystem(100);
+        PlayerHealth = new HealthSystem(100);
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        Player.SetHealthSystem(HealthSystem);
+        HealthBar = FindObjectOfType<HealthBar>();
+        Player.SetHealthSystem(PlayerHealth);
+        HealthBar.SetHealthSystem(PlayerHealth);
     }
 
     private void Update()
     {
-        Debug.Log(HealthSystem.GetHealth());
+        Debug.Log(PlayerHealth.GetHealth());
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            HealthSystem.Damage(10);
+            PlayerHealth.Damage(10);
         }
+        
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HealthSystem
 {
-    //public event EventHandler OnDamage;
+    public event EventHandler OnDamaged;
 
     private float Health;
     private float HealthMax;
@@ -32,6 +32,10 @@ public class HealthSystem
         if(Health < 0)
         {
             Health = 0;
+        }
+        if(OnDamaged != null)
+        {
+            OnDamaged(this, EventArgs.Empty);
         }
     }
 }
