@@ -8,8 +8,11 @@ public class DodecahedronEnemy : MonoBehaviour
     private GameManager GameManager;
     private EnemyHealthBar EnemyHealthBar;
     private Animator Animator;
+    private int AttactCount;
     [SerializeField]
     private bool IsAttacking;
+    [SerializeField]
+    private GameObject Destory;
     private void Start()
     {
         GameManager = FindObjectOfType<GameManager>();
@@ -25,6 +28,7 @@ public class DodecahedronEnemy : MonoBehaviour
     private void Update()
     {
         Attact();
+        Dead();
     }
     private void Attact()
     {
@@ -38,11 +42,30 @@ public class DodecahedronEnemy : MonoBehaviour
         }
         if (IsAttacking)
         {
-
+            Collider[] Collide = Physics.OverlapSphere(transform.position, 1.5f);
+            foreach (var collide in Collide)
+            {
+                if (collide.CompareTag("Player") && AttactCount > 0)
+                {
+                    PlayerHealthSystem.Damage(GameManager.GetDodecahedronDamage());
+                    FindObjectOfType<Player>().isStun = true;
+                }
+            }
+            AttactCount--;
         }
         else
         {
-
+            AttactCount = 1;
+            FindObjectOfType<Player>().isStun = false;
+        }
+    }
+    private void Dead()
+    {
+        if(HealthSystem.GetHealth() <= 0)
+        {
+            GameObject destory = Instantiate(Destory, transform.position, transform.rotation);
+            Destroy(gameObject);
+            Destroy(destory, 5);
         }
     }
 

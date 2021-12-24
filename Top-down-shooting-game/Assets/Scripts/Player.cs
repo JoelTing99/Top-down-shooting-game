@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private bool IsShooting;
     private bool ClickChack = true;
     private bool RollIsCoolDown = true;
+    private bool IsStun;
     [SerializeField]
     private float RollCoolDownTime;
     [SerializeField]
@@ -27,6 +28,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private VisualEffect RollEffect;
     
+    public bool isStun
+    {
+        get { return IsStun; }
+        set { IsStun = value; }
+    }
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -45,7 +51,10 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        MoveMent();
+        if (!IsStun)
+        {
+            MoveMent();
+        }
         if(rb.velocity.x == 0 || rb.velocity.y == 0)
         {
             RollEffect.SendEvent("Stop");
@@ -87,14 +96,11 @@ public class Player : MonoBehaviour
     }
     private void Shooting()
     {
-        if (!IsShooting)
+        if (!IsShooting && ClickChack)
         {
-            if (ClickChack)
-            {
-                ClickChack = false;
-                IsShooting = true;
-                StartCoroutine(HoldShooting(1f));
-            }
+            ClickChack = false;
+            IsShooting = true;
+            StartCoroutine(HoldShooting(1f));
         }
         else
         {
@@ -105,7 +111,7 @@ public class Player : MonoBehaviour
     }
     IEnumerator HoldShooting(float Cycle)
     {
-        while (IsShooting)
+        while (IsShooting && !IsStun)
         {
             Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
             ShootingEffect.SendEvent("Shoot");
