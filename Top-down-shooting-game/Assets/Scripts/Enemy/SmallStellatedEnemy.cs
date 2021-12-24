@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class SmallStellatedEnemy : MonoBehaviour
 {
+    private HealthSystem HealthSystem;
+    private GameManager GameManager;
+    private EnemyHealthBar EnemyHealthBar;
     private Animator Animator;
     [SerializeField]
     private bool IsAttacking;
     private void Awake()
     {
+        GameManager = FindObjectOfType<GameManager>();
+        HealthSystem = new HealthSystem(GameManager.GetSmallStellatedHP());
+        EnemyHealthBar = transform.Find("HealthBar").GetComponent<EnemyHealthBar>();
+        EnemyHealthBar.SetHealthSystem(HealthSystem);
         Animator = GetComponent<Animator>();
+        transform.Find("HealthBar").gameObject.SetActive(false);
     }
     private void Update()
     {
@@ -32,6 +40,14 @@ public class SmallStellatedEnemy : MonoBehaviour
         else
         {
 
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PlayerBullet"))
+        {
+            transform.Find("HealthBar").gameObject.SetActive(true);
+            HealthSystem.Damage(GameManager.GetPlayerDamage());
         }
     }
 }

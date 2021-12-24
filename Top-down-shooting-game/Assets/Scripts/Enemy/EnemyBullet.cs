@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
+    private HealthSystem PlayerHealthSystem;
+    private GameManager GameManager;
     private float Speed;
     [HideInInspector]
     public bool IsCharging;
-    private void Awake()
+    private void Start()
     {
+        GameManager = FindObjectOfType<GameManager>();
+        PlayerHealthSystem = GameManager.GetPlayerHealth();
         transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
     }
     private void Update()
@@ -40,10 +44,14 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Wall") || other.CompareTag("Player"))
+        if (other.CompareTag("Wall"))
         {
             Destroy(gameObject);
         }
-        
+        if (other.CompareTag("Player"))
+        {
+            PlayerHealthSystem.Damage(GameManager.GetOctahedronDamage());
+            Destroy(gameObject);
+        }
     }
 }

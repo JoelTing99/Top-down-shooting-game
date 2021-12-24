@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class OctahedronEnemy : MonoBehaviour
 {
+    private HealthSystem HealthSystem;
+    private GameManager GameManager;
+    private EnemyHealthBar EnemyHealthBar;
     private Animator Animator;
     [SerializeField]
     private GameObject Bullet;
@@ -17,7 +20,12 @@ public class OctahedronEnemy : MonoBehaviour
     private GameObject bullet;
     private void Awake()
     {
+        GameManager = FindObjectOfType<GameManager>();
+        HealthSystem = new HealthSystem(GameManager.GetOctahedronHP());
+        EnemyHealthBar = transform.Find("HealthBar").GetComponent<EnemyHealthBar>();
+        EnemyHealthBar.SetHealthSystem(HealthSystem);
         Animator = GetComponent<Animator>();
+        transform.Find("HealthBar").gameObject.SetActive(false);
     }
 
 
@@ -78,5 +86,12 @@ public class OctahedronEnemy : MonoBehaviour
             }
         }
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PlayerBullet"))
+        {
+            transform.Find("HealthBar").gameObject.SetActive(true);
+            HealthSystem.Damage(GameManager.GetPlayerDamage());
+        }
+    }
 }

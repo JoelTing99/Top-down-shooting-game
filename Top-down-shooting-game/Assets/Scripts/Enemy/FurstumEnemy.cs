@@ -5,13 +5,20 @@ using UnityEngine.AI;
 
 public class FurstumEnemy : MonoBehaviour
 {
-
+    private HealthSystem HealthSystem;
+    private GameManager GameManager;
+    private EnemyHealthBar EnemyHealthBar;
     private Animator Animator;
     [SerializeField]
     private bool IsAttacking;
-    private void Awake()
+    private void Start()
     {
+        GameManager = FindObjectOfType<GameManager>();
+        HealthSystem = new HealthSystem(GameManager.GetFurstumHP());
+        EnemyHealthBar = transform.Find("HealthBar").GetComponent<EnemyHealthBar>();
+        EnemyHealthBar.SetHealthSystem(HealthSystem);
         Animator = GetComponent<Animator>();
+        transform.Find("HealthBar").gameObject.SetActive(false);
     }
 
 
@@ -36,6 +43,14 @@ public class FurstumEnemy : MonoBehaviour
         else
         {
 
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PlayerBullet"))
+        {
+            transform.Find("HealthBar").gameObject.SetActive(true);
+            HealthSystem.Damage(GameManager.GetPlayerDamage());
         }
     }
 }

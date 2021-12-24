@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-public class PlayerHealthBar : MonoBehaviour
+public class EnemyHealthBar : MonoBehaviour
 {
     private float TimerMax = 1f;
     private Image Bar;
@@ -12,16 +11,11 @@ public class PlayerHealthBar : MonoBehaviour
     private float Timer;
     private HealthSystem HealthSystem;
 
-    private void Awake()
+    private void Start()
     {
         Bar = transform.Find("Bar").GetComponent<Image>();
         DamageBar = transform.Find("DamageBar").GetComponent<Image>();
-    }
-    private void Start()
-    {
-        SetHealth(HealthSystem.GetHealthPercent());
         DamageBar.fillAmount = Bar.fillAmount;
-        HealthSystem.OnDamaged += HealthSystem_OnDamaged;
     }
     private void Update()
     {
@@ -30,6 +24,11 @@ public class PlayerHealthBar : MonoBehaviour
         {
             DamageBar.fillAmount -= 0.3f * Time.deltaTime;
         }
+    }
+    private void LateUpdate()
+    {
+        transform.LookAt(Camera.main.transform.position);
+        transform.Rotate(0, 180, 0);
     }
 
     private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
@@ -45,6 +44,6 @@ public class PlayerHealthBar : MonoBehaviour
     public void SetHealthSystem(HealthSystem HealthSystem)
     {
         this.HealthSystem = HealthSystem;
+        this.HealthSystem.OnDamaged += HealthSystem_OnDamaged;
     }
-
 }

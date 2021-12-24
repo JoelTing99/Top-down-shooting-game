@@ -5,7 +5,6 @@ using UnityEngine.VFX;
 
 public class Bullet : MonoBehaviour
 {
-    private Rigidbody rb;
     [SerializeField]
     private float Speed;
     [SerializeField]
@@ -14,7 +13,6 @@ public class Bullet : MonoBehaviour
     private VisualEffect FlyEffect;
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -24,19 +22,24 @@ public class Bullet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player") || !other.CompareTag("Bullet") || !other.CompareTag("Wall"))
+        if (other.CompareTag("Player") || other.CompareTag("PlayerBullet"))
+        {
+            Destroy(gameObject);
+        }
+        else if (other.CompareTag("Wall"))
         {
             Speed = 0f;
             FlyEffect.Stop();
             HitEffect.SendEvent("Hit");
-            
-            transform.SetParent(other.transform);
             Destroy(gameObject, 3f);
         }
         else
         {
-            Destroy(gameObject);
+            Speed = 0f;
+            FlyEffect.Stop();
+            HitEffect.SendEvent("Hit");
+            transform.SetParent(other.transform);
+            Destroy(gameObject, 3f);
         }
     }
-
 }
