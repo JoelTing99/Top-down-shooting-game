@@ -8,11 +8,11 @@ public class DodecahedronEnemy : MonoBehaviour
     private GameManager GameManager;
     private EnemyHealthBar EnemyHealthBar;
     private Animator Animator;
-    private int AttactCount;
+    private int AttackCount;
     [SerializeField]
     private bool IsAttacking;
     [SerializeField]
-    private GameObject Destory;
+    private GameObject DeStroy;
     private void Start()
     {
         GameManager = FindObjectOfType<GameManager>();
@@ -27,10 +27,10 @@ public class DodecahedronEnemy : MonoBehaviour
 
     private void Update()
     {
-        Attact();
+        Attack();
         Dead();
     }
-    private void Attact()
+    private void Attack()
     {
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 0.7f) && hit.collider.CompareTag("Player"))
         {
@@ -45,17 +45,17 @@ public class DodecahedronEnemy : MonoBehaviour
             Collider[] Collide = Physics.OverlapSphere(transform.position, 1.5f);
             foreach (var collide in Collide)
             {
-                if (collide.CompareTag("Player") && AttactCount > 0)
+                if (collide.CompareTag("Player") && AttackCount > 0)
                 {
                     PlayerHealthSystem.Damage(GameManager.GetDodecahedronDamage());
                     FindObjectOfType<Player>().isStun = true;
                 }
             }
-            AttactCount--;
+            AttackCount--;
         }
         else
         {
-            AttactCount = 1;
+            AttackCount = 1;
             FindObjectOfType<Player>().isStun = false;
         }
     }
@@ -63,7 +63,7 @@ public class DodecahedronEnemy : MonoBehaviour
     {
         if(HealthSystem.GetHealth() <= 0)
         {
-            GameObject destory = Instantiate(Destory, transform.position, transform.rotation);
+            GameObject destory = Instantiate(DeStroy, transform.position, transform.rotation);
             Destroy(gameObject);
             Destroy(destory, 5);
         }

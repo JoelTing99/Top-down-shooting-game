@@ -11,7 +11,7 @@ public class CubeEnemy : MonoBehaviour
     private Animator Animator;
     private GameManager GameManager;
     [SerializeField]
-    private GameObject Destory;
+    private GameObject DeStroy;
     [SerializeField]
     private VisualEffect AttactEffect;
     [SerializeField]
@@ -29,10 +29,10 @@ public class CubeEnemy : MonoBehaviour
 
     private void Update()
     {
-        Attact();
+        Attack();
         Dead();
     }
-    private void Attact()
+    private void Attack()
     {
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 0.7f) && hit.collider.CompareTag("Player"))
         {
@@ -59,7 +59,7 @@ public class CubeEnemy : MonoBehaviour
     {
         if (HealthSystem.GetHealth() <= 0)
         {
-            GameObject destroy = Instantiate(Destory, transform.position, transform.rotation);
+            GameObject destroy = Instantiate(DeStroy, transform.position, transform.rotation);
             Destroy(gameObject);
             Destroy(destroy, 5);
         }

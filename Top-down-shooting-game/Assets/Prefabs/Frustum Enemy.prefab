@@ -604,7 +604,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3959129962705099034
 Transform:
   m_ObjectHideFlags: 0
@@ -653,6 +653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsAttacking: 0
+  Destroy: {fileID: 6464499444489142016, guid: f99f802446dd02844bb023aced02da6d, type: 3}
 --- !u!54 &6938390457729740674
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -349,7 +349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1931846828307708339}
   m_Layer: 7
-  m_Name: Dodecahedron Destory
+  m_Name: Dodecahedron Destroy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

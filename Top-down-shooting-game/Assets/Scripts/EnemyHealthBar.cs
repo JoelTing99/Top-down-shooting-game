@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class EnemyHealthBar : MonoBehaviour
 {
-    private float TimerMax = 1f;
+    private float TimerMax = 0.5f;
     private Image Bar;
     private Image DamageBar;
     private float Timer;

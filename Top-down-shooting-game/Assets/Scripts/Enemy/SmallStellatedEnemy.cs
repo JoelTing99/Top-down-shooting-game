@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SmallStellatedEnemy : MonoBehaviour
 {
@@ -8,10 +9,14 @@ public class SmallStellatedEnemy : MonoBehaviour
     private GameManager GameManager;
     private EnemyHealthBar EnemyHealthBar;
     private Animator Animator;
+    private NavMeshAgent NavMeshAgent;
     [SerializeField]
     private bool IsAttacking;
-    private void Awake()
+    [SerializeField]
+    private GameObject DeStroy;
+    private void Start()
     {
+        NavMeshAgent = GetComponent<NavMeshAgent>();
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetSmallStellatedHP());
         EnemyHealthBar = transform.Find("HealthBar").GetComponent<EnemyHealthBar>();
@@ -21,9 +26,9 @@ public class SmallStellatedEnemy : MonoBehaviour
     }
     private void Update()
     {
-        Attact();
+        Attack();
     }
-    private void Attact()
+    private void Attack()
     {
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 1f) && hit.collider.CompareTag("Player"))
         {
@@ -35,11 +40,8 @@ public class SmallStellatedEnemy : MonoBehaviour
         }
         if (IsAttacking)
         {
-
-        }
-        else
-        {
-
+            Instantiate(DeStroy, transform.position, transform.rotation);
+            Destroy(gameObject);
         }
     }
     private void OnTriggerEnter(Collider other)

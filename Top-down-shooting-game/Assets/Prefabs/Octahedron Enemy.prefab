@@ -455,12 +455,12 @@ GameObject:
   - component: {fileID: 8707345625687820816}
   - component: {fileID: 7032693437854627339}
   m_Layer: 7
-  m_Name: Octahedron  Enemy
+  m_Name: Octahedron Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5279142933367337241
 Transform:
   m_ObjectHideFlags: 0
@@ -513,6 +513,7 @@ MonoBehaviour:
   FirePoint: {fileID: 727315708194702586}
   Fire: 0
   Charging: 0
+  Destroy: {fileID: 8987601073146097167, guid: 2fbd3b93eb629c14687c150fdb9d9e46, type: 3}
 --- !u!54 &3982701205227634988
 Rigidbody:
   m_ObjectHideFlags: 0

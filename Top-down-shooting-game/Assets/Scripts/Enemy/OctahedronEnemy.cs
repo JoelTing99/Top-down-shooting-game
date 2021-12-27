@@ -16,9 +16,11 @@ public class OctahedronEnemy : MonoBehaviour
     private bool Fire;
     [SerializeField]
     private bool Charging;
+    [SerializeField]
+    private GameObject DeStroy;
     private int BulletCount;
     private GameObject bullet;
-    private void Awake()
+    private void Start()
     {
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetOctahedronHP());
@@ -31,10 +33,11 @@ public class OctahedronEnemy : MonoBehaviour
 
     private void Update()
     {
-        Attact();
+        Attack();
         FireAction();
+        Dead();
     }
-    private void Attact()
+    private void Attack()
     {
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit HIT, 5f) && !HIT.collider.CompareTag("Wall"))
         {
@@ -84,6 +87,15 @@ public class OctahedronEnemy : MonoBehaviour
                 bullet.GetComponent<EnemyBullet>().Fire();
                 BulletCount = 0;
             }
+        }
+    }
+    private void Dead()
+    {
+        if (HealthSystem.GetHealth() <= 0)
+        {
+            GameObject destory = Instantiate(DeStroy, transform.position, transform.rotation);
+            Destroy(gameObject);
+            Destroy(destory, 5);
         }
     }
     private void OnTriggerEnter(Collider other)
