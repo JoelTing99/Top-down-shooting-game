@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     private HealthSystem PlayerHealth;
     private PlayerHealthBar PlayerHealthBar;
 
-    private float PlayerHP = 50;
+    private float PlayerHP = 100;
     private float CubeHP = 50;
     private float DodecahedronHP = 50;
     private float FurstumHP = 50;
@@ -25,15 +25,6 @@ public class GameManager : MonoBehaviour
         PlayerHealth = new HealthSystem(PlayerHP);
         PlayerHealthBar = FindObjectOfType<PlayerHealthBar>();
         PlayerHealthBar.SetHealthSystem(PlayerHealth);
-    }
-
-    private void Update()
-    {
-        Debug.Log(PlayerHealth.GetHealth());
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            PlayerHealth.Damage(10);
-        }
     }
     public HealthSystem GetPlayerHealth()
     {

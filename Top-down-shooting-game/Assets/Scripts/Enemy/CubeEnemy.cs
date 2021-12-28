@@ -11,7 +11,7 @@ public class CubeEnemy : MonoBehaviour
     private Animator Animator;
     private GameManager GameManager;
     [SerializeField]
-    private GameObject DeStroy;
+    private GameObject Destroyed;
     [SerializeField]
     private VisualEffect AttactEffect;
     [SerializeField]
@@ -59,7 +59,15 @@ public class CubeEnemy : MonoBehaviour
     {
         if (HealthSystem.GetHealth() <= 0)
         {
-            GameObject destroy = Instantiate(DeStroy, transform.position, transform.rotation);
+            GameObject destroy = Instantiate(Destroyed, transform.position, transform.rotation);
+            Collider[] Collider = Physics.OverlapSphere(transform.position, 2f);
+            foreach (var collider in Collider)
+            {
+                if (collider.GetComponent<Rigidbody>() != null)
+                {
+                    collider.GetComponent<Rigidbody>().AddExplosionForce(400, transform.position, 1);
+                }
+            }
             Destroy(gameObject);
             Destroy(destroy, 5);
         }

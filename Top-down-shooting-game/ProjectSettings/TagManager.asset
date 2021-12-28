@@ -9,6 +9,8 @@ TagManager:
   - Bullet
   - Enemy
   - PlayerBullet
+  - SpawnPoint
+  - Centre
   layers:
   - Default
   - TransparentFX

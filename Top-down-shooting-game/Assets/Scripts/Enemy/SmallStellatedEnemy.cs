@@ -13,7 +13,7 @@ public class SmallStellatedEnemy : MonoBehaviour
     [SerializeField]
     private bool IsAttacking;
     [SerializeField]
-    private GameObject DeStroy;
+    private GameObject Destroyed;
     private void Start()
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
@@ -27,6 +27,7 @@ public class SmallStellatedEnemy : MonoBehaviour
     private void Update()
     {
         Attack();
+        Dead();
     }
     private void Attack()
     {
@@ -40,7 +41,15 @@ public class SmallStellatedEnemy : MonoBehaviour
         }
         if (IsAttacking)
         {
-            Instantiate(DeStroy, transform.position, transform.rotation);
+            Instantiate(Destroyed, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
+    }
+    private void Dead()
+    {
+        if (HealthSystem.GetHealth() <= 0)
+        {
+            GameObject destory = Instantiate(Destroyed, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }

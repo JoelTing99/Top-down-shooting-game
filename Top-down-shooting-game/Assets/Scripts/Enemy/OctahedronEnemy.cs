@@ -17,7 +17,7 @@ public class OctahedronEnemy : MonoBehaviour
     [SerializeField]
     private bool Charging;
     [SerializeField]
-    private GameObject DeStroy;
+    private GameObject Destroyed;
     private int BulletCount;
     private GameObject bullet;
     private void Start()
@@ -93,7 +93,15 @@ public class OctahedronEnemy : MonoBehaviour
     {
         if (HealthSystem.GetHealth() <= 0)
         {
-            GameObject destory = Instantiate(DeStroy, transform.position, transform.rotation);
+            GameObject destory = Instantiate(Destroyed, transform.position, transform.rotation);
+            Collider[] Collider = Physics.OverlapSphere(transform.position, 2f);
+            foreach (var collider in Collider)
+            {
+                if (collider.GetComponent<Rigidbody>() != null)
+                {
+                    collider.GetComponent<Rigidbody>().AddExplosionForce(400, transform.position, 1);
+                }
+            }
             Destroy(gameObject);
             Destroy(destory, 5);
         }

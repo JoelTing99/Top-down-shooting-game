@@ -513,7 +513,7 @@ MonoBehaviour:
   FirePoint: {fileID: 727315708194702586}
   Fire: 0
   Charging: 0
-  Destroy: {fileID: 8987601073146097167, guid: 2fbd3b93eb629c14687c150fdb9d9e46, type: 3}
+  Destroyed: {fileID: 8987601073146097167, guid: 2fbd3b93eb629c14687c150fdb9d9e46, type: 3}
 --- !u!54 &3982701205227634988
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -872,7 +872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsAttacking: 0
-  DeStroy: {fileID: 2448667900211520521, guid: afc808418dc34ea46a6d940a3a72f057, type: 3}
+  Destroyed: {fileID: 2448667900211520521, guid: afc808418dc34ea46a6d940a3a72f057, type: 3}
 --- !u!135 &-7910282950279607159
 SphereCollider:
   m_ObjectHideFlags: 0

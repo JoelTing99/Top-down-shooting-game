@@ -22,6 +22,7 @@ public class SmallStellatedAttack : MonoBehaviour
                 PlayerHealthSystem.Damage(GameManager.GetSmallStellatedDamage());
             }
         }
+        Destroy(gameObject, 5);
     }
 
 }
