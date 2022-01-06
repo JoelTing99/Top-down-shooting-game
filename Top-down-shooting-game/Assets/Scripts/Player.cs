@@ -8,12 +8,15 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     private Rigidbody rb;
+    private GameManager GameManager;
     private InputMaster Controls;
     private Animator Animator;
+    private LineRenderer Line;
     private bool IsShooting;
     private bool ClickChack = true;
     private bool CanRoll = true;
     private bool CanThrowGrenade = true;
+    private bool HoldingThrow;
     private bool IsStun;
     [SerializeField] private Image ShootingPeriodImage;
     [SerializeField] private float ShootingPeriod;
@@ -28,6 +31,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform FirePoint;
     [SerializeField] private VisualEffect ShootingEffect;
     [SerializeField] private VisualEffect RollEffect;
+    [SerializeField] private int NumPoints;
+    [SerializeField] private LayerMask CollidableLayer;
     
     public bool isStun
     {
@@ -36,6 +41,8 @@ public class Player : MonoBehaviour
     }
     private void Awake()
     {
+        GameManager = FindObjectOfType<GameManager>();
+        Line = GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody>();
         Animator = GetComponent<Animator>();
         Controls = new InputMaster();
@@ -57,6 +64,14 @@ public class Player : MonoBehaviour
         if(rb.velocity.x == 0 || rb.velocity.y == 0)
         {
             RollEffect.SendEvent("Stop");
+        }
+        if (HoldingThrow)
+        {
+            DrawProjection();
+        }
+        else
+        {
+            Line.positionCount = 0;
         }
     }
     private void MoveMent()
@@ -158,13 +173,19 @@ public class Player : MonoBehaviour
     }
     private void ThrowGrenade()
     {
-        if(CanThrowGrenade && !IsStun)
+        Debug.Log("Click");
+        if(CanThrowGrenade && HoldingThrow && !IsStun)
         {
+            HoldingThrow = false;
             CanThrowGrenade = false;
             GameObject grenade = Instantiate(Grenade, FirePoint.position, transform.rotation);
             Rigidbody rb = grenade.GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * -3 + Vector3.up * 5, ForceMode.VelocityChange);
+            rb.AddForce((FirePoint.transform.up - transform.forward) * GameManager.GetThrowDistance(), ForceMode.VelocityChange) ;
             StartCoroutine(ThrowGrenadeCoolDownCount(ThrowGrenadeTime));
+        }
+        else if(CanThrowGrenade)
+        {
+            HoldingThrow = true;
         }
     }
     private IEnumerator ThrowGrenadeCoolDownCount(float time)
@@ -172,9 +193,29 @@ public class Player : MonoBehaviour
         while(time >= 0)
         {
             time -= Time.deltaTime;
+            ThrowGrenadeCoolDownImage.fillAmount = time / ThrowGrenadeTime;
             yield return null;
         }
         CanThrowGrenade = true;
+    }
+    private void DrawProjection()
+    {
+        Line.positionCount = NumPoints;
+        List<Vector3> points = new List<Vector3>();
+        Vector3 StartingPosition = FirePoint.position;
+        Vector3 StartingVelosity = (FirePoint.up - transform.forward) * GameManager.GetThrowDistance();
+        for (float i = 0; i < NumPoints; i += 0.1f)
+        {
+            Vector3 NewPoint = StartingPosition + i * StartingVelosity;
+            NewPoint.y = StartingPosition.y + i * StartingVelosity.y + Physics.gravity.y / 2f * i * i;
+            points.Add(NewPoint);
+            if(Physics.OverlapSphere(NewPoint, 0.1f, CollidableLayer).Length > 0)
+            {
+                Line.positionCount = points.Count;
+                break;
+            }
+        }
+        Line.SetPositions(points.ToArray());
     }
 
     private void OnEnable()

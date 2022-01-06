@@ -85,14 +85,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256bd888cc02a964ca5454dec0fc2a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShootingPeriodImage: {fileID: 0}
+  ShootingPeriod: 1
   RollCoolDownImage: {fileID: 0}
   RollCoolDownTime: 5
+  Grenade: {fileID: 4667216123059944504, guid: 9d3a07e7b16b3b440a46a12f25130650, type: 3}
+  ThrowGrenadeCoolDownImage: {fileID: 0}
+  ThrowGrenadeTime: 3
   Speed: 3
   MouseRotating: 1
   BulletPrefab: {fileID: 2130338247805064566, guid: 54d22de689ca97247a41ff10737a592e, type: 3}
   FirePoint: {fileID: 2191048435472609023}
   ShootingEffect: {fileID: 1457989388321983221}
   RollEffect: {fileID: 7827737557939987217}
+  NumPoints: 0
 --- !u!95 &919132149173462648
 Animator:
   serializedVersion: 3

@@ -64,7 +64,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""id"": ""f429b797-5e51-488f-995f-b64affd4b659"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press(behavior=2)""
                 }
             ],
             ""bindings"": [
@@ -204,9 +204,20 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""cec4388f-430a-40ce-82ab-54820d6703ef"",
                     ""path"": ""<Keyboard>/g"",
-                    ""interactions"": ""Press(behavior=1)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
+                    ""action"": ""Throw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6dbc64e3-2228-44ef-96df-45a326d96b2b"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Throw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     private HealthSystem PlayerHealth;
     private PlayerHealthBar PlayerHealthBar;
 
+    private float ThrowDistance = 3;
+
     private float PlayerHP = 100;
     private float CubeHP = 50;
     private float DodecahedronHP = 50;
@@ -58,8 +60,6 @@ public class GameManager : MonoBehaviour
     {
         return SmallStellatedHP;
     }
-
-
     public float GetCubeDamage()
     {
         return CubeDamage;
@@ -87,5 +87,9 @@ public class GameManager : MonoBehaviour
     public float GetGrenadeDamage()
     {
         return GrenadeDamage;
+    }
+    public float GetThrowDistance()
+    {
+        return ThrowDistance;
     }
 }
