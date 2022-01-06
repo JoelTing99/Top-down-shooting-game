@@ -20,10 +20,10 @@ public class Player : MonoBehaviour
     private bool IsStun;
     [SerializeField] private Image ShootingPeriodImage;
     [SerializeField] private float ShootingPeriod;
-    [SerializeField] private Image RollCoolDownImage;
+    [SerializeField] private GameObject RollCoolDownImage;
     [SerializeField] private float RollCoolDownTime;
     [SerializeField] private GameObject Grenade;
-    [SerializeField] private Image ThrowGrenadeCoolDownImage;
+    [SerializeField] private GameObject ThrowGrenadeCoolDownImage;
     [SerializeField] private float ThrowGrenadeTime;
     [SerializeField] private float Speed;
     [SerializeField] private bool MouseRotating;
@@ -41,6 +41,8 @@ public class Player : MonoBehaviour
     }
     private void Awake()
     {
+        ThrowGrenadeCoolDownImage.SetActive(false);
+        RollCoolDownImage.SetActive(false);
         GameManager = FindObjectOfType<GameManager>();
         Line = GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody>();
@@ -61,17 +63,20 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         MoveMent();
-        if(rb.velocity.x == 0 || rb.velocity.y == 0)
+    }
+    private void Update()
+    {
+        if (rb.velocity.x == 0 || rb.velocity.y == 0)
         {
             RollEffect.SendEvent("Stop");
         }
         if (HoldingThrow)
         {
-            DrawProjection();
+            DrawGrenadeProjection();
         }
         else
         {
-            Line.positionCount = 0;
+            DrawProjection();
         }
     }
     private void MoveMent()
@@ -122,7 +127,7 @@ public class Player : MonoBehaviour
         else
         {
             IsShooting = false;
-            ShootingPeriodImage.fillAmount = 1;
+            ShootingPeriodImage.GetComponent<Image>().fillAmount = 1;
             return;
         }
     }
@@ -132,7 +137,7 @@ public class Player : MonoBehaviour
         while (IsShooting && !IsStun)
         {
             Count -= Time.deltaTime;
-            ShootingPeriodImage.fillAmount = Count / ShootingPeriod;
+            ShootingPeriodImage.GetComponent<Image>().fillAmount = Count / ShootingPeriod;
             if(Count <= 0)
             {
                 Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
@@ -163,17 +168,18 @@ public class Player : MonoBehaviour
     }
     private IEnumerator RollCoolDownCount(float time)
     {
+        RollCoolDownImage.SetActive(true);
         while(time >= 0)
         {
             time -= Time.deltaTime;
-            RollCoolDownImage.fillAmount = time / RollCoolDownTime;
+            RollCoolDownImage.GetComponent<Image>().fillAmount = time / RollCoolDownTime;
             yield return null;
         }
         CanRoll = true;
+        RollCoolDownImage.SetActive(false);
     }
     private void ThrowGrenade()
     {
-        Debug.Log("Click");
         if(CanThrowGrenade && HoldingThrow && !IsStun)
         {
             HoldingThrow = false;
@@ -190,17 +196,18 @@ public class Player : MonoBehaviour
     }
     private IEnumerator ThrowGrenadeCoolDownCount(float time)
     {
+        ThrowGrenadeCoolDownImage.SetActive(true);
         while(time >= 0)
         {
             time -= Time.deltaTime;
-            ThrowGrenadeCoolDownImage.fillAmount = time / ThrowGrenadeTime;
+            ThrowGrenadeCoolDownImage.GetComponent<Image>().fillAmount = time / ThrowGrenadeTime;
             yield return null;
         }
         CanThrowGrenade = true;
+        ThrowGrenadeCoolDownImage.SetActive(false);
     }
-    private void DrawProjection()
+    private void DrawGrenadeProjection()
     {
-        Line.positionCount = NumPoints;
         List<Vector3> points = new List<Vector3>();
         Vector3 StartingPosition = FirePoint.position;
         Vector3 StartingVelosity = (FirePoint.up - transform.forward) * GameManager.GetThrowDistance();
@@ -210,6 +217,23 @@ public class Player : MonoBehaviour
             NewPoint.y = StartingPosition.y + i * StartingVelosity.y + Physics.gravity.y / 2f * i * i;
             points.Add(NewPoint);
             if(Physics.OverlapSphere(NewPoint, 0.1f, CollidableLayer).Length > 0)
+            {
+                Line.positionCount = points.Count;
+                break;
+            }
+        }
+        Line.SetPositions(points.ToArray());
+    }
+    private void DrawProjection()
+    {
+        List<Vector3> points = new List<Vector3>();
+        Vector3 StartingPosition = FirePoint.position;
+        Vector3 StartingVelosity = -transform.forward;
+        for (float i = 0; i < NumPoints; i++)
+        {
+            Vector3 NewPoint = StartingPosition + i * StartingVelosity;
+            points.Add(NewPoint);
+            if (Physics.OverlapSphere(NewPoint, 0.3f, CollidableLayer).Length > 0)
             {
                 Line.positionCount = points.Count;
                 break;
