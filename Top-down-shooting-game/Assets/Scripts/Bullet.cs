@@ -11,8 +11,10 @@ public class Bullet : MonoBehaviour
     private VisualEffect HitEffect;
     [SerializeField]
     private VisualEffect FlyEffect;
+    private GameManager GameManager;
     private void Awake()
     {
+        GameManager = FindObjectOfType<GameManager>();
     }
 
     void Update()
@@ -35,6 +37,24 @@ public class Bullet : MonoBehaviour
         }
         else
         {
+            switch (other.name)
+            {
+                case "Cube Enemy":
+                    other.GetComponent<CubeEnemy>().TakeDamage(GameManager.GetPlayerDamage());
+                    break;
+                case "Dodecahedron Enemy":
+                    other.GetComponent<DodecahedronEnemy>().TakeDamage(GameManager.GetPlayerDamage());
+                    break;
+                case "Frustum Enemy":
+                    other.GetComponent<FurstumEnemy>().TakeDamage(GameManager.GetPlayerDamage());
+                    break;
+                case "Octahedron Enemy":
+                    other.GetComponent<OctahedronEnemy>().TakeDamage(GameManager.GetPlayerDamage());
+                    break;
+                case "Small Stellated Enemy":
+                    other.GetComponent<SmallStellatedEnemy>().TakeDamage(GameManager.GetPlayerDamage());
+                    break;
+            }
             Speed = 0f;
             FlyEffect.Stop();
             HitEffect.SendEvent("Hit");

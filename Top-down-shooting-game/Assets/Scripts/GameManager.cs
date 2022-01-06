@@ -20,11 +20,19 @@ public class GameManager : MonoBehaviour
     private float FurstumDamage = 10;
     private float OctahedronDamage = 10;
     private float SmallStellatedDamage = 10;
+    private float GrenadeDamage = 20;
     private void Awake()
     {
         PlayerHealth = new HealthSystem(PlayerHP);
         PlayerHealthBar = FindObjectOfType<PlayerHealthBar>();
         PlayerHealthBar.SetHealthSystem(PlayerHealth);
+    }
+    private void Update()
+    {
+        if(Input.touchCount >= 1)
+        {
+            Debug.Log("Touch");
+        }
     }
     public HealthSystem GetPlayerHealth()
     {
@@ -75,5 +83,9 @@ public class GameManager : MonoBehaviour
     public float GetSmallStellatedDamage()
     {
         return SmallStellatedDamage;
+    }
+    public float GetGrenadeDamage()
+    {
+        return GrenadeDamage;
     }
 }

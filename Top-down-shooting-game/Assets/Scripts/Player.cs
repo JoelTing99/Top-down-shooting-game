@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -11,22 +12,22 @@ public class Player : MonoBehaviour
     private Animator Animator;
     private bool IsShooting;
     private bool ClickChack = true;
-    private bool RollIsCoolDown = true;
+    private bool CanRoll = true;
+    private bool CanThrowGrenade = true;
     private bool IsStun;
-    [SerializeField]
-    private float RollCoolDownTime;
-    [SerializeField]
-    private float Speed;
-    [SerializeField]
-    private bool MouseRotating;
-    [SerializeField]
-    private GameObject BulletPrefab;
-    [SerializeField]
-    private Transform FirePoint;
-    [SerializeField]
-    private VisualEffect ShootingEffect;
-    [SerializeField]
-    private VisualEffect RollEffect;
+    [SerializeField] private Image ShootingPeriodImage;
+    [SerializeField] private float ShootingPeriod;
+    [SerializeField] private Image RollCoolDownImage;
+    [SerializeField] private float RollCoolDownTime;
+    [SerializeField] private GameObject Grenade;
+    [SerializeField] private Image ThrowGrenadeCoolDownImage;
+    [SerializeField] private float ThrowGrenadeTime;
+    [SerializeField] private float Speed;
+    [SerializeField] private bool MouseRotating;
+    [SerializeField] private GameObject BulletPrefab;
+    [SerializeField] private Transform FirePoint;
+    [SerializeField] private VisualEffect ShootingEffect;
+    [SerializeField] private VisualEffect RollEffect;
     
     public bool isStun
     {
@@ -48,13 +49,11 @@ public class Player : MonoBehaviour
         }
         Controls.Player.Shooting.performed += _ => Shooting();
         Controls.Player.Roll.performed += _ => Roll(1);
+        Controls.Player.Throw.performed += _ => ThrowGrenade();
     }
     private void FixedUpdate()
     {
-        if (!IsStun)
-        {
-            MoveMent();
-        }
+        MoveMent();
         if(rb.velocity.x == 0 || rb.velocity.y == 0)
         {
             RollEffect.SendEvent("Stop");
@@ -62,9 +61,12 @@ public class Player : MonoBehaviour
     }
     private void MoveMent()
     {
-        Vector2 InputVector = Controls.Player.Movement.ReadValue<Vector2>();
-        rb.MovePosition(new Vector3(InputVector.x, 0, InputVector.y) * Speed * Time.deltaTime + rb.position);
-        MoveAnimation();
+        if (!IsStun)
+        {
+            Vector2 InputVector = Controls.Player.Movement.ReadValue<Vector2>();
+            rb.MovePosition(new Vector3(InputVector.x, 0, InputVector.y) * Speed * Time.deltaTime + rb.position);
+            MoveAnimation();
+        }
     }
     private void MoveAnimation()
     {
@@ -100,23 +102,30 @@ public class Player : MonoBehaviour
         {
             ClickChack = false;
             IsShooting = true;
-            StartCoroutine(HoldShooting(1f));
+            StartCoroutine(HoldShooting(ShootingPeriod));
         }
         else
         {
             IsShooting = false;
+            ShootingPeriodImage.fillAmount = 1;
             return;
         }
-        
     }
     IEnumerator HoldShooting(float Cycle)
     {
+        float Count = Cycle;
         while (IsShooting && !IsStun)
         {
-            Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
-            ShootingEffect.SendEvent("Shoot");
-            ShootAnimation(1f);
-            yield return new WaitForSeconds(Cycle);
+            Count -= Time.deltaTime;
+            ShootingPeriodImage.fillAmount = Count / ShootingPeriod;
+            if(Count <= 0)
+            {
+                Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
+                ShootingEffect.SendEvent("Shoot");
+                ShootAnimation(ShootingPeriod);
+                Count = Cycle;
+            }
+            yield return null;
         }
         ClickChack = true;
     }
@@ -128,9 +137,9 @@ public class Player : MonoBehaviour
     private void Roll(float Distance)
     {
         Vector2 InputVector = Controls.Player.Movement.ReadValue<Vector2>();
-        if((InputVector.x != 0 || InputVector.y != 0) && RollIsCoolDown)
+        if((InputVector.x != 0 || InputVector.y != 0) && CanRoll && !IsStun)
         {
-            RollIsCoolDown = false;
+            CanRoll = false;
             Vector3 Target = new Vector3(InputVector.x, 0, InputVector.y);
             rb.AddForce(Target * 1000 * Distance * Time.deltaTime, ForceMode.VelocityChange);
             StartCoroutine(RollCoolDownCount(RollCoolDownTime));
@@ -139,9 +148,35 @@ public class Player : MonoBehaviour
     }
     private IEnumerator RollCoolDownCount(float time)
     {
-        yield return new WaitForSeconds(time);
-        RollIsCoolDown = true;
+        while(time >= 0)
+        {
+            time -= Time.deltaTime;
+            RollCoolDownImage.fillAmount = time / RollCoolDownTime;
+            yield return null;
+        }
+        CanRoll = true;
     }
+    private void ThrowGrenade()
+    {
+        if(CanThrowGrenade && !IsStun)
+        {
+            CanThrowGrenade = false;
+            GameObject grenade = Instantiate(Grenade, FirePoint.position, transform.rotation);
+            Rigidbody rb = grenade.GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * -3 + Vector3.up * 5, ForceMode.VelocityChange);
+            StartCoroutine(ThrowGrenadeCoolDownCount(ThrowGrenadeTime));
+        }
+    }
+    private IEnumerator ThrowGrenadeCoolDownCount(float time)
+    {
+        while(time >= 0)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+        CanThrowGrenade = true;
+    }
+
     private void OnEnable()
     {
         Controls.Enable();

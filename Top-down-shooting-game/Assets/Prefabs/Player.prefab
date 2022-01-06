@@ -85,6 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256bd888cc02a964ca5454dec0fc2a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RollCoolDownImage: {fileID: 0}
   RollCoolDownTime: 5
   Speed: 3
   MouseRotating: 1

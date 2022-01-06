@@ -53,12 +53,13 @@ public class SmallStellatedEnemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void TakeDamage(float Damage)
+    {
+        transform.Find("HealthBar").gameObject.SetActive(true);
+        HealthSystem.Damage(Damage);
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PlayerBullet"))
-        {
-            transform.Find("HealthBar").gameObject.SetActive(true);
-            HealthSystem.Damage(GameManager.GetPlayerDamage());
-        }
+
     }
 }
