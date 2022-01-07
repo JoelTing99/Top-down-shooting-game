@@ -8,16 +8,12 @@ public class OctahedronEnemy : MonoBehaviour
     private GameManager GameManager;
     private EnemyHealthBar EnemyHealthBar;
     private Animator Animator;
-    [SerializeField]
-    private GameObject Bullet;
-    [SerializeField]
-    private Transform FirePoint;
-    [SerializeField]
-    private bool Fire;
-    [SerializeField]
-    private bool Charging;
-    [SerializeField]
-    private GameObject Destroyed;
+    private LineRenderer Line;
+    [SerializeField] private GameObject Bullet;
+    [SerializeField] private Transform FirePoint;
+    [SerializeField] private bool Fire;
+    [SerializeField] private bool Charging;
+    [SerializeField] private GameObject Destroyed;
     private int BulletCount;
     private GameObject bullet;
     private void Start()
@@ -26,6 +22,7 @@ public class OctahedronEnemy : MonoBehaviour
         HealthSystem = new HealthSystem(GameManager.GetOctahedronHP());
         EnemyHealthBar = transform.Find("HealthBar").GetComponent<EnemyHealthBar>();
         EnemyHealthBar.SetHealthSystem(HealthSystem);
+        Line = GetComponent<LineRenderer>();
         Animator = GetComponent<Animator>();
         transform.Find("HealthBar").gameObject.SetActive(false);
     }
@@ -77,10 +74,13 @@ public class OctahedronEnemy : MonoBehaviour
             if (Charging)
             {
                 bullet.GetComponent<EnemyBullet>().IsCharging = true;
+                Line.positionCount = 5;
+                DrawProjection();
             }
             else
             {
                 bullet.GetComponent<EnemyBullet>().IsCharging = false;
+                Line.positionCount = 0;
             }
             if (Fire)
             {
@@ -105,6 +105,23 @@ public class OctahedronEnemy : MonoBehaviour
             Destroy(gameObject);
             Destroy(destory, 5);
         }
+    }
+    private void DrawProjection()
+    {
+        List<Vector3> points = new List<Vector3>();
+        Vector3 StartingPosition = FirePoint.position;
+        Vector3 StartingVelosity = transform.forward;
+        for (float i = 0; i < 5; i++)
+        {
+            Vector3 NewPoint = StartingPosition + i * StartingVelosity;
+            points.Add(NewPoint);
+            if (Physics.OverlapSphere(NewPoint, 0.3f, 6).Length > 0)
+            {
+                Line.positionCount = points.Count;
+                break;
+            }
+        }
+        Line.SetPositions(points.ToArray());
     }
     public void TakeDamage(float Damage)
     {

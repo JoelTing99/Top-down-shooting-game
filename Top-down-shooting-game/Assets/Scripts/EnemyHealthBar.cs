@@ -11,7 +11,7 @@ public class EnemyHealthBar : MonoBehaviour
     private float Timer;
     private HealthSystem HealthSystem;
 
-    private void Start()
+    private void Awake()
     {
         Bar = transform.Find("Bar").GetComponent<Image>();
         DamageBar = transform.Find("DamageBar").GetComponent<Image>();

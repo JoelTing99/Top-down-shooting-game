@@ -19,10 +19,10 @@ public class FurstumEnemy : MonoBehaviour
     {
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetFurstumHP());
-        EnemyHealthBar = transform.Find("HealthBar").GetComponent<EnemyHealthBar>();
-        EnemyHealthBar.SetHealthSystem(HealthSystem);
         PlayerHealthSystem = GameManager.GetPlayerHealth();
         Animator = GetComponent<Animator>();
+        EnemyHealthBar = transform.Find("HealthBar").GetComponent<EnemyHealthBar>();
+        EnemyHealthBar.SetHealthSystem(HealthSystem);
         transform.Find("HealthBar").gameObject.SetActive(false);
     }
 

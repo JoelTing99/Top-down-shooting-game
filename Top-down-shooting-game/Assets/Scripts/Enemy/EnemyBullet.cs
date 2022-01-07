@@ -44,13 +44,12 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Wall"))
-        {
-            Destroy(gameObject);
-        }
         if (other.CompareTag("Player"))
         {
+            Destroy(gameObject);
             PlayerHealthSystem.Damage(GameManager.GetOctahedronDamage());
+        }else if (other.CompareTag("Wall"))
+        {
             Destroy(gameObject);
         }
     }

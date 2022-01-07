@@ -5,21 +5,19 @@ using UnityEngine.VFX;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField]
-    private float Speed;
-    [SerializeField]
-    private VisualEffect HitEffect;
-    [SerializeField]
-    private VisualEffect FlyEffect;
+    [SerializeField] private float Speed;
+    [SerializeField] private VisualEffect HitEffect;
+    [SerializeField] private VisualEffect FlyEffect;
+    private float PlayerDamage;
     private GameManager GameManager;
     private void Awake()
     {
         GameManager = FindObjectOfType<GameManager>();
+        PlayerDamage = GameManager.GetPlayerDamage();
     }
 
     void Update()
     {
-
         transform.Translate(Vector3.forward * Speed * Time.deltaTime);
     }
     private void OnTriggerEnter(Collider other)
@@ -37,22 +35,22 @@ public class Bullet : MonoBehaviour
         }
         else
         {
-            switch (other.name)
+            switch (other.tag)
             {
-                case "Cube Enemy":
-                    other.GetComponent<CubeEnemy>().TakeDamage(GameManager.GetPlayerDamage());
+                case "CubeEnemy":
+                    other.GetComponent<CubeEnemy>().TakeDamage(PlayerDamage);
                     break;
-                case "Dodecahedron Enemy":
-                    other.GetComponent<DodecahedronEnemy>().TakeDamage(GameManager.GetPlayerDamage());
+                case "DodecahedronEnemy":
+                    other.GetComponent<DodecahedronEnemy>().TakeDamage(PlayerDamage);
                     break;
-                case "Frustum Enemy":
-                    other.GetComponent<FurstumEnemy>().TakeDamage(GameManager.GetPlayerDamage());
+                case "FrustumEnemy":
+                    other.GetComponent<FurstumEnemy>().TakeDamage(PlayerDamage);
                     break;
-                case "Octahedron Enemy":
-                    other.GetComponent<OctahedronEnemy>().TakeDamage(GameManager.GetPlayerDamage());
+                case "OctahedronEnemy":
+                    other.GetComponent<OctahedronEnemy>().TakeDamage(PlayerDamage);
                     break;
-                case "Small Stellated Enemy":
-                    other.GetComponent<SmallStellatedEnemy>().TakeDamage(GameManager.GetPlayerDamage());
+                case "SmallStellatedEnemy":
+                    other.GetComponent<SmallStellatedEnemy>().TakeDamage(PlayerDamage);
                     break;
             }
             Speed = 0f;

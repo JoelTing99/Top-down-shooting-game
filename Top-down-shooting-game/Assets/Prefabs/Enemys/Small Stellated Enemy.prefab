@@ -815,7 +815,7 @@ GameObject:
   - component: {fileID: 1006325738340914923}
   m_Layer: 7
   m_Name: Small Stellated Enemy
-  m_TagString: Enemy
+  m_TagString: SmallStellatedEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1070,7 +1070,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1135576723274699378, guid: 50736e13687866a4680270fe71f10698, type: 3}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1

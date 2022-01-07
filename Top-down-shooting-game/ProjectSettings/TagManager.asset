@@ -10,7 +10,11 @@ TagManager:
   - Enemy
   - PlayerBullet
   - SpawnPoint
-  - Centre
+  - CubeEnemy
+  - DodecahedronEnemy
+  - FrustumEnemy
+  - OctahedronEnemy
+  - SmallStellatedEnemy
   layers:
   - Default
   - TransparentFX

@@ -12,26 +12,27 @@ public class Player : MonoBehaviour
     private InputMaster Controls;
     private Animator Animator;
     private LineRenderer Line;
+    private Transform FirePoint;
     private bool IsShooting;
     private bool ClickChack = true;
     private bool CanRoll = true;
     private bool CanThrowGrenade = true;
     private bool HoldingThrow;
     private bool IsStun;
+    private float ThrowGrenadeTime;
+    private float RollCoolDownTime;
+    private float RollDistance;
+    private float ShootingPeriod;
+    private float Speed;
+    [SerializeField] private int NumPoints;
+    [SerializeField] private bool MouseRotating;
     [SerializeField] private Image ShootingPeriodImage;
-    [SerializeField] private float ShootingPeriod;
     [SerializeField] private GameObject RollCoolDownImage;
-    [SerializeField] private float RollCoolDownTime;
     [SerializeField] private GameObject Grenade;
     [SerializeField] private GameObject ThrowGrenadeCoolDownImage;
-    [SerializeField] private float ThrowGrenadeTime;
-    [SerializeField] private float Speed;
-    [SerializeField] private bool MouseRotating;
     [SerializeField] private GameObject BulletPrefab;
-    [SerializeField] private Transform FirePoint;
     [SerializeField] private VisualEffect ShootingEffect;
     [SerializeField] private VisualEffect RollEffect;
-    [SerializeField] private int NumPoints;
     [SerializeField] private LayerMask CollidableLayer;
     
     public bool isStun
@@ -48,6 +49,12 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Animator = GetComponent<Animator>();
         Controls = new InputMaster();
+        //ThrowGrenadeTime = GameManager.GetGrendaeCoolDownTime();
+        //RollCoolDownTime = GameManager.GetRollCoolDownTime();
+        //RollDistance = GameManager.GetRollDistance();
+        //ShootingPeriod = GameManager.GetAttackSpeed();
+        //Speed = GameManager.GetPlayerSpeed();
+        FirePoint = transform.Find("FirePoint");
         if (MouseRotating)
         {
             Controls.Player.MouseDirection.performed += _ => MouseRotation();
@@ -57,7 +64,7 @@ public class Player : MonoBehaviour
             Controls.Player.JoystickDirection.performed += _ => JoystickRotation();
         }
         Controls.Player.Shooting.performed += _ => Shooting();
-        Controls.Player.Roll.performed += _ => Roll(1);
+        Controls.Player.Roll.performed += _ => Roll(GameManager.GetRollDistance());
         Controls.Player.Throw.performed += _ => ThrowGrenade();
     }
     private void FixedUpdate()
@@ -66,6 +73,7 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        //Debug.Log(rb.velocity);
         if (rb.velocity.x == 0 || rb.velocity.y == 0)
         {
             RollEffect.SendEvent("Stop");
@@ -84,7 +92,7 @@ public class Player : MonoBehaviour
         if (!IsStun)
         {
             Vector2 InputVector = Controls.Player.Movement.ReadValue<Vector2>();
-            rb.MovePosition(new Vector3(InputVector.x, 0, InputVector.y) * Speed * Time.deltaTime + rb.position);
+            transform.position += new Vector3(InputVector.x, 0, InputVector.y) * GameManager.GetPlayerSpeed() * Time.deltaTime;
             MoveAnimation();
         }
     }
@@ -122,7 +130,7 @@ public class Player : MonoBehaviour
         {
             ClickChack = false;
             IsShooting = true;
-            StartCoroutine(HoldShooting(ShootingPeriod));
+            StartCoroutine(HoldShooting(GameManager.GetAttackSpeed()));
         }
         else
         {
@@ -137,12 +145,12 @@ public class Player : MonoBehaviour
         while (IsShooting && !IsStun)
         {
             Count -= Time.deltaTime;
-            ShootingPeriodImage.GetComponent<Image>().fillAmount = Count / ShootingPeriod;
+            ShootingPeriodImage.GetComponent<Image>().fillAmount = Count / GameManager.GetAttackSpeed();
             if(Count <= 0)
             {
                 Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
                 ShootingEffect.SendEvent("Shoot");
-                ShootAnimation(ShootingPeriod);
+                ShootAnimation(GameManager.GetAttackSpeed());
                 Count = Cycle;
             }
             yield return null;
@@ -161,8 +169,8 @@ public class Player : MonoBehaviour
         {
             CanRoll = false;
             Vector3 Target = new Vector3(InputVector.x, 0, InputVector.y);
-            rb.AddForce(Target * 1000 * Distance * Time.deltaTime, ForceMode.VelocityChange);
-            StartCoroutine(RollCoolDownCount(RollCoolDownTime));
+            rb.AddForce(Target * Distance, ForceMode.Impulse);
+            StartCoroutine(RollCoolDownCount(GameManager.GetRollCoolDownTime()));
             RollEffect.SendEvent("Roll");
         }
     }
@@ -172,7 +180,7 @@ public class Player : MonoBehaviour
         while(time >= 0)
         {
             time -= Time.deltaTime;
-            RollCoolDownImage.GetComponent<Image>().fillAmount = time / RollCoolDownTime;
+            RollCoolDownImage.GetComponent<Image>().fillAmount = time / GameManager.GetRollCoolDownTime();
             yield return null;
         }
         CanRoll = true;
@@ -186,8 +194,8 @@ public class Player : MonoBehaviour
             CanThrowGrenade = false;
             GameObject grenade = Instantiate(Grenade, FirePoint.position, transform.rotation);
             Rigidbody rb = grenade.GetComponent<Rigidbody>();
-            rb.AddForce((FirePoint.transform.up - transform.forward) * GameManager.GetThrowDistance(), ForceMode.VelocityChange) ;
-            StartCoroutine(ThrowGrenadeCoolDownCount(ThrowGrenadeTime));
+            rb.AddForce((FirePoint.transform.up - transform.forward) * GameManager.GetThrowGrenadeDistance(), ForceMode.VelocityChange) ;
+            StartCoroutine(ThrowGrenadeCoolDownCount(GameManager.GetGrendaeCoolDownTime()));
         }
         else if(CanThrowGrenade)
         {
@@ -200,7 +208,7 @@ public class Player : MonoBehaviour
         while(time >= 0)
         {
             time -= Time.deltaTime;
-            ThrowGrenadeCoolDownImage.GetComponent<Image>().fillAmount = time / ThrowGrenadeTime;
+            ThrowGrenadeCoolDownImage.GetComponent<Image>().fillAmount = time / GameManager.GetGrendaeCoolDownTime();
             yield return null;
         }
         CanThrowGrenade = true;
@@ -210,7 +218,7 @@ public class Player : MonoBehaviour
     {
         List<Vector3> points = new List<Vector3>();
         Vector3 StartingPosition = FirePoint.position;
-        Vector3 StartingVelosity = (FirePoint.up - transform.forward) * GameManager.GetThrowDistance();
+        Vector3 StartingVelosity = (FirePoint.up - transform.forward) * GameManager.GetThrowGrenadeDistance();
         for (float i = 0; i < NumPoints; i += 0.1f)
         {
             Vector3 NewPoint = StartingPosition + i * StartingVelosity;
@@ -229,7 +237,7 @@ public class Player : MonoBehaviour
         List<Vector3> points = new List<Vector3>();
         Vector3 StartingPosition = FirePoint.position;
         Vector3 StartingVelosity = -transform.forward;
-        for (float i = 0; i < NumPoints; i++)
+        for (float i = 0; i < 15; i++)
         {
             Vector3 NewPoint = StartingPosition + i * StartingVelosity;
             points.Add(NewPoint);
