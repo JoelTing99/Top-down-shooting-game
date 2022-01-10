@@ -31,6 +31,11 @@ public class PlayerHealthBar : MonoBehaviour
             DamageBar.fillAmount -= 0.3f * Time.deltaTime;
         }
     }
+    private void LateUpdate()
+    {
+        transform.LookAt(Camera.main.transform.position);
+        transform.Rotate(0, 180, 0);
+    }
 
     private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
     {

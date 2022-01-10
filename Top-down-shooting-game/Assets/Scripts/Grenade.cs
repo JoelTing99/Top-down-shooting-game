@@ -33,21 +33,21 @@ public class Grenade : MonoBehaviour
         Collider[] Hit = Physics.OverlapSphere(transform.position, ExplodeRadius);
         foreach (var hit in Hit)
         {
-            switch (hit.name)
+            switch (hit.tag)
             {
-                case "Cube Enemy":
+                case "CubeEnemy":
                     hit.GetComponent<CubeEnemy>().TakeDamage(GrenadeDamage);
                     break;
-                case "Dodecahedron Enemy":
+                case "DodecahedronEnemy":
                     hit.GetComponent<DodecahedronEnemy>().TakeDamage(GrenadeDamage);
                     break;
-                case "Frustum Enemy":
+                case "FrustumEnemy":
                     hit.GetComponent<FurstumEnemy>().TakeDamage(GrenadeDamage);
                     break;
-                case "Octahedron Enemy":
+                case "OctahedronEnemy":
                     hit.GetComponent<OctahedronEnemy>().TakeDamage(GrenadeDamage);
                     break;
-                case "Small Stellated Enemy":
+                case "SmallStellatedEnemy":
                     hit.GetComponent<SmallStellatedEnemy>().TakeDamage(GrenadeDamage);
                     break;
             }

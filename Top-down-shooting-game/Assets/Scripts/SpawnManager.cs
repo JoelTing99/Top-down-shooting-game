@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -8,10 +9,12 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject[] TypeOfEnemy;
     [SerializeField] private float SpawnPeriod;
     [SerializeField] private int SpawnNum;
+    [SerializeField] private Text Timer;
+    [SerializeField] private Text WaveCounter;
     private int SpawnedNum;
-    private bool StartSpawning = true;
     private int WaveNum = 1;
-    private float WavePeriod = 5;
+    private float WavePeriod;
+    private float WavePeriodTime = 5;
     private float TimeBtwSpawn;
     void Start()
     {
@@ -20,31 +23,31 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         SpawnSystem();
-        Debug.Log(WaveNum);
+        Timer.text = ((int)WavePeriod).ToString();
+        WaveCounter.text = WaveNum.ToString();
     }
     private void SpawnSystem()
     {
-        for (int i = 1; i < 101; i++)
+        if (WaveNum <= 5)
         {
-            if (WaveNum == i)
+            if (SpawnedNum < SpawnNum)
             {
-                if (WaveNum <= 5 && StartSpawning)
-                {
-                    if (SpawnedNum < SpawnNum)
-                    {
-                        Spawn(0);
-                    }
-                    else
-                    {
-                        WaveNum++;
-                        StartSpawning = false;
-                        SpawnNum += Random.Range(1, 3);
-                        WaveTimeCountDown(WavePeriod);
-                    }
-                } else if (WaveNum <= 10 && WaveNum > 5)
-                {
-
-                }
+                Spawn(Random.Range(0, TypeOfEnemy.Length));
+                WavePeriod = WavePeriodTime;
+            }
+            else
+            {
+                WaveTimeCountDown();
+            }
+        } else if (WaveNum <= 10 && WaveNum > 5)
+        {
+            if (SpawnedNum < SpawnNum)
+            {
+                WavePeriod = WavePeriodTime;
+            }
+            else
+            {
+                WaveTimeCountDown();
             }
         }
     }
@@ -61,16 +64,18 @@ public class SpawnManager : MonoBehaviour
             TimeBtwSpawn -= Time.deltaTime;
         }
     }
-    private void WaveTimeCountDown(float time)
+    private void WaveTimeCountDown()
     {
-        if(time <= 0)
+        
+        if(WavePeriod <= 0)
         {
-            StartSpawning = true;
+            WaveNum++;
+            SpawnNum += Random.Range(1, 3);
             SpawnedNum = 0;
         }
         else
         {
-            time -= Time.deltaTime;
+            WavePeriod -= Time.deltaTime;
         }
 
     }
