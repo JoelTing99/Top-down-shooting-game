@@ -33,6 +33,13 @@ public class GameManager : MonoBehaviour
     private float OctahedronDamage = 10;
     private float SmallStellatedDamage = 10;
 
+    //Enemy Speed
+    private float CubeSpeed = 1.5f;
+    private float DodecahedronSpeed = 2;
+    private float FurstumSpeed = 3;
+    private float OctahedronSpeed = 2;
+    private float SmallStellatedSpeed = 5;
+
     private void Awake()
     {
         PlayerHealth = new HealthSystem(PlayerHP);
@@ -104,6 +111,27 @@ public class GameManager : MonoBehaviour
     public float GetSmallStellatedDamage()
     {
         return SmallStellatedDamage;
+    }
+    //Enemy Speed
+    public float GetCubeSpeed()
+    {
+        return CubeSpeed;
+    }
+    public float GetDodecahedronSpeed()
+    {
+        return DodecahedronSpeed;
+    }
+    public float GetFurstumSpeed()
+    {
+        return FurstumSpeed;
+    }
+    public float GetOctahedronSpeed()
+    {
+        return OctahedronSpeed;
+    }
+    public float GetSmallStellatedSpeed()
+    {
+        return SmallStellatedSpeed;
     }
     //Ability
     public float GetGrenadeDamage()

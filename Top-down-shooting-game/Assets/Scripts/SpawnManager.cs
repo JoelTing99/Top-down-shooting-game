@@ -16,9 +16,15 @@ public class SpawnManager : MonoBehaviour
     private float WavePeriod;
     private float WavePeriodTime = 5;
     private float TimeBtwSpawn;
-    void Start()
+    private int CubeNum, FurstumNum, DodecahedronNum, OctahedronNum, SmallStellatedNum;
+    private void Start()
     {
-        
+        CubeNum = SpawnRateCalculate(0.25f);
+        FurstumNum = SpawnRateCalculate(0.35f);
+        DodecahedronNum = SpawnRateCalculate(0.1f);
+        OctahedronNum = SpawnRateCalculate(0.2f);
+        SmallStellatedNum = SpawnRateCalculate(0.1f);
+        WavePeriod = CubeNum + FurstumNum + DodecahedronNum + OctahedronNum + SmallStellatedNum;
     }
     void Update()
     {
@@ -28,55 +34,106 @@ public class SpawnManager : MonoBehaviour
     }
     private void SpawnSystem()
     {
-        if (WaveNum <= 5)
+        if (WaveNum <= 2)
         {
-            if (SpawnedNum < SpawnNum)
+            int Index = 0;
+            int Order = Random.Range(0, TypeOfEnemy.Length);
+            switch (Order)
             {
-                Spawn(Random.Range(0, TypeOfEnemy.Length));
-                WavePeriod = WavePeriodTime;
+                case 0:
+                    if (FurstumNum != 0)
+                    {
+                        Index = 0;
+                    }
+                    break;
+                case 1:
+                    if (CubeNum != 0)
+                    {
+                        Index = 1;
+                    }
+                    break;
+                case 2:
+                    if (OctahedronNum != 0)
+                    {
+                        Index = 2;
+                    }
+                    break;
+                case 3:
+                    if (DodecahedronNum != 0)
+                    {
+                        Index = 3;
+                    }
+                    break;
+                case 4:
+                    if (SmallStellatedNum != 0)
+                    {
+                        Index = 4;
+                    }
+                    break;
             }
-            else
-            {
-                WaveTimeCountDown();
-            }
-        } else if (WaveNum <= 10 && WaveNum > 5)
-        {
-            if (SpawnedNum < SpawnNum)
-            {
-                WavePeriod = WavePeriodTime;
-            }
-            else
-            {
-                WaveTimeCountDown();
-            }
+            Spawn(Index);
         }
     }
     private void Spawn(int Type)
     {
-        if (TimeBtwSpawn <= 0)
+        if (SpawnedNum < SpawnNum)
         {
-            Instantiate(TypeOfEnemy[Type], Spawners[Random.Range(0, Spawners.Length)].position, Quaternion.identity);
-            SpawnedNum++;
-            TimeBtwSpawn = SpawnPeriod;
+            if (TimeBtwSpawn <= 0)
+            {
+                Instantiate(TypeOfEnemy[Type], Spawners[Random.Range(0, Spawners.Length)].position, Quaternion.identity);
+                SpawnedNum++;
+                TimeBtwSpawn = SpawnPeriod;
+                switch (Type)
+                {
+                    case 0:
+                        FurstumNum--;
+                        break;
+                    case 1:
+                        CubeNum--;
+                        break;
+                    case 2:
+                        OctahedronNum--;
+                        break;
+                    case 3:
+                        DodecahedronNum--;
+                        break;
+                    case 4:
+                        SmallStellatedNum--;
+                        break;
+                }
+            }
+            else
+            {
+                TimeBtwSpawn -= Time.deltaTime;
+            }
+            WavePeriod = WavePeriodTime;
         }
         else
         {
-            TimeBtwSpawn -= Time.deltaTime;
+            WaveTimeCountDown();
         }
     }
     private void WaveTimeCountDown()
     {
-        
         if(WavePeriod <= 0)
         {
             WaveNum++;
-            SpawnNum += Random.Range(1, 3);
+            SpawnNum += Random.Range(1, 4);
             SpawnedNum = 0;
+            CubeNum = SpawnRateCalculate(0.25f);
+            FurstumNum = SpawnRateCalculate(0.35f);
+            DodecahedronNum = SpawnRateCalculate(0.1f);
+            OctahedronNum = SpawnRateCalculate(0.2f);
+            SmallStellatedNum = SpawnRateCalculate(0.1f);
+            WavePeriod = CubeNum + FurstumNum + DodecahedronNum + OctahedronNum + SmallStellatedNum;
         }
         else
         {
             WavePeriod -= Time.deltaTime;
         }
-
+    }
+    private int SpawnRateCalculate(float rate)
+    {
+        return Mathf.RoundToInt(SpawnNum * rate);
     }
 }

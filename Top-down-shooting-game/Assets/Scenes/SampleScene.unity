@@ -1672,8 +1672,8 @@ MonoBehaviour:
   - {fileID: 4758220319040203683, guid: b0f596398485071498729c6732dc1337, type: 3}
   - {fileID: 6387778774856831431, guid: 3000a69845d04414da57ad81c1114d94, type: 3}
   - {fileID: 6144080961601415222, guid: 2bc4a915d92a1024e853f6a3c2d2bcb9, type: 3}
-  SpawnPeriod: 2
-  SpawnNum: 2
+  SpawnPeriod: 1
+  SpawnNum: 10
   Timer: {fileID: 553909599}
   WaveCounter: {fileID: 727115210}
 --- !u!4 &1210640301
