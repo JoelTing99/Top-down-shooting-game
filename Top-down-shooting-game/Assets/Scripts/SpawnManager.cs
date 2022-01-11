@@ -9,8 +9,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject[] TypeOfEnemy;
     [SerializeField] private float SpawnPeriod;
     [SerializeField] private int SpawnNum;
-    [SerializeField] private Text Timer;
-    [SerializeField] private Text WaveCounter;
+    private string Timer;
+    private string WaveCount;
     private int SpawnedNum;
     private int WaveNum = 1;
     private float WavePeriod;
@@ -24,13 +24,11 @@ public class SpawnManager : MonoBehaviour
         DodecahedronNum = SpawnRateCalculate(0.1f);
         OctahedronNum = SpawnRateCalculate(0.2f);
         SmallStellatedNum = SpawnRateCalculate(0.1f);
-        WavePeriod = CubeNum + FurstumNum + DodecahedronNum + OctahedronNum + SmallStellatedNum;
+        SpawnNum = CubeNum + FurstumNum + DodecahedronNum + OctahedronNum + SmallStellatedNum;
     }
     void Update()
     {
         SpawnSystem();
-        Timer.text = ((int)WavePeriod).ToString();
-        WaveCounter.text = WaveNum.ToString();
     }
     private void SpawnSystem()
     {
@@ -125,7 +123,7 @@ public class SpawnManager : MonoBehaviour
             DodecahedronNum = SpawnRateCalculate(0.1f);
             OctahedronNum = SpawnRateCalculate(0.2f);
             SmallStellatedNum = SpawnRateCalculate(0.1f);
-            WavePeriod = CubeNum + FurstumNum + DodecahedronNum + OctahedronNum + SmallStellatedNum;
+            SpawnNum = CubeNum + FurstumNum + DodecahedronNum + OctahedronNum + SmallStellatedNum;
         }
         else
         {
@@ -135,5 +133,15 @@ public class SpawnManager : MonoBehaviour
     private int SpawnRateCalculate(float rate)
     {
         return Mathf.RoundToInt(SpawnNum * rate);
+    }
+    public string GetWaveTime()
+    {
+        Timer = ((int)WavePeriod).ToString();
+        return Timer;
+    }
+    public string GetWaveCount()
+    {
+        WaveCount = WaveNum.ToString();
+        return WaveCount;
     }
 }

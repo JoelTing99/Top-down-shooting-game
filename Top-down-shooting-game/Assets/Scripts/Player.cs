@@ -19,17 +19,19 @@ public class Player : MonoBehaviour
     private bool CanThrowGrenade = true;
     private bool HoldingThrow;
     private bool IsStun;
+    private bool RollCoolDownImageActive;
+    private bool GrenadeCoolDownImageActive;
     private float ThrowGrenadeTime;
     private float RollCoolDownTime;
     private float RollDistance;
     private float ShootingPeriod;
     private float Speed;
+    private float ReloadImagefillAmount;
+    private float RollCoolDownImagefillAmount;
+    private float GrenadeCoolDownImagefillAmount;
     [SerializeField] private int NumPoints;
     [SerializeField] private bool MouseRotating;
-    [SerializeField] private Image ShootingPeriodImage;
-    [SerializeField] private GameObject RollCoolDownImage;
     [SerializeField] private GameObject Grenade;
-    [SerializeField] private GameObject ThrowGrenadeCoolDownImage;
     [SerializeField] private GameObject BulletPrefab;
     [SerializeField] private VisualEffect ShootingEffect;
     [SerializeField] private VisualEffect RollEffect;
@@ -42,8 +44,6 @@ public class Player : MonoBehaviour
     }
     private void Awake()
     {
-        ThrowGrenadeCoolDownImage.SetActive(false);
-        RollCoolDownImage.SetActive(false);
         GameManager = FindObjectOfType<GameManager>();
         Line = GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody>();
@@ -135,7 +135,6 @@ public class Player : MonoBehaviour
         else
         {
             IsShooting = false;
-            ShootingPeriodImage.GetComponent<Image>().fillAmount = 1;
             return;
         }
     }
@@ -145,7 +144,7 @@ public class Player : MonoBehaviour
         while (IsShooting && !IsStun)
         {
             Count -= Time.deltaTime;
-            ShootingPeriodImage.GetComponent<Image>().fillAmount = Count / GameManager.GetAttackSpeed();
+            ReloadImagefillAmount = Count / GameManager.GetAttackSpeed();
             if(Count <= 0)
             {
                 Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
@@ -176,15 +175,15 @@ public class Player : MonoBehaviour
     }
     private IEnumerator RollCoolDownCount(float time)
     {
-        RollCoolDownImage.SetActive(true);
+        RollCoolDownImageActive = true;
         while(time >= 0)
         {
             time -= Time.deltaTime;
-            RollCoolDownImage.GetComponent<Image>().fillAmount = time / GameManager.GetRollCoolDownTime();
+            RollCoolDownImagefillAmount = time / GameManager.GetRollCoolDownTime();
             yield return null;
         }
         CanRoll = true;
-        RollCoolDownImage.SetActive(false);
+        RollCoolDownImageActive = false;
     }
     private void ThrowGrenade()
     {
@@ -204,15 +203,15 @@ public class Player : MonoBehaviour
     }
     private IEnumerator ThrowGrenadeCoolDownCount(float time)
     {
-        ThrowGrenadeCoolDownImage.SetActive(true);
+        GrenadeCoolDownImageActive = true;
         while(time >= 0)
         {
             time -= Time.deltaTime;
-            ThrowGrenadeCoolDownImage.GetComponent<Image>().fillAmount = time / GameManager.GetGrendaeCoolDownTime();
+            GrenadeCoolDownImagefillAmount = time / GameManager.GetGrendaeCoolDownTime();
             yield return null;
         }
         CanThrowGrenade = true;
-        ThrowGrenadeCoolDownImage.SetActive(false);
+        GrenadeCoolDownImageActive = false;
     }
     private void DrawGrenadeProjection()
     {
@@ -249,7 +248,26 @@ public class Player : MonoBehaviour
         }
         Line.SetPositions(points.ToArray());
     }
-
+    public float GetReloadImagefillAmount()
+    {
+        return ReloadImagefillAmount;
+    }
+    public float GetRollCoolDownImagefillAmount()
+    {
+        return RollCoolDownImagefillAmount;
+    }
+    public bool GetRollCoolDownImageActive()
+    {
+        return RollCoolDownImageActive;
+    }
+    public float GetGrenadeCoolDownImagefillAmount()
+    {
+        return GrenadeCoolDownImagefillAmount;
+    }
+    public bool GetGrenadeCoolDownImageActive()
+    {
+        return GrenadeCoolDownImageActive;
+    }
     private void OnEnable()
     {
         Controls.Enable();
