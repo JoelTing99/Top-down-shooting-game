@@ -95,6 +95,10 @@ public class OctahedronEnemy : MonoBehaviour
         {
             GameObject destory = Instantiate(Destroyed, transform.position, transform.rotation);
             Collider[] Collider = Physics.OverlapSphere(transform.position, 2f);
+            for (int i = 0; i < Random.Range(3, 5); i++)
+            {
+                Instantiate(GameManager.GetCoinsGameObject(), transform.position, Quaternion.identity);
+            }
             foreach (var collider in Collider)
             {
                 if (collider.GetComponent<Rigidbody>() != null)

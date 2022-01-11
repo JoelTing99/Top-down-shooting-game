@@ -49,6 +49,10 @@ public class SmallStellatedEnemy : MonoBehaviour
     {
         if (HealthSystem.GetHealth() <= 0)
         {
+            for (int i = 0; i < Random.Range(6, 10); i++)
+            {
+                Instantiate(GameManager.GetCoinsGameObject(), transform.position, Quaternion.identity);
+            }
             GameObject destory = Instantiate(Destroyed, transform.position, transform.rotation);
             Destroy(gameObject);
         }

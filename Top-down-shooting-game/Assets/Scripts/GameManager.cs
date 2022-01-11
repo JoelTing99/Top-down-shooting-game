@@ -1,11 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public event EventHandler OnCollectedCoin;
+
     private HealthSystem PlayerHealth;
     private PlayerHealthBar PlayerHealthBar;
+    [SerializeField] GameObject Coins;
+    private int CoinsAmount;
     //Player
     private float PlayerHP = 200;
     private float PlayerDamage = 10;
@@ -51,6 +56,22 @@ public class GameManager : MonoBehaviour
         if(Input.touchCount >= 1)
         {
             Debug.Log("Touch");
+        }
+    }
+    public GameObject GetCoinsGameObject()
+    {
+        return Coins;
+    }
+    public int GetCoinAmount()
+    {
+        return CoinsAmount;
+    }
+    public void AddCoin(int Amount)
+    {
+        CoinsAmount += Amount;
+        if(OnCollectedCoin != null)
+        {
+            OnCollectedCoin(this, EventArgs.Empty);
         }
     }
     //Player
