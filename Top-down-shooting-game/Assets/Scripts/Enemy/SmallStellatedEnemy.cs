@@ -9,19 +9,20 @@ public class SmallStellatedEnemy : MonoBehaviour
     private GameManager GameManager;
     private EnemyHealthBar EnemyHealthBar;
     private Animator Animator;
-    private NavMeshAgent NavMeshAgent;
+    private NavMeshAgent Agent;
     [SerializeField]
     private bool IsAttacking;
     [SerializeField]
     private GameObject Destroyed;
     private void Start()
     {
-        NavMeshAgent = GetComponent<NavMeshAgent>();
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetSmallStellatedHP());
         EnemyHealthBar = transform.Find("HealthBar").GetComponent<EnemyHealthBar>();
         EnemyHealthBar.SetHealthSystem(HealthSystem);
         Animator = GetComponent<Animator>();
+        Agent = GetComponent<NavMeshAgent>();
+        Agent.speed = GameManager.GetSmallStellatedSpeed();
         transform.Find("HealthBar").gameObject.SetActive(false);
     }
     private void Update()

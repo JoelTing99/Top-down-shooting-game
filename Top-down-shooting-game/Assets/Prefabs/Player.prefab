@@ -277,7 +277,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 1135576723274699378, guid: 50736e13687866a4680270fe71f10698, type: 3}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -351,6 +351,7 @@ GameObject:
   - component: {fileID: 1865215429332851852}
   - component: {fileID: 2191048435470925431}
   - component: {fileID: 2191048435470925428}
+  - component: {fileID: 8633143886317629762}
   - component: {fileID: 2191048435470925429}
   - component: {fileID: 919132149173462648}
   - component: {fileID: 1065895663}
@@ -415,6 +416,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.35
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &8633143886317629762
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344679770281346614}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 0.1, z: 4}
+  m_Center: {x: 0, y: -1.22, z: 0}
 --- !u!114 &2191048435470925429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,10 +443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NumPoints: 50
   MouseRotating: 1
-  ShootingPeriodImage: {fileID: 0}
-  RollCoolDownImage: {fileID: 0}
   Grenade: {fileID: 4667216123059944504, guid: 9d3a07e7b16b3b440a46a12f25130650, type: 3}
-  ThrowGrenadeCoolDownImage: {fileID: 0}
   BulletPrefab: {fileID: 2130338247805064566, guid: 54d22de689ca97247a41ff10737a592e, type: 3}
   ShootingEffect: {fileID: 1457989388321983221}
   RollEffect: {fileID: 7827737557939987217}
@@ -525,7 +536,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.104412235
+        value: 0.20045105
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -534,7 +545,7 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0
+        value: 0.07910156
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -546,24 +557,24 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 0.6039216}
-      key1: {r: 1, g: 0, b: 0, a: 0.6039216}
-      key2: {r: 0, g: 0, b: 0, a: 0}
-      key3: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+      key1: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 0.7607843}
+      key2: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 0}
+      key3: {r: 0.745283, g: 0.745283, b: 0.745283, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65535
-      ctime2: 0
-      ctime3: 0
+      ctime1: 65342
+      ctime2: 65342
+      ctime3: 65342
       ctime4: 0
       ctime5: 0
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 45682
+      atime1: 578
       atime2: 65535
       atime3: 65535
       atime4: 0

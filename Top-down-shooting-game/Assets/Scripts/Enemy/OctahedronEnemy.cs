@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class OctahedronEnemy : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class OctahedronEnemy : MonoBehaviour
     private EnemyHealthBar EnemyHealthBar;
     private Animator Animator;
     private LineRenderer Line;
+    private NavMeshAgent Agent;
     [SerializeField] private GameObject Bullet;
     [SerializeField] private Transform FirePoint;
     [SerializeField] private bool Fire;
@@ -24,6 +26,8 @@ public class OctahedronEnemy : MonoBehaviour
         EnemyHealthBar.SetHealthSystem(HealthSystem);
         Line = GetComponent<LineRenderer>();
         Animator = GetComponent<Animator>();
+        Agent = GetComponent<NavMeshAgent>();
+        Agent.speed = GameManager.GetOctahedronSpeed();
         transform.Find("HealthBar").gameObject.SetActive(false);
     }
 

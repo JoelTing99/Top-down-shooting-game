@@ -1,29 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.VFX;
 
 public class CubeEnemy : MonoBehaviour
 {
     private HealthSystem HealthSystem;
-    private HealthSystem PlayerHealthSystem;
     private EnemyHealthBar EnemyHealthBar;
     private Animator Animator;
     private GameManager GameManager;
-    [SerializeField]
-    private GameObject Destroyed;
-    [SerializeField]
-    private VisualEffect AttactEffect;
-    [SerializeField]
-    private bool IsAttacking;
+    private NavMeshAgent Agent;
+    [SerializeField] private GameObject Destroyed;
+    [SerializeField] private VisualEffect AttactEffect;
+    [SerializeField] private bool IsAttacking;
     private void Start()
     {
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetCubeHP());
         EnemyHealthBar = transform.Find("HealthBar").GetComponent<EnemyHealthBar>();
         EnemyHealthBar.SetHealthSystem(HealthSystem);
-        PlayerHealthSystem = GameManager.GetPlayerHealth();
+        Agent = GetComponent<NavMeshAgent>();
         Animator = GetComponent<Animator>();
+        Agent.speed = GameManager.GetCubeSpeed();
         transform.Find("HealthBar").gameObject.SetActive(false);
     }
 
@@ -47,7 +46,7 @@ public class CubeEnemy : MonoBehaviour
             AttactEffect.SendEvent("Attacking");
             if (Physics.SphereCast(transform.position, 0.05f, transform.forward, out RaycastHit Hit, 1f) && Hit.transform.CompareTag("Player"))
             {
-                PlayerHealthSystem.Damage(GameManager.GetCubeDamage());
+                GameManager.AttackPlayer(GameManager.GetCubeDamage());
             }
         }
         else

@@ -5,11 +5,9 @@ using UnityEngine;
 public class SmallStellatedAttack : MonoBehaviour
 {
     private GameManager GameManager;
-    private HealthSystem PlayerHealthSystem;
     void Start()
     {
         GameManager = FindObjectOfType<GameManager>();
-        PlayerHealthSystem = GameManager.GetPlayerHealth();
         Collider[] Collider = Physics.OverlapSphere(transform.position, 2f);
         foreach (var collider in Collider)
         {
@@ -19,7 +17,7 @@ public class SmallStellatedAttack : MonoBehaviour
             }
             if (collider.CompareTag("Player"))
             {
-                PlayerHealthSystem.Damage(GameManager.GetSmallStellatedDamage());
+                GameManager.AttackPlayer(GameManager.GetSmallStellatedDamage());
             }
         }
         Destroy(gameObject, 5);

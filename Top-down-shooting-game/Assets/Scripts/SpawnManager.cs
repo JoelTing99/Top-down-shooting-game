@@ -9,6 +9,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject[] TypeOfEnemy;
     [SerializeField] private float SpawnPeriod;
     [SerializeField] private int SpawnNum;
+    private GameObject Player;
     private string Timer;
     private string WaveCount;
     private int SpawnedNum;
@@ -19,6 +20,7 @@ public class SpawnManager : MonoBehaviour
     private int CubeNum, FurstumNum, DodecahedronNum, OctahedronNum, SmallStellatedNum;
     private void Start()
     {
+        Player = GameObject.FindWithTag("Player");
         CubeNum = SpawnRateCalculate(0.25f);
         FurstumNum = SpawnRateCalculate(0.35f);
         DodecahedronNum = SpawnRateCalculate(0.1f);
@@ -28,7 +30,10 @@ public class SpawnManager : MonoBehaviour
     }
     void Update()
     {
-        SpawnSystem();
+        if(Player != null)
+        {
+            SpawnSystem();
+        }
     }
     private void SpawnSystem()
     {

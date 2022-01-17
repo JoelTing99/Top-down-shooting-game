@@ -22,7 +22,10 @@ public class PlayerHealthBar : MonoBehaviour
         SetHealth(HealthSystem.GetHealthPercent());
         DamageBar.fillAmount = Bar.fillAmount;
         HealthSystem.OnDamaged += HealthSystem_OnDamaged;
+        HealthSystem.OnHealed += HealthSystem_OnHealed;
     }
+
+
     private void Update()
     {
         Timer -= Time.deltaTime;
@@ -35,6 +38,10 @@ public class PlayerHealthBar : MonoBehaviour
     {
         transform.LookAt(Camera.main.transform.position);
         transform.Rotate(0, 180, 0);
+    }
+    private void HealthSystem_OnHealed(object sender, System.EventArgs e)
+    {
+        SetHealth(HealthSystem.GetHealthPercent());
     }
 
     private void HealthSystem_OnDamaged(object sender, System.EventArgs e)

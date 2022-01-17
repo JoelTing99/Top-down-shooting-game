@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        //Debug.Log(rb.velocity);
+        
         if (rb.velocity.x == 0 || rb.velocity.y == 0)
         {
             RollEffect.SendEvent("Stop");
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
     }
     private void Shooting()
     {
-        if (!IsShooting && ClickChack)
+        if (!IsShooting && ClickChack && !HoldingThrow)
         {
             ClickChack = false;
             IsShooting = true;

@@ -8,12 +8,10 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float Speed;
     [SerializeField] private VisualEffect HitEffect;
     [SerializeField] private VisualEffect FlyEffect;
-    private float PlayerDamage;
     private GameManager GameManager;
     private void Awake()
     {
         GameManager = FindObjectOfType<GameManager>();
-        PlayerDamage = GameManager.GetPlayerDamage();
     }
 
     void Update()
@@ -22,35 +20,31 @@ public class Bullet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("PlayerBullet"))
-        {
-            Destroy(gameObject);
-        }
-        else if (other.CompareTag("Wall"))
+        if (other.CompareTag("Wall"))
         {
             Speed = 0f;
             FlyEffect.Stop();
             HitEffect.SendEvent("Hit");
             Destroy(gameObject, 3f);
         }
-        else
+        else if(!other.isTrigger)
         {
             switch (other.tag)
             {
                 case "CubeEnemy":
-                    other.GetComponent<CubeEnemy>().TakeDamage(PlayerDamage);
+                    other.GetComponent<CubeEnemy>().TakeDamage(GameManager.GetPlayerDamage());
                     break;
                 case "DodecahedronEnemy":
-                    other.GetComponent<DodecahedronEnemy>().TakeDamage(PlayerDamage);
+                    other.GetComponent<DodecahedronEnemy>().TakeDamage(GameManager.GetPlayerDamage());
                     break;
                 case "FrustumEnemy":
-                    other.GetComponent<FurstumEnemy>().TakeDamage(PlayerDamage);
+                    other.GetComponent<FurstumEnemy>().TakeDamage(GameManager.GetPlayerDamage());
                     break;
                 case "OctahedronEnemy":
-                    other.GetComponent<OctahedronEnemy>().TakeDamage(PlayerDamage);
+                    other.GetComponent<OctahedronEnemy>().TakeDamage(GameManager.GetPlayerDamage());
                     break;
                 case "SmallStellatedEnemy":
-                    other.GetComponent<SmallStellatedEnemy>().TakeDamage(PlayerDamage);
+                    other.GetComponent<SmallStellatedEnemy>().TakeDamage(GameManager.GetPlayerDamage());
                     break;
             }
             Speed = 0f;
@@ -58,6 +52,10 @@ public class Bullet : MonoBehaviour
             HitEffect.SendEvent("Hit");
             transform.SetParent(other.transform);
             Destroy(gameObject, 3f);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 }

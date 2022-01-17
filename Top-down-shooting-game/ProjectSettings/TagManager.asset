@@ -15,6 +15,7 @@ TagManager:
   - FrustumEnemy
   - OctahedronEnemy
   - SmallStellatedEnemy
+  - Grenade
   layers:
   - Default
   - TransparentFX

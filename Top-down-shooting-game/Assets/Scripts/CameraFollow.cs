@@ -5,14 +5,16 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     private Transform Player;
+    [SerializeField] Vector3 Offset;
     private void Awake()
     {
         Player = GameObject.FindWithTag("Player").transform;
     }
     void FixedUpdate()
     {
-        
-        transform.position = Vector3.Lerp(transform.position, Player.position + new Vector3(0f, 8.5f, -3f), 0.125f);
-        
+        if(Player != null)
+        {
+            transform.position = Vector3.Lerp(transform.position, Player.position + Offset, 0.125f);
+        }
     }
 }

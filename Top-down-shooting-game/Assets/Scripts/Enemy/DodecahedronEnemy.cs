@@ -1,26 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 public class DodecahedronEnemy : MonoBehaviour
 {
     private HealthSystem HealthSystem;
-    private HealthSystem PlayerHealthSystem;
     private GameManager GameManager;
     private EnemyHealthBar EnemyHealthBar;
     private Animator Animator;
+    private NavMeshAgent Agent;
     private int AttackCount;
-    [SerializeField]
-    private bool IsAttacking;
-    [SerializeField]
-    private GameObject Destroyed;
+    [SerializeField] private bool IsAttacking;
+    [SerializeField] private GameObject Destroyed;
     private void Start()
     {
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetDodecahedronHP());
         EnemyHealthBar = transform.Find("HealthBar").GetComponent<EnemyHealthBar>();
         EnemyHealthBar.SetHealthSystem(HealthSystem);
-        PlayerHealthSystem = GameManager.GetPlayerHealth();
         Animator = GetComponent<Animator>();
+        Agent = GetComponent<NavMeshAgent>();
+        Agent.speed = GameManager.GetDodecahedronSpeed();
         transform.Find("HealthBar").gameObject.SetActive(false);
     }
 
@@ -47,8 +47,11 @@ public class DodecahedronEnemy : MonoBehaviour
             {
                 if (collide.CompareTag("Player") && AttackCount > 0)
                 {
-                    PlayerHealthSystem.Damage(GameManager.GetDodecahedronDamage());
-                    FindObjectOfType<Player>().isStun = true;
+                    GameManager.AttackPlayer(GameManager.GetDodecahedronDamage());
+                    if (FindObjectOfType<Player>() != null)
+                    {
+                        FindObjectOfType<Player>().isStun = true;
+                    }
                 }
             }
             AttackCount--;
@@ -56,7 +59,10 @@ public class DodecahedronEnemy : MonoBehaviour
         else
         {
             AttackCount = 1;
-            FindObjectOfType<Player>().isStun = false;
+            if(FindObjectOfType<Player>() != null)
+            {
+                FindObjectOfType<Player>().isStun = false;
+            }
         }
     }
     private void Dead()

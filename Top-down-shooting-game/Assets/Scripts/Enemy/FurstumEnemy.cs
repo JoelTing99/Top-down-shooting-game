@@ -6,10 +6,10 @@ using UnityEngine.AI;
 public class FurstumEnemy : MonoBehaviour
 {
     private HealthSystem HealthSystem;
-    private HealthSystem PlayerHealthSystem;
     private GameManager GameManager;
     private EnemyHealthBar EnemyHealthBar;
     private Animator Animator;
+    private NavMeshAgent Agent;
     private int AttackCount;
     [SerializeField] private bool IsAttacking;
     [SerializeField] private GameObject Destroyed;
@@ -17,10 +17,12 @@ public class FurstumEnemy : MonoBehaviour
     {
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetFurstumHP());
-        PlayerHealthSystem = GameManager.GetPlayerHealth();
-        Animator = GetComponent<Animator>();
+ 
         EnemyHealthBar = transform.Find("HealthBar").GetComponent<EnemyHealthBar>();
         EnemyHealthBar.SetHealthSystem(HealthSystem);
+        Animator = GetComponent<Animator>();
+        Agent = GetComponent<NavMeshAgent>();
+        Agent.speed = GameManager.GetFurstumSpeed();
         transform.Find("HealthBar").gameObject.SetActive(false);
     }
 
@@ -44,7 +46,7 @@ public class FurstumEnemy : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit Hit, 1f) && hit.collider.CompareTag("Player") && AttackCount > 0)
             {
-                PlayerHealthSystem.Damage(GameManager.GetFurstumDamage());
+                GameManager.AttackPlayer(GameManager.GetFurstumDamage());
                 AttackCount--;
             }
         }
