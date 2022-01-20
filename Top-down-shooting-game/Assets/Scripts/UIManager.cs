@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
         //UI Elemnet
         GrenadeCoolDownImage.SetActive(Player.GetGrenadeCoolDownImageActive());
         GrenadeCoolDownImage.GetComponent<Image>().fillAmount = Player.GetGrenadeCoolDownImagefillAmount();
-        RollCoolDownImage.SetActive(Player.GetGrenadeCoolDownImageActive());
+        RollCoolDownImage.SetActive(Player.GetRollCoolDownImageActive());
         RollCoolDownImage.GetComponent<Image>().fillAmount = Player.GetRollCoolDownImagefillAmount();
         ReloadImage.fillAmount = Player.GetReloadImagefillAmount();
         WaveTimer.text = SpawnManager.GetWaveTime();

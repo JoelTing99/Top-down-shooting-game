@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class Grenade : MonoBehaviour
 {
-    [SerializeField]
-    private float ExplodeTime;
-    [SerializeField]
-    private float ExplodeRadius;
-    [SerializeField]
-    private float ExplodeForce;
+    [SerializeField] private float ExplodeTime;
+    [SerializeField] private float ExplodeRadius;
+    [SerializeField] private float ExplodeForce;
     private float GrenadeDamage;
     private bool HasExploded;
     private GameManager GameManager;
@@ -53,7 +50,7 @@ public class Grenade : MonoBehaviour
             }
             if (hit.GetComponent<Rigidbody>() != null)
             {
-                hit.GetComponent<Rigidbody>().AddExplosionForce(ExplodeForce, transform.position, 1);
+                hit.GetComponent<Rigidbody>().AddExplosionForce(ExplodeForce, transform.position, ExplodeRadius);
             }
         }
         Destroy(gameObject);

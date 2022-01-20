@@ -15,7 +15,7 @@ public class SpawnManager : MonoBehaviour
     private int SpawnedNum;
     private int WaveNum = 1;
     private float WavePeriod;
-    private float WavePeriodTime = 5;
+    private float WavePeriodTime = 30;
     private float TimeBtwSpawn;
     private int CubeNum, FurstumNum, DodecahedronNum, OctahedronNum, SmallStellatedNum;
     private void Start()

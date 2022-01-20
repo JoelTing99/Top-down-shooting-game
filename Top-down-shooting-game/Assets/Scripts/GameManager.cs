@@ -10,19 +10,21 @@ public class GameManager : MonoBehaviour
     private HealthSystem PlayerHealth;
     private PlayerHealthBar PlayerHealthBar;
     [SerializeField] GameObject Coins;
-    private int CoinsAmount;
     //Player
-    private float PlayerHP = 300;
+    private float PlayerHP = 640;
     private float PlayerDamage = 60;
+    private float PlayerDamage_Return;
     private float PlayerSpeed = 2;
+    private float PlayerSpeed_Return;
     private float AttackSpeed = 1;
     private float Defense = 3;
+    private float Defense_Return;
     private float DodgeRate = 0;
 
     //Ability
     private float ThrowGrenadeDistance = 3;
     private float GrenadeDamage = 150;
-    private float GrendaeCoolDownTime = 10; 
+    private float GrendaeCoolDownTime = 25; 
     private float RollCoolDownTime = 3;
     private float RollDistance = 3;
 
@@ -48,12 +50,21 @@ public class GameManager : MonoBehaviour
     private float SmallStellatedSpeed = 5;
 
     //Item
+    private int CoinsAmount;
     private float HealPackAmount = 40;
+    private float BoostDuration = 10;
+    private float DamageBoostRate = 0.3f;
+    private float DefenseBoostRate = 0.2f;
+    private float SpeedUpRate = 0.5f;
     private void Awake()
     {
         PlayerHealth = new HealthSystem(PlayerHP);
         PlayerHealthBar = FindObjectOfType<PlayerHealthBar>();
         PlayerHealthBar.SetHealthSystem(PlayerHealth);
+        PlayerDamage_Return = PlayerDamage;
+        PlayerSpeed_Return = PlayerSpeed;
+        Defense_Return = Defense;
+        PlayerSpeed_Return = PlayerSpeed;
     }
     private void Update()
     {
@@ -91,13 +102,13 @@ public class GameManager : MonoBehaviour
     {
         if (UnityEngine.Random.value > DodgeRate)
         {
-            if(damage <= Defense)
+            if(damage <= Defense_Return)
             {
                 PlayerHealth.Damage(damage);
             }
             else
             {
-                PlayerHealth.Damage(damage - Defense);
+                PlayerHealth.Damage(damage - Defense_Return);
             }
         }
         else
@@ -107,11 +118,11 @@ public class GameManager : MonoBehaviour
     }
     public float GetPlayerDamage()
     {
-        return PlayerDamage;
+        return PlayerDamage_Return;
     }
     public float GetPlayerSpeed()
     {
-        return PlayerSpeed;
+        return PlayerSpeed_Return;
     }
     public float GetAttackSpeed()
     {
@@ -125,6 +136,52 @@ public class GameManager : MonoBehaviour
     public float GetHealPackAmount()
     {
         return HealPackAmount;
+    }
+    public float GetBoostDuration()
+    {
+        return BoostDuration;
+    }
+    public void StartDamageBoost()
+    {
+        StartCoroutine(DamageBoost(BoostDuration));
+    }
+    private IEnumerator DamageBoost(float time)
+    {
+        PlayerDamage_Return = PlayerDamage + PlayerDamage * DamageBoostRate;
+        while (time >= 0)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+        PlayerDamage_Return = PlayerDamage;
+    }
+    public void StartDefenseBoost()
+    {
+        StartCoroutine(DefenseBoost(BoostDuration));
+    }
+    private IEnumerator DefenseBoost(float time)
+    {
+        Defense_Return = Defense + Defense * DefenseBoostRate;
+        while (time >= 0)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+        Defense_Return = Defense;
+    }
+    public void StartSpeedUp()
+    {
+        StartCoroutine(SpeedUp(BoostDuration));
+    }
+    private IEnumerator SpeedUp(float time)
+    {
+        PlayerSpeed_Return = PlayerSpeed + PlayerSpeed * SpeedUpRate;
+        while(time >= 0)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+        PlayerSpeed_Return = PlayerSpeed;
     }
     //Enemy Health
     public float GetCubeHP()
