@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     private Animator Animator;
     private LineRenderer Line;
     private Transform FirePoint;
+    private Vector2 LaseVector;
     private bool IsShooting;
     private bool ClickChack = true;
     private bool CanRoll = true;
@@ -21,6 +22,11 @@ public class Player : MonoBehaviour
     private bool IsStun;
     private bool RollCoolDownImageActive;
     private bool GrenadeCoolDownImageActive;
+    private float VelocityX = 0;
+    private float VelocityZ = 0;
+    private float RotateAngle;
+    private float Acceleration = 2f;
+    private float Deceleration = 2f;
     private float ThrowGrenadeTime;
     private float RollCoolDownTime;
     private float RollDistance;
@@ -69,6 +75,7 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        changeVelocity();
         MoveMent();
     }
     private void Update()
@@ -87,6 +94,50 @@ public class Player : MonoBehaviour
             DrawProjection();
         }
     }
+    private void changeVelocity()
+    {
+        Vector2 InputVector = Controls.Player.Movement.ReadValue<Vector2>();
+        if (InputVector.y > 0 && VelocityZ < 0.5f)
+        {
+            VelocityZ += Time.deltaTime * Acceleration;
+        }
+        if (InputVector.y == 0 && VelocityZ > 0)
+        {
+            VelocityZ -= Time.deltaTime * Deceleration;
+        }
+        if (InputVector.y < 0 && VelocityZ > -0.5f)
+        {
+            VelocityZ -= Time.deltaTime * Acceleration;
+        }
+        if (InputVector.y == 0 && VelocityZ < 0)
+        {
+            VelocityZ += Time.deltaTime * Deceleration;
+        }
+        if (InputVector.y == 0 && VelocityZ != 0 && VelocityZ > -0.05 && VelocityZ < 0.05)
+        {
+            VelocityZ = 0;
+        }
+        if (InputVector.x > 0 && VelocityX > -0.5f)
+        {
+            VelocityX -= Time.deltaTime * Acceleration;
+        }
+        if (InputVector.x == 0 && VelocityX < 0)
+        {
+            VelocityX += Time.deltaTime * Deceleration;
+        }
+        if (InputVector.x < 0 && VelocityX < 0.5f)
+        {
+            VelocityX += Time.deltaTime * Acceleration;
+        }
+        if (InputVector.x == 0 && VelocityX > 0)
+        {
+            VelocityX -= Time.deltaTime * Deceleration;
+        }
+        if (InputVector.x == 0 && VelocityX != 0 && VelocityX > -0.05 && VelocityX < 0.05)
+        {
+            VelocityX = 0;
+        }
+    }
     private void MoveMent()
     {
         if (!IsStun)
@@ -98,7 +149,7 @@ public class Player : MonoBehaviour
     }
     private void MoveAnimation()
     {
-        if(Controls.Player.Movement.ReadValue<Vector2>().x != 0 || Controls.Player.Movement.ReadValue<Vector2>().y != 0)
+        if (Controls.Player.Movement.ReadValue<Vector2>().x != 0 || Controls.Player.Movement.ReadValue<Vector2>().y != 0)
         {
             Animator.SetBool("IsWalking", true);
         }
@@ -106,11 +157,22 @@ public class Player : MonoBehaviour
         {
             Animator.SetBool("IsWalking", false);
         }
+        Animator.SetFloat("Velocity X", VelocityX);
+        Animator.SetFloat("Velocity Z", VelocityZ);
+        if(RotateAngle < 0)
+        {
+            Animator.SetFloat("Angle", -RotateAngle / 360);
+        }
+        else
+        {
+            Animator.SetFloat("Angle", RotateAngle / 360);
+        }
     }
     private void JoystickRotation()
     {
         Vector2 InputVector = Controls.Player.JoystickDirection.ReadValue<Vector2>();
-        float TurnAngle = Mathf.Atan2(InputVector.y, InputVector.x) * Mathf.Rad2Deg + 90f;
+        float TurnAngle = Mathf.Atan2(InputVector.y, InputVector.x) * Mathf.Rad2Deg - 90;
+        RotateAngle = TurnAngle;
         transform.rotation = Quaternion.Euler(new Vector3(0f, -TurnAngle, 0f));
     }
     private void MouseRotation()
@@ -120,7 +182,9 @@ public class Player : MonoBehaviour
         {
             Vector3 Target = hitinfo.point;
             Vector3 LookDirection = Target - transform.position;
-            float TurnAngle = Mathf.Atan2(LookDirection.z, LookDirection.x) * Mathf.Rad2Deg + 90f;
+            float TurnAngle = Mathf.Atan2(LookDirection.z, LookDirection.x) * Mathf.Rad2Deg - 90;
+            RotateAngle = TurnAngle;
+            Debug.Log(TurnAngle);
             transform.rotation = Quaternion.Euler(new Vector3(0f, -TurnAngle, 0f));
         }
     }

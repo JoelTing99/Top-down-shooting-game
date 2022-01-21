@@ -7,13 +7,13 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private Transform[] Spawners;
     [SerializeField] private GameObject[] TypeOfEnemy;
-    [SerializeField] private float SpawnPeriod;
     [SerializeField] private int SpawnNum;
     private GameObject Player;
     private string Timer;
     private string WaveCount;
     private int SpawnedNum;
     private int WaveNum = 1;
+    private float SpawnPeriod;
     private float WavePeriod;
     private float WavePeriodTime = 30;
     private float TimeBtwSpawn;
@@ -74,6 +74,7 @@ public class SpawnManager : MonoBehaviour
                     }
                     break;
             }
+            SpawnPeriod = Random.Range(0.5f, 3f);
             Spawn(Index);
         }
     }
