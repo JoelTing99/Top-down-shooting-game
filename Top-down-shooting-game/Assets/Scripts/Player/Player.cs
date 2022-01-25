@@ -12,10 +12,8 @@ public class Player : MonoBehaviour
     private InputMaster Controls;
     private Animator Animator;
     private LineRenderer Line;
-    private Transform FirePoint;
     private Vector2 LaseVector;
     private bool IsShooting;
-    private bool ClickChack = true;
     private bool CanRoll = true;
     private bool CanThrowGrenade = true;
     private bool HoldingThrow;
@@ -37,6 +35,8 @@ public class Player : MonoBehaviour
     private float GrenadeCoolDownImagefillAmount;
     [SerializeField] private int NumPoints;
     [SerializeField] private bool MouseRotating;
+    [SerializeField] private Transform FirePoint;
+    [SerializeField] private Transform ThrowGrenadePoint;
     [SerializeField] private GameObject Grenade;
     [SerializeField] private GameObject BulletPrefab;
     [SerializeField] private VisualEffect ShootingEffect;
@@ -55,12 +55,12 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Animator = GetComponent<Animator>();
         Controls = new InputMaster();
+        Animator.SetFloat("AttackSpeed", GameManager.GetAttackSpeed());
         //ThrowGrenadeTime = GameManager.GetGrendaeCoolDownTime();
         //RollCoolDownTime = GameManager.GetRollCoolDownTime();
         //RollDistance = GameManager.GetRollDistance();
         //ShootingPeriod = GameManager.GetAttackSpeed();
         //Speed = GameManager.GetPlayerSpeed();
-        FirePoint = transform.Find("FirePoint");
         if (MouseRotating)
         {
             Controls.Player.MouseDirection.performed += _ => MouseRotation();
@@ -71,12 +71,13 @@ public class Player : MonoBehaviour
         }
         Controls.Player.Shooting.performed += _ => Shooting();
         Controls.Player.Roll.performed += _ => Roll(GameManager.GetRollDistance());
-        Controls.Player.Throw.performed += _ => ThrowGrenade();
+        Controls.Player.Throw.performed += _ => ThrowGrenadeAnimation();
     }
     private void FixedUpdate()
     {
         changeVelocity();
         MoveMent();
+        MoveAnimation();
     }
     private void Update()
     {
@@ -92,6 +93,14 @@ public class Player : MonoBehaviour
         else
         {
             DrawProjection();
+        }
+        if (IsStun)
+        {
+            SetLayerWeight("GetHit", 1);
+        }
+        else
+        {
+            SetLayerWeight("GetHit", 0);
         }
     }
     private void changeVelocity()
@@ -144,36 +153,20 @@ public class Player : MonoBehaviour
         {
             Vector2 InputVector = Controls.Player.Movement.ReadValue<Vector2>();
             transform.position += new Vector3(InputVector.x, 0, InputVector.y) * GameManager.GetPlayerSpeed() * Time.deltaTime;
-            MoveAnimation();
         }
     }
     private void MoveAnimation()
     {
-        if (Controls.Player.Movement.ReadValue<Vector2>().x != 0 || Controls.Player.Movement.ReadValue<Vector2>().y != 0)
-        {
-            Animator.SetBool("IsWalking", true);
-        }
-        else
-        {
-            Animator.SetBool("IsWalking", false);
-        }
         Animator.SetFloat("Velocity X", VelocityX);
         Animator.SetFloat("Velocity Z", VelocityZ);
-        if(RotateAngle < 0)
-        {
-            Animator.SetFloat("Angle", -RotateAngle / 360);
-        }
-        else
-        {
-            Animator.SetFloat("Angle", RotateAngle / 360);
-        }
+        Animator.SetFloat("Angle", RotateAngle / 180);
     }
     private void JoystickRotation()
     {
         Vector2 InputVector = Controls.Player.JoystickDirection.ReadValue<Vector2>();
-        float TurnAngle = Mathf.Atan2(InputVector.y, InputVector.x) * Mathf.Rad2Deg - 90;
+        float TurnAngle = Mathf.Atan2(InputVector.y, InputVector.x) * Mathf.Rad2Deg;
         RotateAngle = TurnAngle;
-        transform.rotation = Quaternion.Euler(new Vector3(0f, -TurnAngle, 0f));
+        transform.rotation = Quaternion.Euler(new Vector3(0f, -TurnAngle + 90, 0f));
     }
     private void MouseRotation()
     {
@@ -182,57 +175,35 @@ public class Player : MonoBehaviour
         {
             Vector3 Target = hitinfo.point;
             Vector3 LookDirection = Target - transform.position;
-            float TurnAngle = Mathf.Atan2(LookDirection.z, LookDirection.x) * Mathf.Rad2Deg - 90;
+            float TurnAngle = Mathf.Atan2(LookDirection.z, LookDirection.x) * Mathf.Rad2Deg;
             RotateAngle = TurnAngle;
-            Debug.Log(TurnAngle);
-            transform.rotation = Quaternion.Euler(new Vector3(0f, -TurnAngle, 0f));
+            transform.rotation = Quaternion.Euler(new Vector3(0f, -TurnAngle + 90, 0f));
         }
     }
     private void Shooting()
     {
-        if (!IsShooting && ClickChack && !HoldingThrow)
+        if (!IsShooting && !HoldingThrow)
         {
-            ClickChack = false;
+            Animator.SetLayerWeight(Animator.GetLayerIndex("Shoot"), 1);
             IsShooting = true;
-            StartCoroutine(HoldShooting(GameManager.GetAttackSpeed()));
         }
         else
         {
+            Animator.SetLayerWeight(Animator.GetLayerIndex("Shoot"), 0);
             IsShooting = false;
-            return;
         }
     }
-    IEnumerator HoldShooting(float Cycle)
+    private void Fire()
     {
-        float Count = Cycle;
-        while (IsShooting && !IsStun)
-        {
-            Count -= Time.deltaTime;
-            ReloadImagefillAmount = Count / GameManager.GetAttackSpeed();
-            if(Count <= 0)
-            {
-                Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
-                ShootingEffect.SendEvent("Shoot");
-                ShootAnimation(GameManager.GetAttackSpeed());
-                Count = Cycle;
-            }
-            yield return null;
-        }
-        ClickChack = true;
-    }
-    private void ShootAnimation(float Speed)
-    {
-        Animator.SetFloat("AnimSpeed", Speed);
-        Animator.SetTrigger("Shoot");
+        ShootingEffect.SendEvent("Shoot");
+        Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
     }
     private void Roll(float Distance)
     {
-        Vector2 InputVector = Controls.Player.Movement.ReadValue<Vector2>();
-        if((InputVector.x != 0 || InputVector.y != 0) && CanRoll && !IsStun)
+        if(CanRoll && !IsStun)
         {
+            Animator.SetTrigger("Roll");
             CanRoll = false;
-            Vector3 Target = new Vector3(InputVector.x, 0, InputVector.y);
-            rb.AddForce(Target * Distance, ForceMode.Impulse);
             StartCoroutine(RollCoolDownCount(GameManager.GetRollCoolDownTime()));
             RollEffect.SendEvent("Roll");
         }
@@ -249,21 +220,43 @@ public class Player : MonoBehaviour
         CanRoll = true;
         RollCoolDownImageActive = false;
     }
-    private void ThrowGrenade()
+    private void ThrowGrenadeAnimation()
     {
         if(CanThrowGrenade && HoldingThrow && !IsStun)
         {
             HoldingThrow = false;
             CanThrowGrenade = false;
-            GameObject grenade = Instantiate(Grenade, FirePoint.position, transform.rotation);
-            Rigidbody rb = grenade.GetComponent<Rigidbody>();
-            rb.AddForce((FirePoint.transform.up - transform.forward) * GameManager.GetThrowGrenadeDistance(), ForceMode.VelocityChange) ;
-            StartCoroutine(ThrowGrenadeCoolDownCount(GameManager.GetGrendaeCoolDownTime()));
+            Animator.SetLayerWeight(Animator.GetLayerIndex("Throw"), 1);
         }
         else if(CanThrowGrenade)
         {
             HoldingThrow = true;
         }
+    }
+    private void ThrowGrenade()
+    {
+        GameObject grenade = Instantiate(Grenade, ThrowGrenadePoint.position, transform.rotation);
+        Rigidbody rb = grenade.GetComponent<Rigidbody>();
+        rb.AddForce((ThrowGrenadePoint.up + transform.forward) * GameManager.GetThrowGrenadeDistance(), ForceMode.VelocityChange);
+        StartCoroutine(ThrowGrenadeCoolDownCount(GameManager.GetGrendaeCoolDownTime()));
+        StartCoroutine(SetLayerWeight("Throw", -1));
+    }
+    private IEnumerator SetLayerWeight(string Name, int Constant)
+    {
+        float weight = Animator.GetLayerWeight(Animator.GetLayerIndex(Name));
+
+        while (weight >= 0)
+        {
+            weight += Constant * Time.deltaTime;
+            Animator.SetLayerWeight(Animator.GetLayerIndex(Name), weight);
+            if(weight == 0 || weight == 1)
+            {
+                break;
+            }
+            yield return null;
+        }
+
+        
     }
     private IEnumerator ThrowGrenadeCoolDownCount(float time)
     {
@@ -280,8 +273,8 @@ public class Player : MonoBehaviour
     private void DrawGrenadeProjection()
     {
         List<Vector3> points = new List<Vector3>();
-        Vector3 StartingPosition = FirePoint.position;
-        Vector3 StartingVelosity = (FirePoint.up - transform.forward) * GameManager.GetThrowGrenadeDistance();
+        Vector3 StartingPosition = ThrowGrenadePoint.position;
+        Vector3 StartingVelosity = (ThrowGrenadePoint.up + transform.forward) * GameManager.GetThrowGrenadeDistance();
         for (float i = 0; i < NumPoints; i += 0.1f)
         {
             Vector3 NewPoint = StartingPosition + i * StartingVelosity;
@@ -299,7 +292,7 @@ public class Player : MonoBehaviour
     {
         List<Vector3> points = new List<Vector3>();
         Vector3 StartingPosition = FirePoint.position;
-        Vector3 StartingVelosity = -transform.forward;
+        Vector3 StartingVelosity = transform.forward;
         for (float i = 0; i < 15; i++)
         {
             Vector3 NewPoint = StartingPosition + i * StartingVelosity;
