@@ -16,6 +16,7 @@ TagManager:
   - OctahedronEnemy
   - SmallStellatedEnemy
   - Grenade
+  - ConnectPoint
   layers:
   - Default
   - TransparentFX
