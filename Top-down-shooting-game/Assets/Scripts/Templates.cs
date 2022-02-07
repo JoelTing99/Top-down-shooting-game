@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.AI;
 
 public class Templates : MonoBehaviour
 {
@@ -34,4 +35,19 @@ public class Templates : MonoBehaviour
     public GameObject[] T_BLConnect;
 
     public GameObject L;
+    public GameObject Straight;
+
+    public List<GameObject> Bridges;
+
+    private float time = 5;
+    private int BakeCount = 0;
+    private void Start()
+    {
+        NavMeshBuilder.ClearAllNavMeshes();
+        Invoke("BuildNavMesh", 5);
+    }
+    private void BuildNavMesh()
+    {
+        NavMeshBuilder.BuildNavMesh();
+    }
 }
