@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OpenDirection: 2
+  spawned: 0
 --- !u!1 &5877816812603696562
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +158,7 @@ GameObject:
   - component: {fileID: 5642186391052097219}
   m_Layer: 0
   m_Name: Connect point
-  m_TagString: SpawnPoint
+  m_TagString: ConnectPoint
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -218,6 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OpenDirection: 1
+  spawned: 0
 --- !u!1001 &4382852548451579226
 PrefabInstance:
   m_ObjectHideFlags: 0
