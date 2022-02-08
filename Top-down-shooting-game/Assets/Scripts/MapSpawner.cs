@@ -8,31 +8,41 @@ public class MapSpawner : MonoBehaviour
     [SerializeField] private bool spawned = false;
     private Templates Templates;
     private int rand;
-    private float TGenerateRate = 0.1f; //Smaller numer bigger Rate
+    private float TGenerateRate = 0.3f; //Smaller numer bigger Rate
     private Vector3 TVector = new Vector3(0, 0, 12);
     private Vector3 BVector = new Vector3(0, 0, -12);
     private Vector3 LVector = new Vector3(-12, 0, 0);
     private Vector3 RVector = new Vector3(12, 0, 0);
     private bool TDetected, LDetected, BDetected, RDetected;
-    private void Start()
+    private void Awake()
     {
         Detect();
+    }
+    private void Start()
+    {
         Templates = FindObjectOfType<Templates>();
-        if (gameObject.CompareTag("SpawnPoint"))
+        if(Templates.RoomNumbers >= 0)
         {
-            if(Random.value > 0.3f)
+            if (gameObject.CompareTag("SpawnPoint"))
             {
-                Invoke("SpawnRoom", .3f);
-            }else
+                if(Random.value > 0.7f)
+                {
+                    Invoke("SpawnRoom", .3f);
+                }else
+                {
+                    Invoke("SpawnConnection", .3f);
+                }
+            }
+            else
             {
                 Invoke("SpawnConnection", .3f);
             }
         }
         else
         {
-            Invoke("SpawnConnection", .3f);
+            Invoke("SpawnRoom", .3f);
         }
-        //Destroy(gameObject, 10);
+        Destroy(gameObject, 10);
     }
     private void Detect()
     {
@@ -168,7 +178,7 @@ public class MapSpawner : MonoBehaviour
                             }
                             else
                             {
-                                rand = Random.Range(0, 4);
+                                rand = Random.Range(0, 5);
                                 switch (rand)
                                 {
                                     case 0:
@@ -274,7 +284,7 @@ public class MapSpawner : MonoBehaviour
                             }
                             else
                             {
-                                rand = Random.Range(0, 4);
+                                rand = Random.Range(0, 5);
                                 switch (rand)
                                 {
                                     case 0:
@@ -380,7 +390,7 @@ public class MapSpawner : MonoBehaviour
                             }
                             else
                             {
-                                rand = Random.Range(0, 4);
+                                rand = Random.Range(0, 5);
                                 switch (rand)
                                 {
                                     case 0:
@@ -487,7 +497,7 @@ public class MapSpawner : MonoBehaviour
                             }
                             else
                             {
-                                rand = Random.Range(0, 4);
+                                rand = Random.Range(0, 5);
                                 switch (rand)
                                 {
                                     case 0:

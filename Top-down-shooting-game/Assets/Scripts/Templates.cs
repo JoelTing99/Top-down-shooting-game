@@ -38,13 +38,11 @@ public class Templates : MonoBehaviour
     public GameObject Straight;
 
     public List<GameObject> Bridges;
-
-    private float time = 5;
-    private int BakeCount = 0;
+    public int RoomNumbers = 50;
     private void Start()
     {
         NavMeshBuilder.ClearAllNavMeshes();
-        Invoke("BuildNavMesh", 5);
+        Invoke("BuildNavMesh", 10);
     }
     private void BuildNavMesh()
     {

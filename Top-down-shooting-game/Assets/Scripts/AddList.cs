@@ -9,5 +9,6 @@ public class AddList : MonoBehaviour
     {
         Templates = FindObjectOfType<Templates>();
         Templates.Bridges.Add(this.gameObject);
+        Templates.RoomNumbers--;
     }
 }

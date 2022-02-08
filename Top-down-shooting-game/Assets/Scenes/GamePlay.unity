@@ -2759,6 +2759,7 @@ MonoBehaviour:
   L: {fileID: 7035619435957460517, guid: cf71e68a00826a943b19db57b79c82b0, type: 3}
   Straight: {fileID: 1928059574963091655, guid: 033a5a874a730024db5d43b6a8378fbc, type: 3}
   Bridges: []
+  RoomNumbers: 50
 --- !u!4 &2071450000
 Transform:
   m_ObjectHideFlags: 0
@@ -3081,18 +3082,6 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4276478238346233495, guid: 6684883011280224aa28e0f422ff6ddc, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4276478238346233495, guid: 6684883011280224aa28e0f422ff6ddc, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4276478238346233495, guid: 6684883011280224aa28e0f422ff6ddc, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4276478238346233495, guid: 6684883011280224aa28e0f422ff6ddc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.13
       objectReference: {fileID: 0}
@@ -3136,8 +3125,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4276478238349842421, guid: 6684883011280224aa28e0f422ff6ddc, type: 3}
-      propertyPath: m_CastShadows
+    - target: {fileID: 4276478238353926453, guid: 6684883011280224aa28e0f422ff6ddc, type: 3}
+      propertyPath: m_ApplyRootMotion
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

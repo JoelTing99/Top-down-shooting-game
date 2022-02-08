@@ -126,21 +126,21 @@ public class Player : MonoBehaviour
         {
             VelocityZ = 0;
         }
-        if (InputVector.x > 0 && VelocityX > -0.5f)
-        {
-            VelocityX -= Time.deltaTime * Acceleration;
-        }
-        if (InputVector.x == 0 && VelocityX < 0)
-        {
-            VelocityX += Time.deltaTime * Deceleration;
-        }
-        if (InputVector.x < 0 && VelocityX < 0.5f)
+        if (InputVector.x > 0 && VelocityX < 0.5f)
         {
             VelocityX += Time.deltaTime * Acceleration;
         }
         if (InputVector.x == 0 && VelocityX > 0)
         {
             VelocityX -= Time.deltaTime * Deceleration;
+        }
+        if (InputVector.x < 0 && VelocityX > -0.5f)
+        {
+            VelocityX -= Time.deltaTime * Acceleration;
+        }
+        if (InputVector.x == 0 && VelocityX < 0)
+        {
+            VelocityX += Time.deltaTime * Deceleration;
         }
         if (InputVector.x == 0 && VelocityX != 0 && VelocityX > -0.05 && VelocityX < 0.05)
         {
@@ -152,7 +152,8 @@ public class Player : MonoBehaviour
         if (!IsStun)
         {
             Vector2 InputVector = Controls.Player.Movement.ReadValue<Vector2>();
-            transform.position += new Vector3(InputVector.x, 0, InputVector.y) * GameManager.GetPlayerSpeed() * Time.deltaTime;
+            //rb.AddForce(new Vector3(InputVector.x, 0, InputVector.y) * GameManager.GetPlayerSpeed() * Time.deltaTime);
+            rb.velocity = new Vector3(VelocityX * Time.deltaTime * GameManager.GetPlayerSpeed(), 0, VelocityZ * Time.deltaTime * GameManager.GetPlayerSpeed());
         }
     }
     private void MoveAnimation()
@@ -207,6 +208,11 @@ public class Player : MonoBehaviour
             StartCoroutine(RollCoolDownCount(GameManager.GetRollCoolDownTime()));
             RollEffect.SendEvent("Roll");
         }
+    }
+    private void Rollingg()
+    {
+        VelocityX = 0;
+        VelocityZ = 0;
     }
     private IEnumerator RollCoolDownCount(float time)
     {

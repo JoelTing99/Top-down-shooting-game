@@ -356,10 +356,10 @@ ModelImporter:
     second: ImportLogs
   externalObjects: {}
   materials:
-    materialImportMode: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -373,20 +373,8 @@ ModelImporter:
       might lower retargeting quality:\nNote: Activate translation DOF on avatar
       to improve retargeting quality.\n\t'B_Spine' has translation animation that
       will be discarded.\n"
-    animationRetargetingWarnings: "\nRetargeting quality report for clip 'Take 001':\n\tLeftLowerLeg
-      average position error 1.4 mm and maximum position error 45.2 mm at time 0:12
-      (30.0%) Frame 12\n\tLeftFoot average position error 0.3 mm and maximum position
-      error 8.5 mm at time 0:12 (30.0%) Frame 12\n\tLeftUpperArm average position
-      error 0.1 mm and maximum position error 1.5 mm at time 0: 2 (5.0%) Frame 2\n\tLeftLowerArm
-      average position error 0.2 mm and maximum position error 1.5 mm at time 0:
-      2 (5.0%) Frame 2\n\tLeftHand average position error 0.1 mm and maximum position
-      error 1.5 mm at time 0: 2 (5.0%) Frame 2\n\tRightUpperArm average position
-      error 0.1 mm and maximum position error 1.5 mm at time 0: 2 (5.0%) Frame 2\n\tRightLowerArm
-      average position error 0.1 mm and maximum position error 1.5 mm at time 0:
-      2 (5.0%) Frame 2\n\tRightHand average position error 0.1 mm and maximum position
-      error 1.5 mm at time 0: 2 (5.0%) Frame 2\n\tHead average position error 0.1
-      mm and maximum position error 1.5 mm at time 0: 2 (5.0%) Frame 2\n"
-    animationDoRetargetingWarnings: 1
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
     animationCompression: 3
@@ -448,10 +436,10 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    importVisibility: 0
-    importBlendShapes: 0
-    importCameras: 0
-    importLights: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
     fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -472,7 +460,7 @@ ModelImporter:
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 2
