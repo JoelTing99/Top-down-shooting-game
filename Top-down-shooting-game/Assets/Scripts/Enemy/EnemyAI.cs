@@ -18,7 +18,7 @@ public class EnemyAI : MonoBehaviour
         {
             Player = GameObject.FindWithTag("Player").transform;
             NavMeshAgent.destination = Player.position;
-            transform.LookAt(Player);
+            transform.LookAt(Player.position + new Vector3(0, 1.5f, 0));
         }
     }
 }

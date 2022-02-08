@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] private Transform[] Spawners;
+    [SerializeField] private List<Transform> Spawners;
     [SerializeField] private GameObject[] TypeOfEnemy;
     [SerializeField] private int SpawnNum;
+    [SerializeField] private GameObject Spawner;
+    private Templates Templates;
     private GameObject Player;
+    private bool CanSpawn;
     private string Timer;
     private string WaveCount;
     private int SpawnedNum;
@@ -20,6 +23,7 @@ public class SpawnManager : MonoBehaviour
     private int CubeNum, FurstumNum, DodecahedronNum, OctahedronNum, SmallStellatedNum;
     private void Start()
     {
+        Templates = FindObjectOfType<Templates>();
         Player = GameObject.FindWithTag("Player");
         CubeNum = SpawnRateCalculate(0.25f);
         FurstumNum = SpawnRateCalculate(0.35f);
@@ -27,10 +31,11 @@ public class SpawnManager : MonoBehaviour
         OctahedronNum = SpawnRateCalculate(0.2f);
         SmallStellatedNum = SpawnRateCalculate(0.1f);
         SpawnNum = CubeNum + FurstumNum + DodecahedronNum + OctahedronNum + SmallStellatedNum;
+        Invoke("AddSpawner", 10);
     }
     void Update()
     {
-        if(Player != null)
+        if(Player != null && CanSpawn)
         {
             SpawnSystem();
         }
@@ -84,7 +89,7 @@ public class SpawnManager : MonoBehaviour
         {
             if (TimeBtwSpawn <= 0)
             {
-                Instantiate(TypeOfEnemy[Type], Spawners[Random.Range(0, Spawners.Length)].position, Quaternion.identity);
+                Instantiate(TypeOfEnemy[Type], Spawners[Random.Range(0, Spawners.Count)].position, Quaternion.identity);
                 SpawnedNum++;
                 TimeBtwSpawn = SpawnPeriod;
                 switch (Type)
@@ -139,6 +144,17 @@ public class SpawnManager : MonoBehaviour
     private int SpawnRateCalculate(float rate)
     {
         return Mathf.RoundToInt(SpawnNum * rate);
+    }
+    private void AddSpawner()
+    {
+        int RandNumber = Random.Range(Templates.Bridges.Count / 10, Templates.Bridges.Count);
+        for (int i = 0; i < RandNumber; i++)
+        {
+            int RandLocation = Random.Range(10, Templates.Bridges.Count);
+            GameObject spawner = Instantiate(Spawner, Templates.Bridges[RandLocation].transform.position, Quaternion.identity, transform);
+            Spawners.Add(spawner.transform);
+        }
+        CanSpawn = true;
     }
     public string GetWaveTime()
     {

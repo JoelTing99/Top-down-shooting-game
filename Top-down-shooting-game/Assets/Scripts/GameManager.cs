@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private float PlayerHP = 640;
     private float PlayerDamage = 60;
     private float PlayerDamage_Return;
-    private float PlayerSpeed = 250;
+    private float PlayerSpeed = 320;
     private float PlayerSpeed_Return;
     private float AttackSpeed = 1;
     private float Defense = 3;
