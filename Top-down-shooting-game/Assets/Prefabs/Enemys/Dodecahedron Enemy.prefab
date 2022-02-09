@@ -264,8 +264,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 70, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.6}
-  m_SizeDelta: {x: 200, y: 15}
+  m_AnchoredPosition: {x: 0, y: 2}
+  m_SizeDelta: {x: 250, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1540281215
 Canvas:
@@ -1081,9 +1081,9 @@ GameObject:
   - component: {fileID: 8072291764717535587}
   - component: {fileID: 7381704352279500748}
   - component: {fileID: 7378250632247943951}
-  - component: {fileID: 6605289012993610215}
   - component: {fileID: 6961537659521300580}
   - component: {fileID: 7664311382722833522}
+  - component: {fileID: 8639294486150159646}
   m_Layer: 7
   m_Name: Dodecahedron Enemy
   m_TagString: DodecahedronEnemy
@@ -1160,19 +1160,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!135 &6605289012993610215
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6387778774856831431}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.95
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &6961537659521300580
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1214,6 +1201,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &8639294486150159646
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387778774856831431}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7823395120701983326
 GameObject:
   m_ObjectHideFlags: 0

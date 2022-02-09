@@ -153,7 +153,10 @@ public class Player : MonoBehaviour
         {
             Vector2 InputVector = Controls.Player.Movement.ReadValue<Vector2>();
             //rb.AddForce(new Vector3(InputVector.x, 0, InputVector.y) * GameManager.GetPlayerSpeed() * Time.deltaTime);
-            rb.velocity = new Vector3(VelocityX * Time.deltaTime * GameManager.GetPlayerSpeed(), 0, VelocityZ * Time.deltaTime * GameManager.GetPlayerSpeed());
+            Vector3 velocity = rb.velocity;
+            velocity.x = VelocityX * Time.deltaTime * GameManager.GetPlayerSpeed();
+            velocity.z = VelocityZ * Time.deltaTime * GameManager.GetPlayerSpeed();
+            rb.velocity = velocity;
         }
     }
     private void MoveAnimation()
