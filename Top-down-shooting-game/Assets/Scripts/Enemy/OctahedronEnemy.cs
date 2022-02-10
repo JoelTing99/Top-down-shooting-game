@@ -52,7 +52,7 @@ public class OctahedronEnemy : MonoBehaviour
     }
     private void Charging()
     {
-        if (BulletCount < 1)
+        if (BulletCount < 1 && bullet != null)
         {
             bullet = Instantiate(Bullet, FirePoint.position, transform.rotation, transform);
             StartCoroutine(bullet.GetComponent<EnemyBullet>().Charge());

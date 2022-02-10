@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 3351892}
   - component: {fileID: 2382698}
   - component: {fileID: 6541824}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: glass_panel_1
   m_TagString: Wall
   m_Icon: {fileID: 0}
