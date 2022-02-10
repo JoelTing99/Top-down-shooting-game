@@ -5,9 +5,7 @@ using UnityEngine;
 public class EnemyBullet : MonoBehaviour
 {
     private GameManager GameManager;
-    private float Speed;
-    [HideInInspector]
-    public bool IsCharging;
+    private float Speed = 0;
     private void Start()
     {
         GameManager = FindObjectOfType<GameManager>();
@@ -16,22 +14,15 @@ public class EnemyBullet : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.forward * Speed * Time.deltaTime);
-        if (IsCharging)
-        {
-            Charge();
-        }
-        else
-        {
-            return;
-        }
     }
 
-    public void Charge()
+    public IEnumerator Charge()
     {
         Speed = 0f;
-        if(transform.localScale.x < 0.3f || transform.localScale.y < 0.3f || transform.localScale.z < 0.3f)
+        while(transform.localScale.x < 0.3f || transform.localScale.y < 0.3f || transform.localScale.z < 0.3f)
         {
-            transform.localScale *= 1.01f;
+            transform.localScale *= 1.02f;
+            yield return null;
         }
     }
     public void Fire()

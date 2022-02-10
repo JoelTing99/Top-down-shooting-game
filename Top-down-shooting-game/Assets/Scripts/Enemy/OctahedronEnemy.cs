@@ -13,8 +13,6 @@ public class OctahedronEnemy : MonoBehaviour
     private NavMeshAgent Agent;
     [SerializeField] private GameObject Bullet;
     [SerializeField] private Transform FirePoint;
-    [SerializeField] private bool Fire;
-    [SerializeField] private bool Charging;
     [SerializeField] private GameObject Destroyed;
     private int BulletCount;
     private GameObject bullet;
@@ -34,40 +32,35 @@ public class OctahedronEnemy : MonoBehaviour
 
     private void Update()
     {
-        Attack();
-        FireAction();
+        AttackAnimation();
         Dead();
     }
-    private void Attack()
+    private void AttackAnimation()
     {
-        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit HIT, 5f) && !HIT.collider.CompareTag("Wall"))
+        if(Physics.Raycast(transform.position, transform.forward, out RaycastHit HIT, 5f) && !HIT.collider.CompareTag("Wall"))
         {
-            bool HitPlayer = false;
             RaycastHit[] Hit = Physics.RaycastAll(transform.position, transform.TransformDirection(Vector3.forward), 5f);
             foreach (var hit in Hit)
             {
-                HitPlayer = true;
-            }
-            if (HitPlayer)
-            {
                 Animator.SetBool("IsAttack", true);
-                if (BulletCount < 1 && Charging)
-                {
-                    bullet = Instantiate(Bullet, FirePoint.position, transform.rotation, transform);
-                    BulletCount++;
-                }
-            }
-            else
-            {
-                Animator.SetBool("IsAttack", false);
-                Destroy(bullet, 5f);
-                BulletCount = 0;
             }
         }
         else
         {
             Animator.SetBool("IsAttack", false);
+        }
+    }
+    private void Charging()
+    {
+        if (BulletCount < 1)
+        {
+            bullet = Instantiate(Bullet, FirePoint.position, transform.rotation, transform);
+            StartCoroutine(bullet.GetComponent<EnemyBullet>().Charge());
+            BulletCount++;
             Destroy(bullet, 5f);
+        }
+        else
+        {
             BulletCount = 0;
         }
     }
@@ -75,22 +68,9 @@ public class OctahedronEnemy : MonoBehaviour
     {
         if (bullet != null)
         {
-            if (Charging)
-            {
-                bullet.GetComponent<EnemyBullet>().IsCharging = true;
-                Line.positionCount = 5;
-                DrawProjection();
-            }
-            else
-            {
-                bullet.GetComponent<EnemyBullet>().IsCharging = false;
-                Line.positionCount = 0;
-            }
-            if (Fire)
-            {
-                bullet.GetComponent<EnemyBullet>().Fire();
-                BulletCount = 0;
-            }
+            bullet.GetComponent<EnemyBullet>().Fire();
+            BulletCount = 0;
+            bullet = null;
         }
     }
     private void Dead()

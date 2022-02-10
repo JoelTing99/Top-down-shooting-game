@@ -13,7 +13,7 @@ public class SmallStellatedAttack : MonoBehaviour
         {
             if(collider.GetComponent<Rigidbody>() != null)
             {
-                collider.GetComponent<Rigidbody>().AddExplosionForce(400, transform.position, 1);
+                collider.GetComponent<Rigidbody>().AddExplosionForce(500, transform.position, 1.5f);
             }
             if (collider.CompareTag("Player"))
             {

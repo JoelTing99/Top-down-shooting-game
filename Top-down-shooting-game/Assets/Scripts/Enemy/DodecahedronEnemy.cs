@@ -10,7 +10,6 @@ public class DodecahedronEnemy : MonoBehaviour
     private Animator Animator;
     private NavMeshAgent Agent;
     private int AttackCount;
-    [SerializeField] private bool IsAttacking;
     [SerializeField] private GameObject Destroyed;
     private void Start()
     {
@@ -27,12 +26,12 @@ public class DodecahedronEnemy : MonoBehaviour
 
     private void Update()
     {
-        Attack();
+        AttackAnimation();
         Dead();
     }
-    private void Attack()
+    private void AttackAnimation()
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 0.7f) && hit.collider.CompareTag("Player"))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 1f) && hit.collider.CompareTag("Player"))
         {
             Animator.SetBool("IsAttack", true);
         }
@@ -40,29 +39,29 @@ public class DodecahedronEnemy : MonoBehaviour
         {
             Animator.SetBool("IsAttack", false);
         }
-        if (IsAttacking)
+    }
+    private void StartAttack()
+    {
+        Collider[] Collide = Physics.OverlapSphere(transform.position, 1.5f);
+        foreach (var collide in Collide)
         {
-            Collider[] Collide = Physics.OverlapSphere(transform.position, 1.5f);
-            foreach (var collide in Collide)
+            if (collide.CompareTag("Player") && AttackCount > 0)
             {
-                if (collide.CompareTag("Player") && AttackCount > 0)
+                GameManager.AttackPlayer(GameManager.GetDodecahedronDamage());
+                if (FindObjectOfType<Player>() != null)
                 {
-                    GameManager.AttackPlayer(GameManager.GetDodecahedronDamage());
-                    if (FindObjectOfType<Player>() != null)
-                    {
-                        FindObjectOfType<Player>().isStun = true;
-                    }
+                    FindObjectOfType<Player>().isStun = true;
                 }
             }
-            AttackCount--;
         }
-        else
+        AttackCount--;
+    }
+    private void StopAttack()
+    {
+        AttackCount = 1;
+        if (FindObjectOfType<Player>() != null)
         {
-            AttackCount = 1;
-            if(FindObjectOfType<Player>() != null)
-            {
-                FindObjectOfType<Player>().isStun = false;
-            }
+            FindObjectOfType<Player>().isStun = false;
         }
     }
     private void Dead()

@@ -11,7 +11,6 @@ public class FurstumEnemy : MonoBehaviour
     private Animator Animator;
     private NavMeshAgent Agent;
     private int AttackCount;
-    [SerializeField] private bool IsAttacking;
     [SerializeField] private GameObject Destroyed;
     private void Start()
     {
@@ -29,10 +28,10 @@ public class FurstumEnemy : MonoBehaviour
 
     private void Update()
     {
-        Attack();
+        AttackAnimation();
         Dead();
     }
-    private void Attack()
+    private void AttackAnimation()
     {
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 1f) && hit.collider.CompareTag("Player"))
         {
@@ -42,18 +41,18 @@ public class FurstumEnemy : MonoBehaviour
         {
             Animator.SetBool("IsAttack", false);
         }
-        if (IsAttacking)
+    }
+    private void StartAttack()
+    {
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit Hit, 1.5f) && Hit.collider.CompareTag("Player") && AttackCount > 0)
         {
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit Hit, 1f) && hit.collider.CompareTag("Player") && AttackCount > 0)
-            {
-                GameManager.AttackPlayer(GameManager.GetFurstumDamage());
-                AttackCount--;
-            }
+            GameManager.AttackPlayer(GameManager.GetFurstumDamage());
+            AttackCount--;
         }
-        else
-        {
-            AttackCount = 1;
-        }
+    }
+    private void StopAttack()
+    {
+        AttackCount = 1;
     }
     private void Dead()
     {

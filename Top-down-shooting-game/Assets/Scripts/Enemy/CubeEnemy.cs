@@ -13,7 +13,6 @@ public class CubeEnemy : MonoBehaviour
     private NavMeshAgent Agent;
     [SerializeField] private GameObject Destroyed;
     [SerializeField] private VisualEffect AttactEffect;
-    [SerializeField] private bool IsAttacking;
     private void Start()
     {
         GameManager = FindObjectOfType<GameManager>();
@@ -28,31 +27,31 @@ public class CubeEnemy : MonoBehaviour
 
     private void Update()
     {
-        Attack();
+        AttackAnimation();
         Dead();
     }
-    private void Attack()
+    private void AttackAnimation()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 0.7f) && hit.collider.CompareTag("Player"))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1.5f) && hit.collider.CompareTag("Player"))
         {
             Animator.SetBool("IsAttack", true);
-        }
-        else
-        {
-            Animator.SetBool("IsAttack", false);
-        }
-        if (IsAttacking)
-        {
-            AttactEffect.SendEvent("Attacking");
-            if (Physics.SphereCast(transform.position, 0.05f, transform.forward, out RaycastHit Hit, 1f) && Hit.transform.CompareTag("Player"))
+            if (Physics.SphereCast(transform.position, 1f, transform.forward, out RaycastHit Hit, 1.5f) && Hit.transform.CompareTag("Player"))
             {
                 GameManager.AttackPlayer(GameManager.GetCubeDamage());
             }
         }
         else
         {
-            AttactEffect.SendEvent("StopAttacking");
+            Animator.SetBool("IsAttack", false);
         }
+    }
+    private void StartAttackEffect()
+    {
+        AttactEffect.SendEvent("Attacking");
+    }
+    private void StopAttackEffect()
+    {
+        AttactEffect.SendEvent("StopAttacking");
     }
     private void Dead()
     {

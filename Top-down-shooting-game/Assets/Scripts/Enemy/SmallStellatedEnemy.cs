@@ -10,10 +10,7 @@ public class SmallStellatedEnemy : MonoBehaviour
     private EnemyHealthBar EnemyHealthBar;
     private Animator Animator;
     private NavMeshAgent Agent;
-    [SerializeField]
-    private bool IsAttacking;
-    [SerializeField]
-    private GameObject Destroyed;
+    [SerializeField] private GameObject Destroyed;
     private void Start()
     {
         GameManager = FindObjectOfType<GameManager>();
@@ -27,12 +24,12 @@ public class SmallStellatedEnemy : MonoBehaviour
     }
     private void Update()
     {
-        Attack();
+        AttackAnimation();
         Dead();
     }
-    private void Attack()
+    private void AttackAnimation()
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 1f) && hit.collider.CompareTag("Player"))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 2f) && hit.collider.CompareTag("Player"))
         {
             Animator.SetBool("IsAttack", true);
         }
@@ -40,11 +37,11 @@ public class SmallStellatedEnemy : MonoBehaviour
         {
             Animator.SetBool("IsAttack", false);
         }
-        if (IsAttacking)
-        {
-            Instantiate(Destroyed, transform.position, transform.rotation);
-            Destroy(gameObject);
-        }
+    }
+    private void Attack()
+    {
+        Instantiate(Destroyed, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
     private void Dead()
     {

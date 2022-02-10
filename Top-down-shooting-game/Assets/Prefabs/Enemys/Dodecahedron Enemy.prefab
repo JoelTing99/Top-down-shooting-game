@@ -1142,7 +1142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8240860d018514d9849f1fad0fcee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsAttacking: 0
   Destroyed: {fileID: 1262306250906837769, guid: e27027838e2ddf5439247e3646ea8c9b, type: 3}
 --- !u!54 &7378250632247943951
 Rigidbody:
@@ -1152,7 +1151,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6387778774856831431}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
