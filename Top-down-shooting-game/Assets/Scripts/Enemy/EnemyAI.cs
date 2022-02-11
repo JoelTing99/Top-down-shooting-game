@@ -11,14 +11,19 @@ public class EnemyAI : MonoBehaviour
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
         Player = GameObject.FindWithTag("Player").transform;
+        StartCoroutine(SetDestination());
     }
-    private void Update()
+    private IEnumerator SetDestination()
     {
-        if(Player != null)
+        while (true)
         {
-            Player = GameObject.FindWithTag("Player").transform;
-            NavMeshAgent.destination = Player.position;
-            transform.LookAt(Player.position + new Vector3(0, 1.5f, 0));
+            if (Player != null)
+            {
+                Player = GameObject.FindWithTag("Player").transform;
+                NavMeshAgent.destination = Player.position;
+                transform.LookAt(Player.position + new Vector3(0, 1.5f, 0));
+            }
+            yield return null;
         }
     }
 }

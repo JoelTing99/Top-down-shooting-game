@@ -33,7 +33,7 @@ public class FurstumEnemy : MonoBehaviour
     }
     private void AttackAnimation()
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 1f) && hit.collider.CompareTag("Player"))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 1.5f) && hit.collider.CompareTag("Player"))
         {
             Animator.SetBool("IsAttack", true);
         }

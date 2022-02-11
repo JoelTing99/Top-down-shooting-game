@@ -1396,6 +1396,7 @@ GameObject:
   - component: {fileID: 8634434555069719694}
   - component: {fileID: 1871104168}
   - component: {fileID: 1871104164}
+  - component: {fileID: 1438427731}
   m_Layer: 0
   m_Name: New Player
   m_TagString: Player
@@ -1437,7 +1438,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 860793eb3324391468f1c120a75ec049, type: 3}
   m_Controller: {fileID: 9100000, guid: 07731884451ed2343ac3bf03d2f03c58, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
@@ -1622,6 +1623,22 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0.25}
+--- !u!208 &1438427731
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4276478238346664631}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 1, z: 0.4}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 1, z: 0.25}
+  m_TimeToStationary: 0.5
 --- !u!1 &4276478238346664633
 GameObject:
   m_ObjectHideFlags: 0

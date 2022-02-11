@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     private HealthSystem PlayerHealth;
     private PlayerHealthBar PlayerHealthBar;
-    [SerializeField] GameObject Coins;
+    [SerializeField] private GameObject Coins;
     //Player
     private float PlayerHP = 640;
     private float PlayerDamage = 60;
