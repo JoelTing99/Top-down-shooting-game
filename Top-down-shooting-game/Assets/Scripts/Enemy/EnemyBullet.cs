@@ -6,6 +6,7 @@ public class EnemyBullet : MonoBehaviour
 {
     private GameManager GameManager;
     private float Speed = 0;
+    public bool Charging;
     private void Start()
     {
         GameManager = FindObjectOfType<GameManager>();
@@ -14,19 +15,23 @@ public class EnemyBullet : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+        if (Charging)
+        {
+            Charge();
+        }
     }
 
-    public IEnumerator Charge()
+    public void Charge()
     {
         Speed = 0f;
-        while(transform.localScale.x < 0.3f || transform.localScale.y < 0.3f || transform.localScale.z < 0.3f)
+        if(transform.localScale.x < 0.3f || transform.localScale.y < 0.3f || transform.localScale.z < 0.3f)
         {
-            transform.localScale *= 1.02f;
-            yield return null;
+            transform.localScale *= 1.05f;
         }
     }
     public void Fire()
     {
+        Charging = false;
         Speed = 10f;
         transform.SetParent(null);
     }

@@ -1394,7 +1394,6 @@ GameObject:
   - component: {fileID: 7366572101150622687}
   - component: {fileID: 3843659618631263132}
   - component: {fileID: 8634434555069719694}
-  - component: {fileID: 1871104168}
   - component: {fileID: 1871104164}
   - component: {fileID: 1438427731}
   m_Layer: 0
@@ -1440,7 +1439,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 07731884451ed2343ac3bf03d2f03c58, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
     are already bound by a Humanoid avatar. These transforms can only be changed
@@ -1596,19 +1595,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!65 &1871104168
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4276478238346664631}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.6, z: 1}
-  m_Center: {x: 0, y: 0.35, z: 0.25}
 --- !u!136 &1871104164
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1633,7 +1619,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.5, y: 1, z: 0.4}
+  m_Extents: {x: 0.3, y: 1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 0
@@ -2679,7 +2665,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4276478238346233567}
-  - component: {fileID: 85846760}
   m_Layer: 0
   m_Name: ArmPosition_Right
   m_TagString: Player
@@ -2704,19 +2689,6 @@ Transform:
   m_Father: {fileID: 4276478238346233587}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 48.63, y: -16.65, z: 20.461}
---- !u!65 &85846760
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4276478238346664703}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 16.5, y: 7.5, z: 16.4}
-  m_Center: {x: -66.7, y: -70.3, z: 0}
 --- !u!1 &4276478238346664769
 GameObject:
   m_ObjectHideFlags: 0
@@ -2756,6 +2728,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4276478238346233507}
+  - component: {fileID: 5110126253632430042}
   m_Layer: 0
   m_Name: Trigger_Right
   m_TagString: Untagged
@@ -2778,6 +2751,20 @@ Transform:
   m_Father: {fileID: 4276478238346233567}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &5110126253632430042
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4276478238346664771}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 10
+  m_Height: 100
+  m_Direction: 0
+  m_Center: {x: -52.5, y: 0, z: -10}
 --- !u!1 &4276478238346664773
 GameObject:
   m_ObjectHideFlags: 0

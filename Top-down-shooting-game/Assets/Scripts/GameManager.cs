@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     private float GrenadeDamage = 150;
     private float GrendaeCoolDownTime = 25; 
     private float RollCoolDownTime = 3;
-    private float RollDistance = 2;
+    private float RollDistance = 45;
 
     //Enemy Health
     private float CubeHP = 280;

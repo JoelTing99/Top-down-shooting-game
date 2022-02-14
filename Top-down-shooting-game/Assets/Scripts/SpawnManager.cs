@@ -150,7 +150,7 @@ public class SpawnManager : MonoBehaviour
         int RandNumber = Random.Range(Templates.Bridges.Count / 10, Templates.Bridges.Count);
         for (int i = 0; i < RandNumber; i++)
         {
-            int RandLocation = Random.Range(10, Templates.Bridges.Count);
+            int RandLocation = Random.Range(Templates.Bridges.Count / 10, Templates.Bridges.Count);
             GameObject spawner = Instantiate(Spawner, Templates.Bridges[RandLocation].transform.position, Quaternion.identity, transform);
             Spawners.Add(spawner.transform);
         }

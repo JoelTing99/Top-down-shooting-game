@@ -182,6 +182,7 @@ public class Player : MonoBehaviour
             float TurnAngle = Mathf.Atan2(LookDirection.z, LookDirection.x) * Mathf.Rad2Deg;
             RotateAngle = TurnAngle;
             transform.rotation = Quaternion.Euler(new Vector3(0f, -TurnAngle + 90, 0f));
+            
         }
     }
     private void Shooting()
@@ -206,16 +207,23 @@ public class Player : MonoBehaviour
     {
         if(CanRoll && !IsStun)
         {
-            Animator.SetTrigger("Roll");
             CanRoll = false;
+            StartCoroutine(Rolling(1f, Distance));
+            Animator.SetTrigger("Roll");
             StartCoroutine(RollCoolDownCount(GameManager.GetRollCoolDownTime()));
             RollEffect.SendEvent("Roll");
         }
     }
-    private void Rollingg()
+    private IEnumerator Rolling(float time, float Distance)
     {
-        VelocityX = 0;
-        VelocityZ = 0;
+        while(time >= 0)
+        {
+            time -= Time.deltaTime;
+            VelocityX = 0;
+            VelocityZ = 0;
+            rb.AddForce(transform.forward * Distance, ForceMode.Impulse);
+            yield return null;
+        }
     }
     private IEnumerator RollCoolDownCount(float time)
     {
@@ -264,8 +272,6 @@ public class Player : MonoBehaviour
             }
             yield return null;
         }
-
-        
     }
     private IEnumerator ThrowGrenadeCoolDownCount(float time)
     {
