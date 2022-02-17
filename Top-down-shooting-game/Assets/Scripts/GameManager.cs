@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
     private float PlayerSpeed = 320;
     private float PlayerSpeed_Return;
     private float AttackSpeed = 1;
-    private float Defense = 3;
-    private float Defense_Return;
+    private float Armor = 3;
+    private float Armor_Return;
     private float DodgeRate = 0;
 
     //Ability
@@ -51,11 +51,11 @@ public class GameManager : MonoBehaviour
 
     //Item
     private int CoinsAmount;
-    private float HealPackAmount = 40;
-    private float BoostDuration = 10;
+    private float HealPackAmount = 70;
+    private float BoostDuration = 5;
     private float DamageBoostRate = 0.3f;
-    private float DefenseBoostRate = 0.2f;
-    private float SpeedUpRate = 0.5f;
+    private float DefenseBoostRate = 0.5f;
+    private float SpeedUpRate = 0.2f;
     private void Awake()
     {
         PlayerHealth = new HealthSystem(PlayerHP);
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         PlayerHealthBar.SetHealthSystem(PlayerHealth);
         PlayerDamage_Return = PlayerDamage;
         PlayerSpeed_Return = PlayerSpeed;
-        Defense_Return = Defense;
+        Armor_Return = Armor;
         PlayerSpeed_Return = PlayerSpeed;
     }
     private void Update()
@@ -76,6 +76,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(GameObject.FindWithTag("Player"));
         }
+        Debug.Log($"HP = {PlayerHP}");
+        Debug.Log($"Damge = {PlayerDamage_Return}");
+        Debug.Log($"Speed = {PlayerSpeed_Return}");
+        Debug.Log($"Armor = {Armor_Return}");
     }
     public GameObject GetCoinsGameObject()
     {
@@ -102,13 +106,13 @@ public class GameManager : MonoBehaviour
     {
         if (UnityEngine.Random.value > DodgeRate)
         {
-            if(damage <= Defense_Return)
+            if(damage <= Armor_Return)
             {
                 PlayerHealth.Damage(damage);
             }
             else
             {
-                PlayerHealth.Damage(damage - Defense_Return);
+                PlayerHealth.Damage(damage - Armor_Return);
             }
         }
         else
@@ -161,13 +165,13 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator DefenseBoost(float time)
     {
-        Defense_Return = Defense + Defense * DefenseBoostRate;
+        Armor_Return = Armor + Armor * DefenseBoostRate;
         while (time >= 0)
         {
             time -= Time.deltaTime;
             yield return null;
         }
-        Defense_Return = Defense;
+        Armor_Return = Armor;
     }
     public void StartSpeedUp()
     {

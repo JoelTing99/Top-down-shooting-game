@@ -24,8 +24,6 @@ public class PlayerHealthBar : MonoBehaviour
         HealthSystem.OnDamaged += HealthSystem_OnDamaged;
         HealthSystem.OnHealed += HealthSystem_OnHealed;
     }
-
-
     private void Update()
     {
         Timer -= Time.deltaTime;
@@ -53,6 +51,18 @@ public class PlayerHealthBar : MonoBehaviour
     private void SetHealth(float HealthPercentage)
     {
         Bar.fillAmount = HealthPercentage;
+        if(Bar.fillAmount >= 0.5f)
+        {
+            Bar.color = new Color(0, 1, 0);
+        }
+        else if(Bar.fillAmount <= 0.5f && Bar.fillAmount >= 0.2f)
+        {
+            Bar.color = new Color(1, 1, 0);
+        }
+        else
+        {
+            Bar.color = new Color(1, 0, 0);
+        }
     }
     public void SetHealthSystem(HealthSystem HealthSystem)
     {

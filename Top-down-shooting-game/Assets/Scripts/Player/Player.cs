@@ -221,7 +221,7 @@ public class Player : MonoBehaviour
             time -= Time.deltaTime;
             VelocityX = 0;
             VelocityZ = 0;
-            rb.AddForce(transform.forward * Distance, ForceMode.Impulse);
+            rb.AddForce(transform.forward * Distance * 30 * Time.deltaTime, ForceMode.Impulse);
             yield return null;
         }
     }
@@ -312,7 +312,7 @@ public class Player : MonoBehaviour
         {
             Vector3 NewPoint = StartingPosition + i * StartingVelosity;
             points.Add(NewPoint);
-            if (Physics.OverlapSphere(NewPoint, 0.1f, CollidableLayer).Length > 0)
+            if (Physics.OverlapSphere(NewPoint, 0.1f, CollidableLayer).Length > 1)
             {
                 Line.positionCount = points.Count;
                 break;
