@@ -41,7 +41,6 @@ public class PlayerHealthBar : MonoBehaviour
     {
         SetHealth(HealthSystem.GetHealthPercent());
     }
-
     private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
     {
         Timer = TimerMax;

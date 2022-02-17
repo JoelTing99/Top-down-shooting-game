@@ -67,7 +67,7 @@ public class CubeEnemy : MonoBehaviour
             {
                 if (collider.GetComponent<Rigidbody>() != null)
                 {
-                    collider.GetComponent<Rigidbody>().AddExplosionForce(400, transform.position, 1);
+                    collider.GetComponent<Rigidbody>().AddExplosionForce(400, transform.position, 2);
                 }
             }
             Destroy(gameObject);

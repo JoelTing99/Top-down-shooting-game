@@ -38,7 +38,7 @@ public class Templates : MonoBehaviour
     public GameObject Straight;
 
     public List<GameObject> Bridges;
-    public int RoomNumbers = 50;
+    public int RoomNumbers;
     private void Start()
     {
         NavMeshBuilder.ClearAllNavMeshes();

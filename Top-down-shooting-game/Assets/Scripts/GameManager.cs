@@ -7,9 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public event EventHandler OnCollectedCoin;
 
+    [SerializeField] private GameObject Coins;
     private HealthSystem PlayerHealth;
     private PlayerHealthBar PlayerHealthBar;
-    [SerializeField] private GameObject Coins;
+    private UIManager UIManager;
+    private LevelSystem LevelSystem;
     //Player
     private float PlayerHP = 640;
     private float PlayerDamage = 60;
@@ -50,6 +52,7 @@ public class GameManager : MonoBehaviour
     private float SmallStellatedSpeed = 5;
 
     //Item
+    [SerializeField] private GameObject[] BonusItem;
     private int CoinsAmount;
     private float HealPackAmount = 70;
     private float BoostDuration = 5;
@@ -59,6 +62,9 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         PlayerHealth = new HealthSystem(PlayerHP);
+        LevelSystem = new LevelSystem(350);
+        UIManager = FindObjectOfType<UIManager>();
+        UIManager.SetLevelSystem(LevelSystem);
         PlayerHealthBar = FindObjectOfType<PlayerHealthBar>();
         PlayerHealthBar.SetHealthSystem(PlayerHealth);
         PlayerDamage_Return = PlayerDamage;
@@ -80,6 +86,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Damge = {PlayerDamage_Return}");
         Debug.Log($"Speed = {PlayerSpeed_Return}");
         Debug.Log($"Armor = {Armor_Return}");
+        Debug.Log($"Level = {LevelSystem.GetExp()}");
     }
     public GameObject GetCoinsGameObject()
     {
@@ -137,6 +144,10 @@ public class GameManager : MonoBehaviour
         return DodgeRate;
     }
     //Item
+    public GameObject GetRandomBonusItem()
+    {
+        return BonusItem[UnityEngine.Random.Range(0, BonusItem.Length)];
+    }
     public float GetHealPackAmount()
     {
         return HealPackAmount;
