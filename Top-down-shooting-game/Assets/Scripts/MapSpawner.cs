@@ -17,10 +17,10 @@ public class MapSpawner : MonoBehaviour
     private void Awake()
     {
         Detect();
+        Templates = FindObjectOfType<Templates>();
     }
     private void Start()
     {
-        Templates = FindObjectOfType<Templates>();
         if(Templates.RoomNumbers >= 0)
         {
             if (gameObject.CompareTag("SpawnPoint"))

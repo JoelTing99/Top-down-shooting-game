@@ -11,12 +11,14 @@ public class CubeEnemy : MonoBehaviour
     private Animator Animator;
     private GameManager GameManager;
     private NavMeshAgent Agent;
+    private LevelSystem LevelSystem;
     [SerializeField] private GameObject Destroyed;
     [SerializeField] private VisualEffect AttactEffect;
     private void Start()
     {
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetCubeHP());
+        LevelSystem = GameManager.GetLevelSystem();
         EnemyHealthBar = transform.Find("HealthBar").GetComponent<EnemyHealthBar>();
         EnemyHealthBar.SetHealthSystem(HealthSystem);
         Agent = GetComponent<NavMeshAgent>();
@@ -70,6 +72,7 @@ public class CubeEnemy : MonoBehaviour
                     collider.GetComponent<Rigidbody>().AddExplosionForce(400, transform.position, 2);
                 }
             }
+            LevelSystem.ObtainExp(GameManager.GetCubeExpAmount());
             Destroy(gameObject);
             Destroy(destroy, 5);
         }

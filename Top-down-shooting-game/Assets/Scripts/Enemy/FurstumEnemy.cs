@@ -10,13 +10,14 @@ public class FurstumEnemy : MonoBehaviour
     private EnemyHealthBar EnemyHealthBar;
     private Animator Animator;
     private NavMeshAgent Agent;
+    private LevelSystem LevelSystem;
     private int AttackCount;
     [SerializeField] private GameObject Destroyed;
     private void Start()
     {
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetFurstumHP());
- 
+        LevelSystem = GameManager.GetLevelSystem();
         EnemyHealthBar = transform.Find("HealthBar").GetComponent<EnemyHealthBar>();
         EnemyHealthBar.SetHealthSystem(HealthSystem);
         Animator = GetComponent<Animator>();
@@ -68,9 +69,10 @@ public class FurstumEnemy : MonoBehaviour
             {
                 if (collider.GetComponent<Rigidbody>() != null)
                 {
-                    collider.GetComponent<Rigidbody>().AddExplosionForce(400, transform.position, 1);
+                    collider.GetComponent<Rigidbody>().AddExplosionForce(400, transform.position, 2f);
                 }
             }
+            LevelSystem.ObtainExp(GameManager.GetFurstumExpAmount());
             Destroy(gameObject);
             Destroy(destory, 5);
         }

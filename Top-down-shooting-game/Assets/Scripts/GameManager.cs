@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject Coins;
     private HealthSystem PlayerHealth;
     private PlayerHealthBar PlayerHealthBar;
-    private UIManager UIManager;
     private LevelSystem LevelSystem;
     //Player
     private float PlayerHP = 640;
@@ -51,6 +50,13 @@ public class GameManager : MonoBehaviour
     private float OctahedronSpeed = 2;
     private float SmallStellatedSpeed = 5;
 
+    //Experience amount
+    private int CubeExpAmount = 20;
+    private int DodecahedronExpAmount = 25;
+    private int FurstumExpAmount = 12;
+    private int OctahedronExpAmount = 18;
+    private int SmallStellatedExpAmount = 30;
+
     //Item
     [SerializeField] private GameObject[] BonusItem;
     private int CoinsAmount;
@@ -63,8 +69,6 @@ public class GameManager : MonoBehaviour
     {
         PlayerHealth = new HealthSystem(PlayerHP);
         LevelSystem = new LevelSystem(350);
-        UIManager = FindObjectOfType<UIManager>();
-        UIManager.SetLevelSystem(LevelSystem);
         PlayerHealthBar = FindObjectOfType<PlayerHealthBar>();
         PlayerHealthBar.SetHealthSystem(PlayerHealth);
         PlayerDamage_Return = PlayerDamage;
@@ -86,7 +90,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Damge = {PlayerDamage_Return}");
         Debug.Log($"Speed = {PlayerSpeed_Return}");
         Debug.Log($"Armor = {Armor_Return}");
-        Debug.Log($"Level = {LevelSystem.GetExp()}");
+        Debug.Log($"Exp = {LevelSystem.GetExp()}");
     }
     public GameObject GetCoinsGameObject()
     {
@@ -103,6 +107,11 @@ public class GameManager : MonoBehaviour
         {
             OnCollectedCoin(this, EventArgs.Empty);
         }
+    }
+    //Level
+    public LevelSystem GetLevelSystem()
+    {
+        return LevelSystem;
     }
     //Player
     public HealthSystem GetPlayerHealthSystem()
@@ -260,6 +269,27 @@ public class GameManager : MonoBehaviour
     public float GetSmallStellatedSpeed()
     {
         return SmallStellatedSpeed;
+    }
+    //Experience Amount
+    public int GetCubeExpAmount()
+    {
+        return CubeExpAmount;
+    }
+    public int GetDodecahedronExpAmount()
+    {
+        return DodecahedronExpAmount;
+    }
+    public int GetFurstumExpAmount()
+    {
+        return FurstumExpAmount;
+    }
+    public int GetOctaedronExpAmount()
+    {
+        return OctahedronExpAmount;
+    }
+    public int GetSmallStellatedExpAmount()
+    {
+        return SmallStellatedExpAmount;
     }
     //Ability
     public float GetGrenadeDamage()

@@ -11,6 +11,7 @@ public class OctahedronEnemy : MonoBehaviour
     private Animator Animator;
     private LineRenderer Line;
     private NavMeshAgent Agent;
+    private LevelSystem LevelSystem;
     [SerializeField] private GameObject Bullet;
     [SerializeField] private Transform FirePoint;
     [SerializeField] private GameObject Destroyed;
@@ -20,6 +21,7 @@ public class OctahedronEnemy : MonoBehaviour
     {
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetOctahedronHP());
+        LevelSystem = GameManager.GetLevelSystem();
         EnemyHealthBar = transform.Find("HealthBar").GetComponent<EnemyHealthBar>();
         EnemyHealthBar.SetHealthSystem(HealthSystem);
         Line = GetComponent<LineRenderer>();
@@ -92,6 +94,7 @@ public class OctahedronEnemy : MonoBehaviour
                     collider.GetComponent<Rigidbody>().AddExplosionForce(400, transform.position, 1);
                 }
             }
+            LevelSystem.ObtainExp(GameManager.GetOctaedronExpAmount());
             Destroy(gameObject);
             Destroy(destory, 5);
         }

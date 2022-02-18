@@ -9,12 +9,14 @@ public class DodecahedronEnemy : MonoBehaviour
     private EnemyHealthBar EnemyHealthBar;
     private Animator Animator;
     private NavMeshAgent Agent;
+    private LevelSystem LevelSystem;
     private int AttackCount;
     [SerializeField] private GameObject Destroyed;
     private void Start()
     {
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetDodecahedronHP());
+        LevelSystem = GameManager.GetLevelSystem();
         EnemyHealthBar = transform.Find("HealthBar").GetComponent<EnemyHealthBar>();
         EnemyHealthBar.SetHealthSystem(HealthSystem);
         Animator = GetComponent<Animator>();
@@ -81,6 +83,7 @@ public class DodecahedronEnemy : MonoBehaviour
                     collider.GetComponent<Rigidbody>().AddExplosionForce(400, transform.position, 2);
                 }
             }
+            LevelSystem.ObtainExp(GameManager.GetDodecahedronExpAmount());
             Destroy(gameObject);
             Destroy(destory, 5);
         }

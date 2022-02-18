@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     private GameManager GameManager;
     private Text WaveNum;
     private Text CoinAmount;
+    private Text LevelText;
     private GameObject GrenadeCoolDownImage;
     private GameObject RollCoolDownImage;
     private Image ReloadImage;
@@ -22,14 +23,25 @@ public class UIManager : MonoBehaviour
         Player = FindObjectOfType<Player>();
         SpawnManager = FindObjectOfType<SpawnManager>();
         GameManager = FindObjectOfType<GameManager>();
+        LevelSystem = GameManager.GetLevelSystem();
+
         GameManager.OnCollectedCoin += GameManager_OnCollectedCoin;
+        LevelSystem.OnGetExp += LevelSystem_OnGetExp;
+        LevelSystem.OnLevelUp += LevelSystem_OnLevelUp;
+
         WaveNum = transform.Find("Wave Counter").Find("Wave").GetComponent<Text>();
         CoinAmount = transform.Find("Coins").Find("Amount").GetComponent<Text>();
         GrenadeCoolDownImage = transform.Find("Grenade").Find("GrenadeCooldown").gameObject;
         RollCoolDownImage = transform.Find("Roll").Find("RollCooldown").gameObject;
         ReloadImage = transform.Find("Right joystick").Find("Reload").GetComponent<Image>();
+        LevelImage = transform.Find("Level").Find("Bar").GetComponent<Image>();
+        LevelText = transform.Find("Level").Find("Level").GetComponent<Text>();
+
+        SetExpBar();
+        SetExpText();
     }
 
+    
 
     void Update()
     {
@@ -41,9 +53,22 @@ public class UIManager : MonoBehaviour
         ReloadImage.fillAmount = Player.GetReloadImagefillAmount();
         WaveNum.text = SpawnManager.GetWaveCount();
     }
-    public void SetLevelSystem(LevelSystem levelSystem)
+    private void SetExpBar()
     {
-        this.LevelSystem = levelSystem;
+        LevelImage.fillAmount = LevelSystem.GetExpPercant();
+    }
+    private void SetExpText()
+    {
+        LevelText.text = LevelSystem.GetLevel().ToString();
+    }
+    private void LevelSystem_OnGetExp(object sender, System.EventArgs e)
+    {
+        SetExpBar();
+    }
+    private void LevelSystem_OnLevelUp(object sender, System.EventArgs e)
+    {
+        SetExpText();
+        SetExpBar();
     }
     private void GameManager_OnCollectedCoin(object sender, System.EventArgs e)
     {
