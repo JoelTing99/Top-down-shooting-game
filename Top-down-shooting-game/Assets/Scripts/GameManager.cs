@@ -17,10 +17,16 @@ public class GameManager : MonoBehaviour
     private float PlayerDamage_Return;
     private float PlayerSpeed = 320;
     private float PlayerSpeed_Return;
-    private float AttackSpeed = 1;
-    private float Armor = 3;
-    private float Armor_Return;
-    private float DodgeRate = 0;
+    private float PlayerAttackSpeed = 1;
+    private float PlayerReloadSpeed = 1;
+    private int PlayerBulletCount = 2;
+    private int PlayerBulletCount_Return;
+    private float PlayerArmor = 3;
+    private float PlayerArmor_Return;
+    private float PlayerDodgeRate = 0;
+    private float PlayerCritRate = 0;
+    private float PlayerCritDamageRate = 2;
+    private float PlayerHeadShotRate = 0;
 
     //Ability
     private float ThrowGrenadeDistance = 3;
@@ -73,8 +79,9 @@ public class GameManager : MonoBehaviour
         PlayerHealthBar.SetHealthSystem(PlayerHealth);
         PlayerDamage_Return = PlayerDamage;
         PlayerSpeed_Return = PlayerSpeed;
-        Armor_Return = Armor;
+        PlayerArmor_Return = PlayerArmor;
         PlayerSpeed_Return = PlayerSpeed;
+        PlayerBulletCount_Return = PlayerBulletCount;
     }
     private void Update()
     {
@@ -89,7 +96,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"HP = {PlayerHP}");
         Debug.Log($"Damge = {PlayerDamage_Return}");
         Debug.Log($"Speed = {PlayerSpeed_Return}");
-        Debug.Log($"Armor = {Armor_Return}");
+        Debug.Log($"Armor = {PlayerArmor_Return}");
         Debug.Log($"Exp = {LevelSystem.GetExp()}");
     }
     public GameObject GetCoinsGameObject()
@@ -120,21 +127,33 @@ public class GameManager : MonoBehaviour
     }
     public void AttackPlayer(float damage)
     {
-        if (UnityEngine.Random.value > DodgeRate)
+        if (UnityEngine.Random.value > PlayerDodgeRate)
         {
-            if(damage <= Armor_Return)
+            if(damage <= PlayerArmor_Return)
             {
                 PlayerHealth.Damage(damage);
             }
             else
             {
-                PlayerHealth.Damage(damage - Armor_Return);
+                PlayerHealth.Damage(damage - PlayerArmor_Return);
             }
         }
         else
         {
 
         }
+    }
+    public float GetPlayerCritRate()
+    {
+        return PlayerCritRate;
+    }
+    public float GetPlayerCritDamageRate()
+    {
+        return PlayerCritDamageRate;
+    }
+    public float GetPlayerHeadShotRate()
+    {
+        return PlayerHeadShotRate;
     }
     public float GetPlayerDamage()
     {
@@ -144,13 +163,21 @@ public class GameManager : MonoBehaviour
     {
         return PlayerSpeed_Return;
     }
-    public float GetAttackSpeed()
+    public float GetPlayerAttackSpeed()
     {
-        return AttackSpeed;
+        return PlayerAttackSpeed;
     }
-    public float GetDodgeRate()
+    public float GetPlayerDodgeRate()
     {
-        return DodgeRate;
+        return PlayerDodgeRate;
+    }
+    public float GetPlayerReloadSpeed()
+    {
+        return PlayerReloadSpeed;
+    }
+    public int GetPlayerBulletCount()
+    {
+        return PlayerBulletCount_Return;
     }
     //Item
     public GameObject GetRandomBonusItem()
@@ -185,13 +212,13 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator DefenseBoost(float time)
     {
-        Armor_Return = Armor + Armor * DefenseBoostRate;
+        PlayerArmor_Return = PlayerArmor + PlayerArmor * DefenseBoostRate;
         while (time >= 0)
         {
             time -= Time.deltaTime;
             yield return null;
         }
-        Armor_Return = Armor;
+        PlayerArmor_Return = PlayerArmor;
     }
     public void StartSpeedUp()
     {

@@ -29,22 +29,35 @@ public class Bullet : MonoBehaviour
         }
         else if(!other.isTrigger)
         {
+            float PlayerDamage;
+            if(Random.value >= GameManager.GetPlayerCritRate())
+            {
+                PlayerDamage = GameManager.GetPlayerDamage();
+            }else
+            {
+                PlayerDamage = GameManager.GetPlayerDamage() * GameManager.GetPlayerCritDamageRate();
+                Debug.Log("Crit!");
+            }
+            if(Random.value <= GameManager.GetPlayerHeadShotRate())
+            {
+                PlayerDamage = 9999;
+            }
             switch (other.tag)
             {
                 case "CubeEnemy":
-                    other.GetComponent<CubeEnemy>().TakeDamage(GameManager.GetPlayerDamage());
+                    other.GetComponent<CubeEnemy>().TakeDamage(PlayerDamage);
                     break;
                 case "DodecahedronEnemy":
-                    other.GetComponent<DodecahedronEnemy>().TakeDamage(GameManager.GetPlayerDamage());
+                    other.GetComponent<DodecahedronEnemy>().TakeDamage(PlayerDamage);
                     break;
                 case "FrustumEnemy":
-                    other.GetComponent<FurstumEnemy>().TakeDamage(GameManager.GetPlayerDamage());
+                    other.GetComponent<FurstumEnemy>().TakeDamage(PlayerDamage);
                     break;
                 case "OctahedronEnemy":
-                    other.GetComponent<OctahedronEnemy>().TakeDamage(GameManager.GetPlayerDamage());
+                    other.GetComponent<OctahedronEnemy>().TakeDamage(PlayerDamage);
                     break;
                 case "SmallStellatedEnemy":
-                    other.GetComponent<SmallStellatedEnemy>().TakeDamage(GameManager.GetPlayerDamage());
+                    other.GetComponent<SmallStellatedEnemy>().TakeDamage(PlayerDamage);
                     break;
             }
             Speed = 0f;

@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     private InputMaster Controls;
     private Animator Animator;
     private LineRenderer Line;
-    private Vector2 LaseVector;
     private bool IsShooting;
     private bool CanRoll = true;
     private bool CanThrowGrenade = true;
@@ -25,14 +24,10 @@ public class Player : MonoBehaviour
     private float RotateAngle;
     private float Acceleration = 2f;
     private float Deceleration = 2f;
-    private float ThrowGrenadeTime;
-    private float RollCoolDownTime;
-    private float RollDistance;
-    private float ShootingPeriod;
-    private float Speed;
     private float ReloadImagefillAmount;
     private float RollCoolDownImagefillAmount;
     private float GrenadeCoolDownImagefillAmount;
+    private int BulletCount;
     [SerializeField] private int NumPoints;
     [SerializeField] private bool MouseRotating;
     [SerializeField] private Transform FirePoint;
@@ -55,7 +50,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Animator = GetComponent<Animator>();
         Controls = new InputMaster();
-        Animator.SetFloat("AttackSpeed", GameManager.GetAttackSpeed());
+        
         //ThrowGrenadeTime = GameManager.GetGrendaeCoolDownTime();
         //RollCoolDownTime = GameManager.GetRollCoolDownTime();
         //RollDistance = GameManager.GetRollDistance();
@@ -73,6 +68,10 @@ public class Player : MonoBehaviour
         Controls.Player.Roll.performed += _ => Roll(GameManager.GetRollDistance());
         Controls.Player.Throw.performed += _ => ThrowGrenadeAnimation();
     }
+    private void Start()
+    {
+        BulletCount = GameManager.GetPlayerBulletCount();
+    }
     private void FixedUpdate()
     {
         changeVelocity();
@@ -81,7 +80,9 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        
+        Animator.SetFloat("AttackSpeed", GameManager.GetPlayerAttackSpeed());
+        Animator.SetFloat("ReloadSpeed", GameManager.GetPlayerReloadSpeed());
+        Debug.Log(BulletCount);
         if (rb.velocity.x == 0 || rb.velocity.y == 0)
         {
             RollEffect.SendEvent("Stop");
@@ -187,7 +188,7 @@ public class Player : MonoBehaviour
     }
     private void Shooting()
     {
-        if (!IsShooting && !HoldingThrow)
+        if (!IsShooting && !HoldingThrow && BulletCount > 0)
         {
             Animator.SetLayerWeight(Animator.GetLayerIndex("Shoot"), 1);
             IsShooting = true;
@@ -201,7 +202,17 @@ public class Player : MonoBehaviour
     private void Fire()
     {
         ShootingEffect.SendEvent("Shoot");
+        BulletCount--;
         Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
+        if (BulletCount <= 0)
+        {
+            Animator.SetLayerWeight(Animator.GetLayerIndex("Shoot"), 0);
+            Animator.SetTrigger("Reload");
+        }
+    }
+    private void Reloaded()
+    {
+        BulletCount = GameManager.GetPlayerBulletCount();
     }
     private void Roll(float Distance)
     {
