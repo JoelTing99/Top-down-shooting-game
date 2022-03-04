@@ -14,7 +14,6 @@ public class UIManager : MonoBehaviour
     private Text LevelText;
     private GameObject GrenadeCoolDownImage;
     private GameObject RollCoolDownImage;
-    private Image ReloadImage;
     private Image LevelImage;
 
     void Start()
@@ -33,7 +32,6 @@ public class UIManager : MonoBehaviour
         CoinAmount = transform.Find("Coins").Find("Amount").GetComponent<Text>();
         GrenadeCoolDownImage = transform.Find("Grenade").Find("GrenadeCooldown").gameObject;
         RollCoolDownImage = transform.Find("Roll").Find("RollCooldown").gameObject;
-        ReloadImage = transform.Find("Right joystick").Find("Reload").GetComponent<Image>();
         LevelImage = transform.Find("Level").Find("Bar").GetComponent<Image>();
         LevelText = transform.Find("Level").Find("Level").GetComponent<Text>();
 
@@ -50,7 +48,6 @@ public class UIManager : MonoBehaviour
         GrenadeCoolDownImage.GetComponent<Image>().fillAmount = Player.GetGrenadeCoolDownImagefillAmount();
         RollCoolDownImage.SetActive(Player.GetRollCoolDownImageActive());
         RollCoolDownImage.GetComponent<Image>().fillAmount = Player.GetRollCoolDownImagefillAmount();
-        ReloadImage.fillAmount = Player.GetReloadImagefillAmount();
         WaveNum.text = SpawnManager.GetWaveCount();
     }
     private void SetExpBar()
@@ -59,7 +56,7 @@ public class UIManager : MonoBehaviour
     }
     private void SetExpText()
     {
-        LevelText.text = LevelSystem.GetLevel().ToString();
+        LevelText.text = "Lv " + LevelSystem.GetLevel().ToString();
     }
     private void LevelSystem_OnGetExp(object sender, System.EventArgs e)
     {

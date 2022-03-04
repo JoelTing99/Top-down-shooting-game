@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
     private float RotateAngle;
     private float Acceleration = 2f;
     private float Deceleration = 2f;
-    private float ReloadImagefillAmount;
     private float RollCoolDownImagefillAmount;
     private float GrenadeCoolDownImagefillAmount;
     private int BulletCount;
@@ -210,6 +209,17 @@ public class Player : MonoBehaviour
             Animator.SetTrigger("Reload");
         }
     }
+    private void SetAnimationLayerToShoot()
+    {
+        if (IsShooting)
+        {
+            Animator.SetLayerWeight(Animator.GetLayerIndex("Shoot"), 1);
+        }
+        else
+        {
+            Animator.SetLayerWeight(Animator.GetLayerIndex("Shoot"), 0);
+        }
+    }
     private void Reloaded()
     {
         BulletCount = GameManager.GetPlayerBulletCount();
@@ -330,10 +340,6 @@ public class Player : MonoBehaviour
             }
         }
         Line.SetPositions(points.ToArray());
-    }
-    public float GetReloadImagefillAmount()
-    {
-        return ReloadImagefillAmount;
     }
     public float GetRollCoolDownImagefillAmount()
     {

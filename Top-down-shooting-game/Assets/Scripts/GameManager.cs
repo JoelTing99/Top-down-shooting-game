@@ -13,13 +13,13 @@ public class GameManager : MonoBehaviour
     private LevelSystem LevelSystem;
     //Player
     private float PlayerHP = 640;
-    private float PlayerDamage = 60;
+    private float PlayerDamage = 30;
     private float PlayerDamage_Return;
     private float PlayerSpeed = 320;
     private float PlayerSpeed_Return;
     private float PlayerAttackSpeed = 1;
     private float PlayerReloadSpeed = 1;
-    private int PlayerBulletCount = 2;
+    private int PlayerBulletCount = 5;
     private int PlayerBulletCount_Return;
     private float PlayerArmor = 3;
     private float PlayerArmor_Return;
