@@ -46,6 +46,7 @@ public class LevelSystem
     private void LevelUp()
     {
         Level++;
+        ExpMax *= 1.04f;
         if(OnLevelUp != null)
         {
             OnLevelUp(this, EventArgs.Empty);

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Grenade : MonoBehaviour
 {
     [SerializeField] private float ExplodeTime;
-    [SerializeField] private float ExplodeRadius;
     [SerializeField] private float ExplodeForce;
     private float GrenadeDamage;
     private bool HasExploded;
@@ -27,7 +26,7 @@ public class Grenade : MonoBehaviour
     }
     private void Explode()
     {
-        Collider[] Hit = Physics.OverlapSphere(transform.position, ExplodeRadius);
+        Collider[] Hit = Physics.OverlapSphere(transform.position, GameManager.GetGrenadeExplodeRadius());
         foreach (var hit in Hit)
         {
             switch (hit.tag)
@@ -50,7 +49,7 @@ public class Grenade : MonoBehaviour
             }
             if (hit.GetComponent<Rigidbody>() != null)
             {
-                hit.GetComponent<Rigidbody>().AddExplosionForce(ExplodeForce, transform.position, ExplodeRadius);
+                hit.GetComponent<Rigidbody>().AddExplosionForce(ExplodeForce, transform.position, GameManager.GetGrenadeExplodeRadius());
             }
         }
         Destroy(gameObject);

@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     private float PlayerSpeed_Return;
     private float PlayerAttackSpeed = 1;
     private float PlayerReloadSpeed = 1;
-    private int PlayerBulletCount = 5;
+    private int PlayerBulletCount = 12;
     private int PlayerBulletCount_Return;
     private float PlayerArmor = 3;
     private float PlayerArmor_Return;
@@ -31,8 +31,9 @@ public class GameManager : MonoBehaviour
     //Ability
     private float ThrowGrenadeDistance = 3;
     private float GrenadeDamage = 150;
-    private float GrendaeCoolDownTime = 25; 
-    private float RollCoolDownTime = 3;
+    private float GrenadeCoolDownTime = 25;
+    private float GrenadeExplodeRadius = 5;
+    private float RollCoolDownTime = 5;
     private float RollDistance = 45;
 
     //Enemy Health
@@ -327,9 +328,13 @@ public class GameManager : MonoBehaviour
     {
         return ThrowGrenadeDistance;
     }
+    public float GetGrenadeExplodeRadius()
+    {
+        return GrenadeExplodeRadius;
+    }
     public float GetGrendaeCoolDownTime()
     {
-        return GrendaeCoolDownTime;
+        return GrenadeCoolDownTime;
     }
     public float GetRollCoolDownTime()
     {
