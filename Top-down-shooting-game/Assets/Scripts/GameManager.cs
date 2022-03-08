@@ -18,15 +18,21 @@ public class GameManager : MonoBehaviour
     private float PlayerSpeed = 320;
     private float PlayerSpeed_Return;
     private float PlayerAttackSpeed = 1;
+    private float PlayerAttackSpeed_Return;
     private float PlayerReloadSpeed = 1;
+    private float PlayerReloadSpeed_Return;
     private int PlayerBulletCount = 12;
     private int PlayerBulletCount_Return;
     private float PlayerArmor = 3;
     private float PlayerArmor_Return;
     private float PlayerDodgeRate = 0;
+    private float PlayerDodgeRate_Return;
     private float PlayerCritRate = 0;
+    private float PlayerCritRate_Return;
     private float PlayerCritDamageRate = 2;
+    private float PlayerCritDamageRate_Return;
     private float PlayerHeadShotRate = 0;
+    private float PlayerHeadShotRate_Return;
 
     //Ability
     private float ThrowGrenadeDistance = 3;
@@ -75,14 +81,20 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         PlayerHealth = new HealthSystem(PlayerHP);
-        LevelSystem = new LevelSystem(350);
+        LevelSystem = new LevelSystem(300);
         PlayerHealthBar = FindObjectOfType<PlayerHealthBar>();
         PlayerHealthBar.SetHealthSystem(PlayerHealth);
         PlayerDamage_Return = PlayerDamage;
         PlayerSpeed_Return = PlayerSpeed;
         PlayerArmor_Return = PlayerArmor;
         PlayerSpeed_Return = PlayerSpeed;
+        PlayerAttackSpeed_Return = PlayerAttackSpeed;
+        PlayerReloadSpeed_Return = PlayerReloadSpeed;
         PlayerBulletCount_Return = PlayerBulletCount;
+        PlayerDodgeRate_Return = PlayerDodgeRate;
+        PlayerCritRate_Return = PlayerCritRate;
+        PlayerCritDamageRate_Return = PlayerCritDamageRate;
+        PlayerHeadShotRate_Return = PlayerHeadShotRate;
     }
     private void Update()
     {
@@ -146,15 +158,15 @@ public class GameManager : MonoBehaviour
     }
     public float GetPlayerCritRate()
     {
-        return PlayerCritRate;
+        return PlayerCritRate_Return;
     }
     public float GetPlayerCritDamageRate()
     {
-        return PlayerCritDamageRate;
+        return PlayerCritDamageRate_Return;
     }
     public float GetPlayerHeadShotRate()
     {
-        return PlayerHeadShotRate;
+        return PlayerHeadShotRate_Return;
     }
     public float GetPlayerDamage()
     {
@@ -166,15 +178,15 @@ public class GameManager : MonoBehaviour
     }
     public float GetPlayerAttackSpeed()
     {
-        return PlayerAttackSpeed;
+        return PlayerAttackSpeed_Return;
     }
     public float GetPlayerDodgeRate()
     {
-        return PlayerDodgeRate;
+        return PlayerDodgeRate_Return;
     }
     public float GetPlayerReloadSpeed()
     {
-        return PlayerReloadSpeed;
+        return PlayerReloadSpeed_Return;
     }
     public int GetPlayerBulletCount()
     {
@@ -344,4 +356,6 @@ public class GameManager : MonoBehaviour
     {
         return RollDistance;
     }
+    //Upgrade
+    
 }

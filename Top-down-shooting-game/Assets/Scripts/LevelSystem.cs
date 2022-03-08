@@ -7,10 +7,12 @@ public class LevelSystem
 {
     public event EventHandler OnGetExp;
     public event EventHandler OnLevelUp;
+    public event EventHandler OnUsedUpgradePoint;
 
     private float Exp;
     private float ExpMax;
     private int Level;
+    private int UpgradePoint;
 
     public LevelSystem(float ExpMax)
     {
@@ -30,6 +32,10 @@ public class LevelSystem
     {
         return Exp / ExpMax;
     }
+    public int GetUpgradePoint()
+    {
+        return UpgradePoint;
+    }
     public void ObtainExp(float amount)
     {
         Exp += amount;
@@ -43,10 +49,19 @@ public class LevelSystem
             OnGetExp(this, EventArgs.Empty);
         }
     }
+    public void UseUpgradePoint(int amount)
+    {
+        UpgradePoint -= amount;
+        if(OnUsedUpgradePoint != null)
+        {
+            OnUsedUpgradePoint(this, EventArgs.Empty);
+        }
+    }
     private void LevelUp()
     {
         Level++;
-        ExpMax *= 1.04f;
+        UpgradePoint++;
+        ExpMax *= 1.035f;
         if(OnLevelUp != null)
         {
             OnLevelUp(this, EventArgs.Empty);
