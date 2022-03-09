@@ -7,8 +7,11 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "New mastery", menuName = "Mastery")]
 public class Mastery : ScriptableObject
 {
-    public string Name;
     public Sprite Icon;
     public int Cost;
     public int MaxLevel;
+    public int RequiredLevel;
+    public Mastery Condition;
+    [HideInInspector]
+    public int CurrentLevel;
 }

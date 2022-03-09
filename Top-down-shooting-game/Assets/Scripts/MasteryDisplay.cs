@@ -7,7 +7,7 @@ public class MasteryDisplay : MonoBehaviour
 {
     private GameManager GameManager;
     private LevelSystem LevelSystem;
-    private int CurrentLevel = 0;
+    [SerializeField] private UnityEvent Upgrade;
     [SerializeField] private Mastery Mastery;
     [SerializeField] private GameObject CheckBox;
     [SerializeField] private Image Icon;
@@ -15,37 +15,56 @@ public class MasteryDisplay : MonoBehaviour
     [SerializeField] private Text Cost;
     private void Start()
     {
+        Mastery.CurrentLevel = 0;
         GameManager = FindObjectOfType<GameManager>();
         LevelSystem = GameManager.GetLevelSystem();
         LevelSystem.OnUsedUpgradePoint += LevelSystem_OnUsedUpgradePoint;
         Cost.text = Mastery.Cost.ToString();
+        Level.text = Mastery.CurrentLevel.ToString() + "/" + Mastery.MaxLevel.ToString();
         Icon.sprite = Mastery.Icon;
-        CheckCost();
+        UpgradeCheck();
     }
     private void Update()
     {
-        Level.text = CurrentLevel.ToString() + "/" + Mastery.MaxLevel.ToString();
         
     }
     private void LevelSystem_OnUsedUpgradePoint(object sender, System.EventArgs e)
     {
-        CheckCost();
+        UpgradeCheck();
+        Level.text = Mastery.CurrentLevel.ToString() + "/" + Mastery.MaxLevel.ToString();
     }
 
-    private void CheckCost()
+    private void UpgradeCheck()
     {
-        if (LevelSystem.GetUpgradePoint() >= Mastery.Cost && CurrentLevel <= Mastery.MaxLevel)
+        if (Mastery.Condition != null)
         {
-            CheckBox.SetActive(false);
+            if (LevelSystem.GetUpgradePoint() >= Mastery.Cost &&
+                Mastery.CurrentLevel < Mastery.MaxLevel &&
+                Mastery.Condition.CurrentLevel >= Mastery.RequiredLevel)
+            {
+                CheckBox.SetActive(false);
+            }
+            else
+            {
+                CheckBox.SetActive(true);
+            }
         }
         else
         {
-            CheckBox.SetActive(true);
+            if (LevelSystem.GetUpgradePoint() >= Mastery.Cost && Mastery.CurrentLevel < Mastery.MaxLevel)
+            {
+                CheckBox.SetActive(false);
+            }
+            else
+            {
+                CheckBox.SetActive(true);
+            }
         }
     }
     public void UpGrade()
     {
+        Mastery.CurrentLevel++;
         LevelSystem.UseUpgradePoint(Mastery.Cost);
-        CurrentLevel++;
+        Upgrade.Invoke();
     }
 }

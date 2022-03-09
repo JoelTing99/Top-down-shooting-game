@@ -12,7 +12,7 @@ public class LevelSystem
     private float Exp;
     private float ExpMax;
     private int Level;
-    private int UpgradePoint;
+    private int UpgradePoint = 50;
 
     public LevelSystem(float ExpMax)
     {

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bb333cab931c554da3e3f71d142e24e, type: 3}
-  m_Name: AtteckSpeed
+  m_Name: HeadShotRate
   m_EditorClassIdentifier: 
-  Icon: {fileID: 21300000, guid: cdc5bac21cda9ea4397784e3bdbe8e32, type: 3}
-  Cost: 1
-  MaxLevel: 20
-  RequiredLevel: 0
-  Condition: {fileID: 0}
-  CurrentLevel: 11
+  Icon: {fileID: 21300000, guid: 0085ad804f3a6714da01a1e75ff75ca4, type: 3}
+  Cost: 2
+  MaxLevel: 5
+  RequiredLevel: 5
+  Condition: {fileID: 11400000, guid: 4ad3393f47e180c47839c9d65cdfc220, type: 2}
+  CurrentLevel: 5

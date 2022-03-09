@@ -9,9 +9,11 @@ public class Bullet : MonoBehaviour
     [SerializeField] private VisualEffect HitEffect;
     [SerializeField] private VisualEffect FlyEffect;
     private GameManager GameManager;
+    private HealthSystem HealthSystem;
     private void Awake()
     {
         GameManager = FindObjectOfType<GameManager>();
+        HealthSystem = GameManager.GetPlayerHealthSystem();
     }
 
     void Update()
@@ -29,18 +31,18 @@ public class Bullet : MonoBehaviour
         }
         else if(!other.isTrigger)
         {
-            float PlayerDamage;
-            if(Random.value >= GameManager.GetPlayerCritRate())
-            {
-                PlayerDamage = GameManager.GetPlayerDamage();
-            }else
+            float PlayerDamage = GameManager.GetPlayerCritRate();
+            if(GameManager.GetPlayerLifeStealRate() > 0) {
+                HealthSystem.Heal(GameManager.GetPlayerDamage() * GameManager.GetPlayerLifeStealRate());
+            }
+            if(Random.value <= GameManager.GetPlayerCritRate())
             {
                 PlayerDamage = GameManager.GetPlayerDamage() * GameManager.GetPlayerCritDamageRate();
                 Debug.Log("Crit!");
             }
             if(Random.value <= GameManager.GetPlayerHeadShotRate())
             {
-                PlayerDamage = 9999;
+                PlayerDamage = 10000;
             }
             switch (other.tag)
             {

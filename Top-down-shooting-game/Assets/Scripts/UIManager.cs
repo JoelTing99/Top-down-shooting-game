@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     private Text WaveNum;
     private Text CoinAmount;
     private Text LevelText;
+    [SerializeField] private Text UpgradePoint;
     private GameObject GrenadeCoolDownImage;
     private GameObject RollCoolDownImage;
     private Image LevelImage;
@@ -27,6 +28,7 @@ public class UIManager : MonoBehaviour
         GameManager.OnCollectedCoin += GameManager_OnCollectedCoin;
         LevelSystem.OnGetExp += LevelSystem_OnGetExp;
         LevelSystem.OnLevelUp += LevelSystem_OnLevelUp;
+        LevelSystem.OnUsedUpgradePoint += LevelSystem_OnUsedUpgradePoint;
 
         WaveNum = transform.Find("Wave Counter").Find("Wave").GetComponent<Text>();
         CoinAmount = transform.Find("Coins").Find("Amount").GetComponent<Text>();
@@ -35,11 +37,12 @@ public class UIManager : MonoBehaviour
         LevelImage = transform.Find("Level").Find("Bar").GetComponent<Image>();
         LevelText = transform.Find("Level").Find("Level").GetComponent<Text>();
 
+        UpgradePoint.text = LevelSystem.GetUpgradePoint().ToString();
+
         SetExpBar();
         SetExpText();
     }
 
-    
 
     void Update()
     {
@@ -66,6 +69,10 @@ public class UIManager : MonoBehaviour
     {
         SetExpText();
         SetExpBar();
+    }
+    private void LevelSystem_OnUsedUpgradePoint(object sender, System.EventArgs e)
+    {
+        UpgradePoint.text = LevelSystem.GetUpgradePoint().ToString();
     }
     private void GameManager_OnCollectedCoin(object sender, System.EventArgs e)
     {

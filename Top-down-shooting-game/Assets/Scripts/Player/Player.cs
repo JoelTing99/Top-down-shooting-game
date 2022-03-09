@@ -49,12 +49,6 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Animator = GetComponent<Animator>();
         Controls = new InputMaster();
-        
-        //ThrowGrenadeTime = GameManager.GetGrendaeCoolDownTime();
-        //RollCoolDownTime = GameManager.GetRollCoolDownTime();
-        //RollDistance = GameManager.GetRollDistance();
-        //ShootingPeriod = GameManager.GetAttackSpeed();
-        //Speed = GameManager.GetPlayerSpeed();
         if (MouseRotating)
         {
             Controls.Player.MouseDirection.performed += _ => MouseRotation();
@@ -79,8 +73,6 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        Animator.SetFloat("AttackSpeed", GameManager.GetPlayerAttackSpeed());
-        Animator.SetFloat("ReloadSpeed", GameManager.GetPlayerReloadSpeed());
         Debug.Log(BulletCount);
         if (rb.velocity.x == 0 || rb.velocity.y == 0)
         {
@@ -187,6 +179,7 @@ public class Player : MonoBehaviour
     }
     private void Shooting()
     {
+        SetShotingMode();
         if (!IsShooting && !HoldingThrow && BulletCount > 0)
         {
             Animator.SetLayerWeight(Animator.GetLayerIndex("Shoot"), 1);
@@ -219,6 +212,13 @@ public class Player : MonoBehaviour
         {
             Animator.SetLayerWeight(Animator.GetLayerIndex("Shoot"), 0);
         }
+    }
+    private void SetShotingMode()
+    {
+        Animator.SetFloat("AttackSpeed", GameManager.GetPlayerAttackSpeed());
+        Animator.SetFloat("ReloadSpeed", GameManager.GetPlayerReloadSpeed());
+        Animator.SetBool("IsTripleShot", GameManager.GetIsTripleShot());
+        Animator.SetBool("IsAutoShot", GameManager.GetIsAutoShot());
     }
     private void Reloaded()
     {

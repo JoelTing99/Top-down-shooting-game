@@ -21,18 +21,24 @@ public class GameManager : MonoBehaviour
     private float PlayerAttackSpeed_Return;
     private float PlayerReloadSpeed = 1;
     private float PlayerReloadSpeed_Return;
+    private float PlayerLifeStealRate = 0;
+    private float PlayerLifeStealRate_Return;
     private int PlayerBulletCount = 12;
     private int PlayerBulletCount_Return;
     private float PlayerArmor = 3;
     private float PlayerArmor_Return;
     private float PlayerDodgeRate = 0;
     private float PlayerDodgeRate_Return;
-    private float PlayerCritRate = 0;
+    private float PlayerCritRate = 0.1f;
     private float PlayerCritRate_Return;
     private float PlayerCritDamageRate = 2;
     private float PlayerCritDamageRate_Return;
     private float PlayerHeadShotRate = 0;
     private float PlayerHeadShotRate_Return;
+    private bool IsTripleShot = false;
+    private bool IsTripleShot_Return;
+    private bool IsAutoShot = false;
+    private bool IsAutoShot_Return;
 
     //Ability
     private float ThrowGrenadeDistance = 3;
@@ -95,6 +101,9 @@ public class GameManager : MonoBehaviour
         PlayerCritRate_Return = PlayerCritRate;
         PlayerCritDamageRate_Return = PlayerCritDamageRate;
         PlayerHeadShotRate_Return = PlayerHeadShotRate;
+        PlayerLifeStealRate_Return = PlayerLifeStealRate;
+        IsTripleShot_Return = IsTripleShot;
+        IsAutoShot_Return = IsAutoShot;
     }
     private void Update()
     {
@@ -191,6 +200,18 @@ public class GameManager : MonoBehaviour
     public int GetPlayerBulletCount()
     {
         return PlayerBulletCount_Return;
+    }
+    public float GetPlayerLifeStealRate()
+    {
+        return PlayerLifeStealRate_Return;
+    }
+    public bool GetIsTripleShot()
+    {
+        return IsTripleShot_Return;
+    }
+    public bool GetIsAutoShot()
+    {
+        return IsAutoShot_Return;
     }
     //Item
     public GameObject GetRandomBonusItem()
@@ -357,5 +378,42 @@ public class GameManager : MonoBehaviour
         return RollDistance;
     }
     //Upgrade
-    
+    public void DamageUpgrade()
+    {
+        PlayerDamage_Return += PlayerDamage * 0.05f;
+    }
+    public void AttackSpeedUpgrade()
+    {
+        PlayerAttackSpeed_Return += PlayerAttackSpeed * 0.05f;
+    }
+    public void CritRateUpgrade()
+    {
+        PlayerCritRate_Return += 0.05f;
+    }
+    public void GetLifeSteal()
+    {
+        PlayerLifeStealRate += 0.05f;
+    }
+    public void LifeStealRateUpgrade()
+    {
+        PlayerLifeStealRate_Return += 0.04f;
+    }
+    public void TripleShot()
+    {
+        IsTripleShot_Return = true;
+        PlayerAttackSpeed_Return = 1;
+    }
+    public void AutoShot()
+    {
+        IsAutoShot_Return = true;
+        PlayerAttackSpeed_Return = 1;
+    }
+    public void HeadShotRateUpgrade()
+    {
+        PlayerHeadShotRate_Return += 0.02f;
+    }
+    public void CritDamageRateUpgrade()
+    {
+        PlayerCritDamageRate_Return += PlayerCritDamageRate * 0.25f;
+    }
 }
