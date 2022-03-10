@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bb333cab931c554da3e3f71d142e24e, type: 3}
-  m_Name: LifeSteal
+  m_Name: GrenadeCoolDown
   m_EditorClassIdentifier: 
-  Icon: {fileID: 21300000, guid: 75a9383994a970f4883de35a772172e9, type: 3}
-  Cost: 3
-  MaxLevel: 1
-  RequiredLevel: 5
-  Condition: {fileID: 11400000, guid: d507101d66124c043b76b574e6fdb173, type: 2}
-  CurrentLevel: 3
+  Icon: {fileID: 21300000, guid: 7ed7e61c414e66d4a9dd95fadd4fd7e5, type: 3}
+  Cost: 2
+  MaxLevel: 5
+  RequiredLevel: 3
+  Condition: {fileID: 11400000, guid: cd5f6952c2cec5c4bb1ce447526b2f51, type: 2}
+  CurrentLevel: 0

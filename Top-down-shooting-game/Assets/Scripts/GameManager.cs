@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     private LevelSystem LevelSystem;
     //Player
     private float PlayerHP = 640;
+    //private float PlayerHP_Return;
     private float PlayerDamage = 30;
     private float PlayerDamage_Return;
     private float PlayerSpeed = 320;
@@ -43,10 +44,15 @@ public class GameManager : MonoBehaviour
     //Ability
     private float ThrowGrenadeDistance = 3;
     private float GrenadeDamage = 150;
+    private float GrenadeDamage_Return;
     private float GrenadeCoolDownTime = 25;
+    private float GrenadeCoolDownTime_Return;
     private float GrenadeExplodeRadius = 5;
+    private float GrenadeExplodeRadius_Return;
     private float RollCoolDownTime = 5;
+    private float RollCoolDownTime_Return;
     private float RollDistance = 45;
+    private float RollDistance_Return;
 
     //Enemy Health
     private float CubeHP = 280;
@@ -104,6 +110,12 @@ public class GameManager : MonoBehaviour
         PlayerLifeStealRate_Return = PlayerLifeStealRate;
         IsTripleShot_Return = IsTripleShot;
         IsAutoShot_Return = IsAutoShot;
+
+        RollDistance_Return = RollDistance;
+        RollCoolDownTime_Return = RollCoolDownTime;
+        GrenadeExplodeRadius_Return = GrenadeExplodeRadius;
+        GrenadeDamage_Return = GrenadeDamage;
+        GrenadeCoolDownTime_Return = GrenadeCoolDownTime;
     }
     private void Update()
     {
@@ -355,7 +367,7 @@ public class GameManager : MonoBehaviour
     //Ability
     public float GetGrenadeDamage()
     {
-        return GrenadeDamage;
+        return GrenadeDamage_Return;
     }
     public float GetThrowGrenadeDistance()
     {
@@ -363,19 +375,19 @@ public class GameManager : MonoBehaviour
     }
     public float GetGrenadeExplodeRadius()
     {
-        return GrenadeExplodeRadius;
+        return GrenadeExplodeRadius_Return;
     }
-    public float GetGrendaeCoolDownTime()
+    public float GetGrenadeCoolDownTime()
     {
-        return GrenadeCoolDownTime;
+        return GrenadeCoolDownTime_Return;
     }
     public float GetRollCoolDownTime()
     {
-        return RollCoolDownTime;
+        return RollCoolDownTime_Return;
     }
     public float GetRollDistance()
     {
-        return RollDistance;
+        return RollDistance_Return;
     }
     //Upgrade
     public void DamageUpgrade()
@@ -415,5 +427,49 @@ public class GameManager : MonoBehaviour
     public void CritDamageRateUpgrade()
     {
         PlayerCritDamageRate_Return += PlayerCritDamageRate * 0.25f;
+    }
+    public void MoveSpeedUpgrade()
+    {
+        PlayerSpeed_Return += PlayerSpeed * 0.03f;
+    }
+    public void ReloatSpeedUpgrade()
+    {
+        PlayerReloadSpeed_Return += PlayerReloadSpeed * 20;
+    }
+    public void BulletAmountUpgrade()
+    {
+        PlayerBulletCount_Return += 5;
+    }
+    public void HealthUpgrade()
+    {
+        PlayerHealth.UpgradeHealth(PlayerHP * 0.05f);
+    }
+    public void ArmorUpgrade()
+    {
+        PlayerArmor_Return += 2;
+    }
+    public void DodgeRateUpgrade()
+    {
+        PlayerDodgeRate_Return += PlayerDodgeRate * 0.06f;
+    }
+    public void RollDistanceUpgrade()
+    {
+        RollDistance_Return += RollDistance * 0.05f;
+    }
+    public void RollCoonDownUpgrade()
+    {
+        RollCoolDownTime_Return -= RollCoolDownTime * 0.1f;
+    }
+    public void GrenadeDamageUpgrade()
+    {
+        GrenadeDamage_Return += GrenadeDamage * 0.1f;
+    }
+    public void GrenadeExplodeRadiusUpgrade()
+    {
+        GrenadeExplodeRadius_Return += GrenadeExplodeRadius * 0.05f;
+    }
+    public void GrenadeCoonDownUpgrade()
+    {
+        GrenadeCoolDownTime_Return -= GrenadeCoolDownTime * 0.3f;
     }
 }

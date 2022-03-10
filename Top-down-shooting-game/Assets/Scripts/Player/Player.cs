@@ -276,7 +276,7 @@ public class Player : MonoBehaviour
         GameObject grenade = Instantiate(Grenade, ThrowGrenadePoint.position, transform.rotation);
         Rigidbody rb = grenade.GetComponent<Rigidbody>();
         rb.AddForce((ThrowGrenadePoint.up + transform.forward) * GameManager.GetThrowGrenadeDistance(), ForceMode.VelocityChange);
-        StartCoroutine(ThrowGrenadeCoolDownCount(GameManager.GetGrendaeCoolDownTime()));
+        StartCoroutine(ThrowGrenadeCoolDownCount(GameManager.GetGrenadeCoolDownTime()));
         StartCoroutine(SetLayerWeight("Throw", -1));
     }
     private IEnumerator SetLayerWeight(string Name, int Constant)
@@ -300,7 +300,7 @@ public class Player : MonoBehaviour
         while(time >= 0)
         {
             time -= Time.deltaTime;
-            GrenadeCoolDownImagefillAmount = time / GameManager.GetGrendaeCoolDownTime();
+            GrenadeCoolDownImagefillAmount = time / GameManager.GetGrenadeCoolDownTime();
             yield return null;
         }
         CanThrowGrenade = true;

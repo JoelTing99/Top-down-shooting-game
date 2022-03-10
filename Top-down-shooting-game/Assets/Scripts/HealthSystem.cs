@@ -51,4 +51,8 @@ public class HealthSystem
             OnHealed(this, EventArgs.Empty);
         }
     }
+    public void UpgradeHealth(float HealAmount)
+    {
+        HealthMax += HealAmount;
+    }
 }

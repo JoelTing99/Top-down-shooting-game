@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bb333cab931c554da3e3f71d142e24e, type: 3}
-  m_Name: LifeSteal
+  m_Name: BulletAmount
   m_EditorClassIdentifier: 
-  Icon: {fileID: 21300000, guid: 75a9383994a970f4883de35a772172e9, type: 3}
-  Cost: 3
-  MaxLevel: 1
-  RequiredLevel: 5
-  Condition: {fileID: 11400000, guid: d507101d66124c043b76b574e6fdb173, type: 2}
-  CurrentLevel: 3
+  Icon: {fileID: 21300000, guid: a123d8c00a1ecb84b9e44b5e390ae5ef, type: 3}
+  Cost: 2
+  MaxLevel: 5
+  RequiredLevel: 3
+  Condition: {fileID: 11400000, guid: 874ef625d4b74a64daef1a66c35d8d5f, type: 2}
+  CurrentLevel: 0
