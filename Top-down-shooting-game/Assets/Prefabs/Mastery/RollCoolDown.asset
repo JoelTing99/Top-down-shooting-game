@@ -18,3 +18,6 @@ MonoBehaviour:
   RequiredLevel: 3
   Condition: {fileID: 11400000, guid: d25931fad31435541bef25442318188e, type: 2}
   CurrentLevel: 0
+  Title: RollCD
+  Description: -10% / Lv
+  Requirement: (RollDistance LV.3)

@@ -54,5 +54,6 @@ public class HealthSystem
     public void UpgradeHealth(float HealAmount)
     {
         HealthMax += HealAmount;
+        Heal(HealAmount);
     }
 }

@@ -17,4 +17,7 @@ MonoBehaviour:
   MaxLevel: 20
   RequiredLevel: 0
   Condition: {fileID: 0}
-  CurrentLevel: 22
+  CurrentLevel: 0
+  Title: CritRate
+  Description: +5% / Lv
+  Requirement: 

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bb333cab931c554da3e3f71d142e24e, type: 3}
-  m_Name: AutoShot
+  m_Name: AutoShoot
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 171aad1c0bfde824fa7d67c0eafbde1a, type: 3}
   Cost: 5
@@ -18,3 +18,6 @@ MonoBehaviour:
   RequiredLevel: 20
   Condition: {fileID: 11400000, guid: 32945c3803094bf4cb11e6f742646bbc, type: 2}
   CurrentLevel: 0
+  Title: AutoShoot
+  Description: On
+  Requirement: (AtteckSpeed Lv.20)

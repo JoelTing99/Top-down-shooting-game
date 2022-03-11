@@ -18,3 +18,6 @@ MonoBehaviour:
   RequiredLevel: 0
   Condition: {fileID: 0}
   CurrentLevel: 0
+  Title: GrenadeDamage
+  Description: +10% / Lv
+  Requirement: 

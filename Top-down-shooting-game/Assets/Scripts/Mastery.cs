@@ -14,4 +14,7 @@ public class Mastery : ScriptableObject
     public Mastery Condition;
     [HideInInspector]
     public int CurrentLevel;
+    public string Title;
+    public string Description;
+    public string Requirement;
 }

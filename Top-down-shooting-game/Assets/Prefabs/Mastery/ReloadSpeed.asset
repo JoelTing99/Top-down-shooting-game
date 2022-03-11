@@ -18,3 +18,6 @@ MonoBehaviour:
   RequiredLevel: 5
   Condition: {fileID: 11400000, guid: d39d3f488ad3b84479fc222a9a611d1b, type: 2}
   CurrentLevel: 0
+  Title: ReloadSpeed
+  Description: +20% / Lv
+  Requirement: (MoveSpeed Lv.5)

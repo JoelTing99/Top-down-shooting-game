@@ -18,3 +18,6 @@ MonoBehaviour:
   RequiredLevel: 10
   Condition: {fileID: 11400000, guid: 31d54d007686abb4995679c7f392da85, type: 2}
   CurrentLevel: 0
+  Title: Armor
+  Description: +2% / Lv
+  Requirement: (Health Lv.10)

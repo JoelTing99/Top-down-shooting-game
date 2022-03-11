@@ -17,4 +17,6 @@ MonoBehaviour:
   MaxLevel: 20
   RequiredLevel: 0
   Condition: {fileID: 0}
-  CurrentLevel: 11
+  CurrentLevel: 0
+  Title: AtteckSpeed
+  Description: +6% / Lv

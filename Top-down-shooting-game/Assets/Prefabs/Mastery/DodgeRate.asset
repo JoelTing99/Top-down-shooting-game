@@ -18,3 +18,6 @@ MonoBehaviour:
   RequiredLevel: 5
   Condition: {fileID: 11400000, guid: 3ba3afae25c2c0e478cead5545027132, type: 2}
   CurrentLevel: 0
+  Title: DodgeRate
+  Description: +6% / Lv
+  Requirement: (Armor Lv.5)

@@ -210,6 +210,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "16d162aa-9ecd-44ac-bfcf-4415b6b3b449",
+            "actions": [
+                {
+                    "name": "Position",
+                    "type": "Value",
+                    "id": "eef1f34a-df0a-4238-ba07-79b8e550b182",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d8b8213d-9bfa-4d00-9d86-d28ddd276476",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

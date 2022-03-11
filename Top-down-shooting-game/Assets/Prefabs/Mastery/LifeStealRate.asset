@@ -17,4 +17,7 @@ MonoBehaviour:
   MaxLevel: 5
   RequiredLevel: 10
   Condition: {fileID: 11400000, guid: d507101d66124c043b76b574e6fdb173, type: 2}
-  CurrentLevel: 7
+  CurrentLevel: 5
+  Title: LifeStealRate
+  Description: +4% / Lv
+  Requirement: (Damage Lv.10)

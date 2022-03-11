@@ -18,3 +18,6 @@ MonoBehaviour:
   RequiredLevel: 0
   Condition: {fileID: 0}
   CurrentLevel: 0
+  Title: MoveSpeed
+  Description: +3% / Lv
+  Requirement: 

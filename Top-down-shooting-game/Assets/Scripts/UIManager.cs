@@ -78,4 +78,5 @@ public class UIManager : MonoBehaviour
     {
         CoinAmount.text = GameManager.GetCoinAmount().ToString();
     }
+
 }

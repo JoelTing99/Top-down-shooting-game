@@ -19,10 +19,11 @@ public class GameManager : MonoBehaviour
     private float PlayerSpeed = 320;
     private float PlayerSpeed_Return;
     private float PlayerAttackSpeed = 1;
+
     private float PlayerAttackSpeed_Return;
     private float PlayerReloadSpeed = 1;
     private float PlayerReloadSpeed_Return;
-    private float PlayerLifeStealRate = 0;
+    private float PlayerLifeStealRate = 0.05f;
     private float PlayerLifeStealRate_Return;
     private int PlayerBulletCount = 12;
     private int PlayerBulletCount_Return;
@@ -34,12 +35,14 @@ public class GameManager : MonoBehaviour
     private float PlayerCritRate_Return;
     private float PlayerCritDamageRate = 2;
     private float PlayerCritDamageRate_Return;
-    private float PlayerHeadShotRate = 0;
-    private float PlayerHeadShotRate_Return;
-    private bool IsTripleShot = false;
-    private bool IsTripleShot_Return;
-    private bool IsAutoShot = false;
-    private bool IsAutoShot_Return;
+    private float PlayerHeadShootRate = 0;
+    private float PlayerHeadShootRate_Return;
+    private bool PlayerHavdLifeSteal = false;
+    private bool PlayerHavdLifeSteal_Return;
+    private bool IsTripleShoot = false;
+    private bool IsTripleShoot_Return;
+    private bool IsAutoShoot = false;
+    private bool IsAutoShoot_Return;
 
     //Ability
     private float ThrowGrenadeDistance = 3;
@@ -106,10 +109,11 @@ public class GameManager : MonoBehaviour
         PlayerDodgeRate_Return = PlayerDodgeRate;
         PlayerCritRate_Return = PlayerCritRate;
         PlayerCritDamageRate_Return = PlayerCritDamageRate;
-        PlayerHeadShotRate_Return = PlayerHeadShotRate;
+        PlayerHeadShootRate_Return = PlayerHeadShootRate;
         PlayerLifeStealRate_Return = PlayerLifeStealRate;
-        IsTripleShot_Return = IsTripleShot;
-        IsAutoShot_Return = IsAutoShot;
+        PlayerHavdLifeSteal_Return = PlayerHavdLifeSteal;
+        IsTripleShoot_Return = IsTripleShoot;
+        IsAutoShoot_Return = IsAutoShoot;
 
         RollDistance_Return = RollDistance;
         RollCoolDownTime_Return = RollCoolDownTime;
@@ -185,9 +189,9 @@ public class GameManager : MonoBehaviour
     {
         return PlayerCritDamageRate_Return;
     }
-    public float GetPlayerHeadShotRate()
+    public float GetPlayerHeadShootRate()
     {
-        return PlayerHeadShotRate_Return;
+        return PlayerHeadShootRate_Return;
     }
     public float GetPlayerDamage()
     {
@@ -219,11 +223,15 @@ public class GameManager : MonoBehaviour
     }
     public bool GetIsTripleShot()
     {
-        return IsTripleShot_Return;
+        return IsTripleShoot_Return;
     }
     public bool GetIsAutoShot()
     {
-        return IsAutoShot_Return;
+        return IsAutoShoot_Return;
+    }
+    public bool GetHaveLifeSteal()
+    {
+        return PlayerHavdLifeSteal_Return;
     }
     //Item
     public GameObject GetRandomBonusItem()
@@ -404,25 +412,25 @@ public class GameManager : MonoBehaviour
     }
     public void GetLifeSteal()
     {
-        PlayerLifeStealRate += 0.05f;
+        PlayerHavdLifeSteal_Return = true;
     }
     public void LifeStealRateUpgrade()
     {
         PlayerLifeStealRate_Return += 0.04f;
     }
-    public void TripleShot()
+    public void TripleShoot()
     {
-        IsTripleShot_Return = true;
+        IsTripleShoot_Return = true;
         PlayerAttackSpeed_Return = 1;
     }
-    public void AutoShot()
+    public void AutoShoot()
     {
-        IsAutoShot_Return = true;
+        IsAutoShoot_Return = true;
         PlayerAttackSpeed_Return = 1;
     }
     public void HeadShotRateUpgrade()
     {
-        PlayerHeadShotRate_Return += 0.02f;
+        PlayerHeadShootRate_Return += 0.02f;
     }
     public void CritDamageRateUpgrade()
     {

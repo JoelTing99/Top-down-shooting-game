@@ -15,6 +15,9 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: 75a9383994a970f4883de35a772172e9, type: 3}
   Cost: 3
   MaxLevel: 1
-  RequiredLevel: 5
+  RequiredLevel: 3
   Condition: {fileID: 11400000, guid: d507101d66124c043b76b574e6fdb173, type: 2}
-  CurrentLevel: 3
+  CurrentLevel: 1
+  Title: LeifSteal
+  Description: On
+  Requirement: (Damage Lv.3)
