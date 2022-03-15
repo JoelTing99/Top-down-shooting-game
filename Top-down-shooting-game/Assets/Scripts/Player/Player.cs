@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    public event EventHandler OnShoot;
+
     private Rigidbody rb;
     private GameManager GameManager;
     private InputMaster Controls;
@@ -159,22 +162,27 @@ public class Player : MonoBehaviour
     }
     private void JoystickRotation()
     {
-        Vector2 InputVector = Controls.Player.JoystickDirection.ReadValue<Vector2>();
-        float TurnAngle = Mathf.Atan2(InputVector.y, InputVector.x) * Mathf.Rad2Deg;
-        RotateAngle = TurnAngle;
-        transform.rotation = Quaternion.Euler(new Vector3(0f, -TurnAngle + 90, 0f));
+        if(Time.timeScale >= 0.5f)
+        {
+            Vector2 InputVector = Controls.Player.JoystickDirection.ReadValue<Vector2>();
+            float TurnAngle = Mathf.Atan2(InputVector.y, InputVector.x) * Mathf.Rad2Deg;
+            RotateAngle = TurnAngle;
+            transform.rotation = Quaternion.Euler(new Vector3(0f, -TurnAngle + 90, 0f));
+        }
     }
     private void MouseRotation()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Controls.Player.MouseDirection.ReadValue<Vector2>());
-        if (Physics.Raycast(ray, out RaycastHit hitinfo, 300f))
+        if (Time.timeScale >= 0.5f)
         {
-            Vector3 Target = hitinfo.point;
-            Vector3 LookDirection = Target - transform.position;
-            float TurnAngle = Mathf.Atan2(LookDirection.z, LookDirection.x) * Mathf.Rad2Deg;
-            RotateAngle = TurnAngle;
-            transform.rotation = Quaternion.Euler(new Vector3(0f, -TurnAngle + 90, 0f));
-            
+            Ray ray = Camera.main.ScreenPointToRay(Controls.Player.MouseDirection.ReadValue<Vector2>());
+            if (Physics.Raycast(ray, out RaycastHit hitinfo, 300f))
+            {
+                Vector3 Target = hitinfo.point;
+                Vector3 LookDirection = Target - transform.position;
+                float TurnAngle = Mathf.Atan2(LookDirection.z, LookDirection.x) * Mathf.Rad2Deg;
+                RotateAngle = TurnAngle;
+                transform.rotation = Quaternion.Euler(new Vector3(0f, -TurnAngle + 90, 0f));
+            }
         }
     }
     private void Shooting()
@@ -196,10 +204,13 @@ public class Player : MonoBehaviour
         ShootingEffect.SendEvent("Shoot");
         BulletCount--;
         Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
+        if(OnShoot != null)
+        {
+            OnShoot(this, EventArgs.Empty);
+        }
         if (BulletCount <= 0)
         {
-            Animator.SetLayerWeight(Animator.GetLayerIndex("Shoot"), 0);
-            Animator.SetTrigger("Reload");
+            SetReload();
         }
     }
     private void SetAnimationLayerToShoot()
@@ -220,9 +231,18 @@ public class Player : MonoBehaviour
         Animator.SetBool("IsTripleShot", GameManager.GetIsTripleShot());
         Animator.SetBool("IsAutoShot", GameManager.GetIsAutoShot());
     }
+    private void SetReload()
+    {
+        Animator.SetLayerWeight(Animator.GetLayerIndex("Shoot"), 0);
+        Animator.SetTrigger("Reload");
+    }
     private void Reloaded()
     {
         BulletCount = GameManager.GetPlayerBulletCount();
+        if (OnShoot != null)
+        {
+            OnShoot(this, EventArgs.Empty);
+        }
     }
     private void Roll(float Distance)
     {
@@ -356,6 +376,10 @@ public class Player : MonoBehaviour
     public bool GetGrenadeCoolDownImageActive()
     {
         return GrenadeCoolDownImageActive;
+    }
+    public int GetBulletCount()
+    {
+        return BulletCount;
     }
     private void OnEnable()
     {

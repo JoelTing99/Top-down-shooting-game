@@ -7,15 +7,13 @@ using UnityEngine.UI;
 public class PlayerHealthBar : MonoBehaviour
 {
     private float TimerMax = 1f;
-    private Image Bar;
-    private Image DamageBar;
+    [SerializeField] private Image Bar;
+    [SerializeField] private Image DamageBar;
     private float Timer;
     private HealthSystem HealthSystem;
 
     private void Awake()
     {
-        Bar = transform.Find("Bar").GetComponent<Image>();
-        DamageBar = transform.Find("DamageBar").GetComponent<Image>();
     }
     private void Start()
     {

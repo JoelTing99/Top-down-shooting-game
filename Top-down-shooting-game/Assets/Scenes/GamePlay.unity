@@ -5624,7 +5624,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 828949475}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1975941400}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OpenMasteryTree
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &828949475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6034,7 +6046,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 8b53e923676f87944bef198a20cb9bce, type: 3}
-    m_FontSize: 40
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -6045,7 +6057,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: AAAAAAAAAAAAAA
+  m_Text: AAAAAAAAAAAAAAAAAA
 --- !u!222 &869138285
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6188,7 +6200,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 8b53e923676f87944bef198a20cb9bce, type: 3}
-    m_FontSize: 55
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -11288,7 +11300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1632950421
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14010,6 +14022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradePoint: {fileID: 1080147665}
+  MasteryTree: {fileID: 1632950420}
 --- !u!1 &2015834052
 GameObject:
   m_ObjectHideFlags: 0
@@ -14897,7 +14910,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 8b53e923676f87944bef198a20cb9bce, type: 3}
-    m_FontSize: 50
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -15409,6 +15422,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 134957864, guid: 6684883011280224aa28e0f422ff6ddc, type: 3}
+      propertyPath: Bar
+      value: 
+      objectReference: {fileID: 6657884601453702473, guid: 211a98fc9ff3db140bccea09cf933bd0, type: 3}
     - target: {fileID: 2197140166743948483, guid: 6684883011280224aa28e0f422ff6ddc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -15469,19 +15486,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4276478238353926453, guid: 6684883011280224aa28e0f422ff6ddc, type: 3}
-      propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'Headgear_Right'\n\tTransform 'Headgear_Right'\n\tTransform
-        'Headgear_Left'\n\tTransform 'Headgear_Left'\n\tTransform 'Headgear_Right'\n\tTransform
-        'Headgear_Left'\n\tFrom animation clip 'Die'\n\tFrom animation clip 'Reload'\n\tFrom
-        animation clip 'Shoot_Autoshot'"
-      objectReference: {fileID: 0}
-    - target: {fileID: 7366572101150622687, guid: 6684883011280224aa28e0f422ff6ddc, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6684883011280224aa28e0f422ff6ddc, type: 3}
 --- !u!1001 &4967681629455555706
@@ -15501,6 +15505,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1647099161606688716, guid: 54d22de689ca97247a41ff10737a592e, type: 3}
       propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647099161606688716, guid: 54d22de689ca97247a41ff10737a592e, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1647099161606688716, guid: 54d22de689ca97247a41ff10737a592e, type: 3}

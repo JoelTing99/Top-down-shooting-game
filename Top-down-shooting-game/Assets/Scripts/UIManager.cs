@@ -13,9 +13,11 @@ public class UIManager : MonoBehaviour
     private Text CoinAmount;
     private Text LevelText;
     [SerializeField] private Text UpgradePoint;
+    [SerializeField] private GameObject MasteryTree;
     private GameObject GrenadeCoolDownImage;
     private GameObject RollCoolDownImage;
     private Image LevelImage;
+    private bool MasteryTreeIsopened;
 
     void Start()
     {
@@ -46,6 +48,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Tab)) { OpenMasteryTree(); }
         //UI Elemnet
         GrenadeCoolDownImage.SetActive(Player.GetGrenadeCoolDownImageActive());
         GrenadeCoolDownImage.GetComponent<Image>().fillAmount = Player.GetGrenadeCoolDownImagefillAmount();
@@ -78,5 +81,19 @@ public class UIManager : MonoBehaviour
     {
         CoinAmount.text = GameManager.GetCoinAmount().ToString();
     }
-
+    public void OpenMasteryTree()
+    {
+        if (MasteryTreeIsopened)
+        {
+            Time.timeScale = 1f;
+            MasteryTreeIsopened = false;
+            MasteryTree.SetActive(false);
+        }
+        else
+        {
+            Time.timeScale = 0;
+            MasteryTreeIsopened = true;
+            MasteryTree.SetActive(true);
+        }
+    }
 }
