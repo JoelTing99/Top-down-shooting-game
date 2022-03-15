@@ -353,7 +353,7 @@ public class Player : MonoBehaviour
         {
             Vector3 NewPoint = StartingPosition + i * StartingVelosity;
             points.Add(NewPoint);
-            if (Physics.OverlapSphere(NewPoint, 0.1f, CollidableLayer).Length > 1)
+            if (Physics.OverlapSphere(NewPoint, 1f, CollidableLayer).Length > 1)
             {
                 Line.positionCount = points.Count;
                 break;

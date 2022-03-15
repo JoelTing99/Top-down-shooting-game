@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
         }
         else if(!other.isTrigger)
         {
-            float PlayerDamage = GameManager.GetPlayerCritRate();
+            float PlayerDamage = GameManager.GetPlayerDamage();
             if(GameManager.GetHaveLifeSteal()) {
                 HealthSystem.Heal(GameManager.GetPlayerDamage() * GameManager.GetPlayerLifeStealRate());
             }
@@ -43,6 +43,7 @@ public class Bullet : MonoBehaviour
             if(Random.value <= GameManager.GetPlayerHeadShootRate())
             {
                 PlayerDamage = 10000;
+                Debug.Log("HeadShot");
             }
             switch (other.tag)
             {
