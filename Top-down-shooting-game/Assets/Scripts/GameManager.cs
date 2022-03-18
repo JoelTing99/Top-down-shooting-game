@@ -79,11 +79,11 @@ public class GameManager : MonoBehaviour
     private float SmallStellatedSpeed = 5;
 
     //Experience amount
-    private int CubeExpAmount = 20;
-    private int DodecahedronExpAmount = 25;
-    private int FurstumExpAmount = 12;
-    private int OctahedronExpAmount = 18;
-    private int SmallStellatedExpAmount = 30;
+    private int CubeExpAmount = 40;
+    private int DodecahedronExpAmount = 50;
+    private int FurstumExpAmount = 24;
+    private int OctahedronExpAmount = 36;
+    private int SmallStellatedExpAmount = 60;
 
     //Item
     [SerializeField] private GameObject[] BonusItem;

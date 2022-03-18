@@ -19,7 +19,7 @@ public class CubeEnemy : MonoBehaviour
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetCubeHP());
         LevelSystem = GameManager.GetLevelSystem();
-        EnemyHealthBar = transform.Find("HealthBar").GetComponent<EnemyHealthBar>();
+        EnemyHealthBar = GetComponentInChildren<EnemyHealthBar>();
         EnemyHealthBar.SetHealthSystem(HealthSystem);
         Agent = GetComponent<NavMeshAgent>();
         Animator = GetComponent<Animator>();

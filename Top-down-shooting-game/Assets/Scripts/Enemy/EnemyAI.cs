@@ -10,7 +10,10 @@ public class EnemyAI : MonoBehaviour
     private void Awake()
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
-        Player = GameObject.FindWithTag("Player").transform;
+        if (GameObject.FindWithTag("Player") != null)
+        {
+            Player = GameObject.FindWithTag("Player").transform;
+        }
     }
     private void Update()
     {

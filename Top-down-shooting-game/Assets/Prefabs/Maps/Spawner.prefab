@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2018008472032870306}
+  - component: {fileID: 6882266026995908823}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -30,3 +31,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6882266026995908823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018008472032870307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96256125ca2d97e4a90c6117f130cab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TypeOfEnemy:
+  - {fileID: 6387778774856831431, guid: 3000a69845d04414da57ad81c1114d94, type: 3}
+  - {fileID: 5240332545240442094, guid: be6735a8c1dbcbe4db6a65e099ce1ff0, type: 3}
+  - {fileID: 4447998514530927520, guid: 6299552db5900594ba0a6fa6ba38f272, type: 3}
+  - {fileID: 4758220319040203683, guid: b0f596398485071498729c6732dc1337, type: 3}
+  - {fileID: 6144080961601415222, guid: 2bc4a915d92a1024e853f6a3c2d2bcb9, type: 3}

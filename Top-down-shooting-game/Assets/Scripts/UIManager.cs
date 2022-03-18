@@ -14,9 +14,11 @@ public class UIManager : MonoBehaviour
     private Text LevelText;
     [SerializeField] private Text UpgradePoint;
     [SerializeField] private GameObject MasteryTree;
+    [SerializeField] private GameObject Arrow;
     private GameObject GrenadeCoolDownImage;
     private GameObject RollCoolDownImage;
     private Image LevelImage;
+    private List<Transform> Spawners;
     private bool MasteryTreeIsopened;
 
     void Start()
@@ -38,11 +40,14 @@ public class UIManager : MonoBehaviour
         RollCoolDownImage = transform.Find("Roll").Find("RollCooldown").gameObject;
         LevelImage = transform.Find("Level").Find("Bar").GetComponent<Image>();
         LevelText = transform.Find("Level").Find("Level").GetComponent<Text>();
+        Spawners = SpawnManager.GetSpawners();
 
         UpgradePoint.text = LevelSystem.GetUpgradePoint().ToString();
 
         SetExpBar();
         SetExpText();
+
+        Invoke("SetArrow", 10);
     }
 
 
@@ -55,6 +60,7 @@ public class UIManager : MonoBehaviour
         RollCoolDownImage.SetActive(Player.GetRollCoolDownImageActive());
         RollCoolDownImage.GetComponent<Image>().fillAmount = Player.GetRollCoolDownImagefillAmount();
         WaveNum.text = SpawnManager.GetWaveCount();
+        
     }
     private void SetExpBar()
     {
@@ -94,6 +100,21 @@ public class UIManager : MonoBehaviour
             Time.timeScale = 0;
             MasteryTreeIsopened = true;
             MasteryTree.SetActive(true);
+        }
+    }
+    private void SetArrow()
+    {
+        if(Spawners != null)
+        {
+            foreach (var spawner in Spawners)
+            {
+                GameObject arrow = Instantiate(Arrow, transform);
+                Vector2 Target = new Vector2(spawner.position.x, spawner.position.z);
+                //float TurnAngle = 
+                //Vector3 Rotatetion = new Vector3(0, 0, TurnAngle);
+                //Arrow.transform.Rotate();
+                arrow.transform.LookAt(Target);
+            }
         }
     }
 }

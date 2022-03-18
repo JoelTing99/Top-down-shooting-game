@@ -17,6 +17,7 @@ TagManager:
   - SmallStellatedEnemy
   - Grenade
   - ConnectPoint
+  - EnemyShip
   layers:
   - Default
   - TransparentFX

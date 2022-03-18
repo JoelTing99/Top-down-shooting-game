@@ -62,6 +62,9 @@ public class Bullet : MonoBehaviour
                 case "SmallStellatedEnemy":
                     other.GetComponent<SmallStellatedEnemy>().TakeDamage(PlayerDamage);
                     break;
+                case "EnemyShip":
+                    other.GetComponent<Spaceship>().TakeDamage(PlayerDamage);
+                    break;
             }
             Speed = 0f;
             FlyEffect.Stop();
