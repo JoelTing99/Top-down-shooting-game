@@ -624,7 +624,7 @@ public class MapSpawner : MonoBehaviour
                     Quaternion rotation = Quaternion.Euler(0, 90, 0);
                     Instantiate(Templates.Straight, transform.position, rotation);
                 }
-                //Destroy(gameObject, 10);
+                Destroy(gameObject, 10);
             }
             spawned = true;
         }

@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
         SetExpBar();
         SetExpText();
 
-        Invoke("SetArrow", 10);
+        Invoke("SetArrow", 6);
     }
 
 
@@ -104,16 +104,13 @@ public class UIManager : MonoBehaviour
     }
     private void SetArrow()
     {
+        Spawners = SpawnManager.GetSpawners();
         if(Spawners != null)
         {
             foreach (var spawner in Spawners)
             {
                 GameObject arrow = Instantiate(Arrow, transform);
-                Vector2 Target = new Vector2(spawner.position.x, spawner.position.z);
-                //float TurnAngle = 
-                //Vector3 Rotatetion = new Vector3(0, 0, TurnAngle);
-                //Arrow.transform.Rotate();
-                arrow.transform.LookAt(Target);
+                arrow.GetComponent<GuideArrow>().SetSpawner(spawner);
             }
         }
     }
