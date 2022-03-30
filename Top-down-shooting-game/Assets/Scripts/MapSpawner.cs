@@ -178,29 +178,37 @@ public class MapSpawner : MonoBehaviour
                             }
                             else
                             {
-                                rand = Random.Range(0, 5);
-                                switch (rand)
+                                if(Random.value <= 0.1f)
                                 {
-                                    case 0:
-                                        rand = Random.Range(0, Templates.TopConnect.Length);
-                                        Instantiate(Templates.TopConnect[rand], transform.position, Templates.TopConnect[rand].transform.rotation);
-                                        break;
-                                    case 1:
-                                        rand = Random.Range(0, Templates.L_TRConnect.Length);
-                                        Instantiate(Templates.L_TRConnect[rand], transform.position, Templates.L_TRConnect[rand].transform.rotation);
-                                        break;
-                                    case 2:
-                                        rand = Random.Range(0, Templates.L_TLConnect.Length);
-                                        Instantiate(Templates.L_TLConnect[rand], transform.position, Templates.L_TLConnect[rand].transform.rotation);
-                                        break;
-                                    case 3:
-                                        rand = Random.Range(0, Templates.T_TRConnect.Length);
-                                        Instantiate(Templates.T_TRConnect[rand], transform.position, Templates.T_TRConnect[rand].transform.rotation);
-                                        break;
-                                    case 4:
-                                        rand = Random.Range(0, Templates.T_TLConnect.Length);
-                                        Instantiate(Templates.T_TLConnect[rand], transform.position, Templates.T_TLConnect[rand].transform.rotation);
-                                        break;
+                                    rand = Random.Range(0, Templates.X_TConnect.Length);
+                                    Instantiate(Templates.X_TConnect[rand], transform.position, Templates.X_TConnect[rand].transform.rotation);
+                                }
+                                else
+                                {
+                                    rand = Random.Range(0, 5);
+                                    switch (rand)
+                                    {
+                                        case 0:
+                                            rand = Random.Range(0, Templates.TopConnect.Length);
+                                            Instantiate(Templates.TopConnect[rand], transform.position, Templates.TopConnect[rand].transform.rotation);
+                                            break;
+                                        case 1:
+                                            rand = Random.Range(0, Templates.L_TRConnect.Length);
+                                            Instantiate(Templates.L_TRConnect[rand], transform.position, Templates.L_TRConnect[rand].transform.rotation);
+                                            break;
+                                        case 2:
+                                            rand = Random.Range(0, Templates.L_TLConnect.Length);
+                                            Instantiate(Templates.L_TLConnect[rand], transform.position, Templates.L_TLConnect[rand].transform.rotation);
+                                            break;
+                                        case 3:
+                                            rand = Random.Range(0, Templates.T_TRConnect.Length);
+                                            Instantiate(Templates.T_TRConnect[rand], transform.position, Templates.T_TRConnect[rand].transform.rotation);
+                                            break;
+                                        case 4:
+                                            rand = Random.Range(0, Templates.T_TLConnect.Length);
+                                            Instantiate(Templates.T_TLConnect[rand], transform.position, Templates.T_TLConnect[rand].transform.rotation);
+                                            break;
+                                    }
                                 }
                             }
                         }
@@ -284,29 +292,37 @@ public class MapSpawner : MonoBehaviour
                             }
                             else
                             {
-                                rand = Random.Range(0, 5);
-                                switch (rand)
+                                if (Random.value <= 0.1f)
                                 {
-                                    case 0:
-                                        rand = Random.Range(0, Templates.RightConnect.Length);
-                                        Instantiate(Templates.RightConnect[rand], transform.position, Templates.RightConnect[rand].transform.rotation);
-                                        break;
-                                    case 1:
-                                        rand = Random.Range(0, Templates.L_RBConnect.Length);
-                                        Instantiate(Templates.L_RBConnect[rand], transform.position, Templates.L_RBConnect[rand].transform.rotation);
-                                        break;
-                                    case 2:
-                                        rand = Random.Range(0, Templates.L_RTConnect.Length);
-                                        Instantiate(Templates.L_RTConnect[rand], transform.position, Templates.L_RTConnect[rand].transform.rotation);
-                                        break;
-                                    case 3:
-                                        rand = Random.Range(0, Templates.T_RBConnect.Length);
-                                        Instantiate(Templates.T_RBConnect[rand], transform.position, Templates.T_RBConnect[rand].transform.rotation);
-                                        break;
-                                    case 4:
-                                        rand = Random.Range(0, Templates.T_RTConnect.Length);
-                                        Instantiate(Templates.T_RTConnect[rand], transform.position, Templates.T_RTConnect[rand].transform.rotation);
-                                        break;
+                                    rand = Random.Range(0, Templates.X_RConnect.Length);
+                                    Instantiate(Templates.X_RConnect[rand], transform.position, Templates.X_RConnect[rand].transform.rotation);
+                                }
+                                else
+                                {
+                                    rand = Random.Range(0, 5);
+                                    switch (rand)
+                                    {
+                                        case 0:
+                                            rand = Random.Range(0, Templates.RightConnect.Length);
+                                            Instantiate(Templates.RightConnect[rand], transform.position, Templates.RightConnect[rand].transform.rotation);
+                                            break;
+                                        case 1:
+                                            rand = Random.Range(0, Templates.L_RBConnect.Length);
+                                            Instantiate(Templates.L_RBConnect[rand], transform.position, Templates.L_RBConnect[rand].transform.rotation);
+                                            break;
+                                        case 2:
+                                            rand = Random.Range(0, Templates.L_RTConnect.Length);
+                                            Instantiate(Templates.L_RTConnect[rand], transform.position, Templates.L_RTConnect[rand].transform.rotation);
+                                            break;
+                                        case 3:
+                                            rand = Random.Range(0, Templates.T_RBConnect.Length);
+                                            Instantiate(Templates.T_RBConnect[rand], transform.position, Templates.T_RBConnect[rand].transform.rotation);
+                                            break;
+                                        case 4:
+                                            rand = Random.Range(0, Templates.T_RTConnect.Length);
+                                            Instantiate(Templates.T_RTConnect[rand], transform.position, Templates.T_RTConnect[rand].transform.rotation);
+                                            break;
+                                    }
                                 }
                             }
                         }
@@ -390,29 +406,37 @@ public class MapSpawner : MonoBehaviour
                             }
                             else
                             {
-                                rand = Random.Range(0, 5);
-                                switch (rand)
+                                if (Random.value <= 0.1f)
                                 {
-                                    case 0:
-                                        rand = Random.Range(0, Templates.BottomRoom.Length);
-                                        Instantiate(Templates.BottomRoom[rand], transform.position, Templates.BottomRoom[rand].transform.rotation);
-                                        break;
-                                    case 1:
-                                        rand = Random.Range(0, Templates.L_BRConnect.Length);
-                                        Instantiate(Templates.L_BRConnect[rand], transform.position, Templates.L_BRConnect[rand].transform.rotation);
-                                        break;
-                                    case 2:
-                                        rand = Random.Range(0, Templates.L_BLConnect.Length);
-                                        Instantiate(Templates.L_BLConnect[rand], transform.position, Templates.L_BLConnect[rand].transform.rotation);
-                                        break;
-                                    case 3:
-                                        rand = Random.Range(0, Templates.T_BRConnect.Length);
-                                        Instantiate(Templates.T_BRConnect[rand], transform.position, Templates.T_BRConnect[rand].transform.rotation);
-                                        break;
-                                    case 4:
-                                        rand = Random.Range(0, Templates.T_BLConnect.Length);
-                                        Instantiate(Templates.T_BLConnect[rand], transform.position, Templates.T_BLConnect[rand].transform.rotation);
-                                        break;
+                                    rand = Random.Range(0, Templates.X_BConnect.Length);
+                                    Instantiate(Templates.X_BConnect[rand], transform.position, Templates.X_BConnect[rand].transform.rotation);
+                                }
+                                else
+                                {
+                                    rand = Random.Range(0, 5);
+                                    switch (rand)
+                                    {
+                                        case 0:
+                                            rand = Random.Range(0, Templates.BottomRoom.Length);
+                                            Instantiate(Templates.BottomRoom[rand], transform.position, Templates.BottomRoom[rand].transform.rotation);
+                                            break;
+                                        case 1:
+                                            rand = Random.Range(0, Templates.L_BRConnect.Length);
+                                            Instantiate(Templates.L_BRConnect[rand], transform.position, Templates.L_BRConnect[rand].transform.rotation);
+                                            break;
+                                        case 2:
+                                            rand = Random.Range(0, Templates.L_BLConnect.Length);
+                                            Instantiate(Templates.L_BLConnect[rand], transform.position, Templates.L_BLConnect[rand].transform.rotation);
+                                            break;
+                                        case 3:
+                                            rand = Random.Range(0, Templates.T_BRConnect.Length);
+                                            Instantiate(Templates.T_BRConnect[rand], transform.position, Templates.T_BRConnect[rand].transform.rotation);
+                                            break;
+                                        case 4:
+                                            rand = Random.Range(0, Templates.T_BLConnect.Length);
+                                            Instantiate(Templates.T_BLConnect[rand], transform.position, Templates.T_BLConnect[rand].transform.rotation);
+                                            break;
+                                    }
                                 }
                             }
                         }
@@ -497,29 +521,37 @@ public class MapSpawner : MonoBehaviour
                             }
                             else
                             {
-                                rand = Random.Range(0, 5);
-                                switch (rand)
+                                if (Random.value <= 0.1f)
                                 {
-                                    case 0:
-                                        rand = Random.Range(0, Templates.LeftConnect.Length);
-                                        Instantiate(Templates.LeftConnect[rand], transform.position, Templates.LeftConnect[rand].transform.rotation);
-                                        break;
-                                    case 1:
-                                        rand = Random.Range(0, Templates.L_LBConnect.Length);
-                                        Instantiate(Templates.L_LBConnect[rand], transform.position, Templates.L_LBConnect[rand].transform.rotation);
-                                        break;
-                                    case 2:
-                                        rand = Random.Range(0, Templates.L_LTConnect.Length);
-                                        Instantiate(Templates.L_LTConnect[rand], transform.position, Templates.L_LTConnect[rand].transform.rotation);
-                                        break;
-                                    case 3:
-                                        rand = Random.Range(0, Templates.T_LBConnect.Length);
-                                        Instantiate(Templates.T_LBConnect[rand], transform.position, Templates.T_LBConnect[rand].transform.rotation);
-                                        break;
-                                    case 4:
-                                        rand = Random.Range(0, Templates.T_LTConnect.Length);
-                                        Instantiate(Templates.T_LTConnect[rand], transform.position, Templates.T_LTConnect[rand].transform.rotation);
-                                        break;
+                                    rand = Random.Range(0, Templates.X_LConnect.Length);
+                                    Instantiate(Templates.X_LConnect[rand], transform.position, Templates.X_LConnect[rand].transform.rotation);
+                                }
+                                else 
+                                {
+                                    rand = Random.Range(0, 5);
+                                    switch (rand)
+                                    {
+                                        case 0:
+                                            rand = Random.Range(0, Templates.LeftConnect.Length);
+                                            Instantiate(Templates.LeftConnect[rand], transform.position, Templates.LeftConnect[rand].transform.rotation);
+                                            break;
+                                        case 1:
+                                            rand = Random.Range(0, Templates.L_LBConnect.Length);
+                                            Instantiate(Templates.L_LBConnect[rand], transform.position, Templates.L_LBConnect[rand].transform.rotation);
+                                            break;
+                                        case 2:
+                                            rand = Random.Range(0, Templates.L_LTConnect.Length);
+                                            Instantiate(Templates.L_LTConnect[rand], transform.position, Templates.L_LTConnect[rand].transform.rotation);
+                                            break;
+                                        case 3:
+                                            rand = Random.Range(0, Templates.T_LBConnect.Length);
+                                            Instantiate(Templates.T_LBConnect[rand], transform.position, Templates.T_LBConnect[rand].transform.rotation);
+                                            break;
+                                        case 4:
+                                            rand = Random.Range(0, Templates.T_LTConnect.Length);
+                                            Instantiate(Templates.T_LTConnect[rand], transform.position, Templates.T_LTConnect[rand].transform.rotation);
+                                            break;
+                                    }
                                 }
                             }
                         }

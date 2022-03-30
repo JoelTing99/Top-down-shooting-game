@@ -34,6 +34,11 @@ public class Templates : MonoBehaviour
     public GameObject[] T_BRConnect;
     public GameObject[] T_BLConnect;
 
+    public GameObject[] X_TConnect;
+    public GameObject[] X_RConnect;
+    public GameObject[] X_BConnect;
+    public GameObject[] X_LConnect; 
+
     public GameObject L;
     public GameObject Straight;
 

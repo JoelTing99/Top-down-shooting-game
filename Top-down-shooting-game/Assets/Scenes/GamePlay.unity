@@ -14616,6 +14616,14 @@ MonoBehaviour:
   - {fileID: 2627450725589758904, guid: 0d9c889e18cb82e40a87b29145b38d3e, type: 3}
   T_BLConnect:
   - {fileID: 8956817779931485351, guid: 79cd215b108ae384e85a18d99605bc1c, type: 3}
+  X_TConnect:
+  - {fileID: 7205301757689712989, guid: a1951b57b259cb34aa34b81d5d3abfb0, type: 3}
+  X_RConnect:
+  - {fileID: 7205301757689712989, guid: 01abe7510f715004fb07dd525b5daf58, type: 3}
+  X_BConnect:
+  - {fileID: 7205301757689712989, guid: ef43e698f91882c4ca8bd6481b4751d5, type: 3}
+  X_LConnect:
+  - {fileID: 7205301757689712989, guid: dd872b1118533cb49ba8be51edc86704, type: 3}
   L: {fileID: 7035619435957460517, guid: cf71e68a00826a943b19db57b79c82b0, type: 3}
   Straight: {fileID: 1928059574963091655, guid: 033a5a874a730024db5d43b6a8378fbc, type: 3}
   Bridges: []
@@ -15454,7 +15462,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.98450136, b: 0.8915094, a: 1}
-  m_Intensity: 1.5
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.802082

@@ -437,7 +437,7 @@ GameObject:
   - component: {fileID: 2330718}
   m_Layer: 0
   m_Name: floor_2_LOD0
-  m_TagString: Wall
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -520,7 +520,7 @@ GameObject:
   - component: {fileID: 2364372}
   m_Layer: 0
   m_Name: floor_2_LOD1
-  m_TagString: Wall
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
