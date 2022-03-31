@@ -66,6 +66,10 @@ public class Bullet : MonoBehaviour
                     other.GetComponent<Spaceship>().TakeDamage(PlayerDamage);
                     break;
             }
+            if(other.GetComponent<Rigidbody>() != null)
+            {
+                other.GetComponent<Rigidbody>().AddForce(-transform.forward * 100, ForceMode.Impulse);
+            }
             Speed = 0f;
             FlyEffect.Stop();
             HitEffect.SendEvent("Hit");

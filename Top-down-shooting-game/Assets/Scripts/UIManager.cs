@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,12 +15,14 @@ public class UIManager : MonoBehaviour
     private Text LevelText;
     [SerializeField] private Text UpgradePoint;
     [SerializeField] private GameObject MasteryTree;
+    [SerializeField] private GameObject QuitConfirmMenu;
     [SerializeField] private GameObject Arrow;
     private GameObject GrenadeCoolDownImage;
     private GameObject RollCoolDownImage;
     private Image LevelImage;
     private List<Transform> Spawners;
     private bool MasteryTreeIsopened;
+    private bool QuitConfirmIsopened;
 
     void Start()
     {
@@ -53,7 +56,8 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)) { OpenMasteryTree(); }
+        if (Input.GetKeyDown(KeyCode.Tab)) OpenMasteryTree();
+        if (Input.GetKeyDown(KeyCode.Escape)) OpenQuitConfirm();
         //UI Elemnet
         GrenadeCoolDownImage.SetActive(Player.GetGrenadeCoolDownImageActive());
         GrenadeCoolDownImage.GetComponent<Image>().fillAmount = Player.GetGrenadeCoolDownImagefillAmount();
@@ -101,6 +105,25 @@ public class UIManager : MonoBehaviour
             MasteryTreeIsopened = true;
             MasteryTree.SetActive(true);
         }
+    }
+    public void OpenQuitConfirm()
+    {
+        if (QuitConfirmIsopened)
+        {
+            Time.timeScale = 1f;
+            QuitConfirmIsopened = false;
+            QuitConfirmMenu.SetActive(false);
+        }
+        else
+        {
+            Time.timeScale = 0;
+            QuitConfirmIsopened = true;
+            QuitConfirmMenu.SetActive(true);
+        }
+    }
+    public void Quit()
+    {
+        SceneManager.LoadScene(0);
     }
     private void SetArrow()
     {

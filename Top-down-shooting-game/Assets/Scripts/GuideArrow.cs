@@ -15,6 +15,10 @@ public class GuideArrow : MonoBehaviour
     }
     void LateUpdate()
     {
+        if (Spawner == null)
+        {
+            return;
+        }
         LookTarget();
         MoveToTarget();
     }

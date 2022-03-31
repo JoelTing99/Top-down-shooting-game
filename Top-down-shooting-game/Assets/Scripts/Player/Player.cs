@@ -293,7 +293,7 @@ public class Player : MonoBehaviour
     }
     private void ThrowGrenade()
     {
-        GameObject grenade = Instantiate(Grenade, ThrowGrenadePoint.position, transform.rotation);
+        GameObject grenade = Instantiate(Grenade, ThrowGrenadePoint.position, transform.rotation, null);
         Rigidbody rb = grenade.GetComponent<Rigidbody>();
         rb.AddForce((ThrowGrenadePoint.up + transform.forward) * GameManager.GetThrowGrenadeDistance(), ForceMode.VelocityChange);
         StartCoroutine(ThrowGrenadeCoolDownCount(GameManager.GetGrenadeCoolDownTime()));
