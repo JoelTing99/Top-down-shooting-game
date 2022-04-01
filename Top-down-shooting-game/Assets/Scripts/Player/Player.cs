@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
         {
             Controls.Player.JoystickDirection.performed += _ => JoystickRotation();
         }
+        Controls.Player.Reload.performed += _ => SetReload();
         Controls.Player.Shooting.performed += _ => Shooting();
         Controls.Player.Roll.performed += _ => Roll(GameManager.GetRollDistance());
         Controls.Player.Throw.performed += _ => ThrowGrenadeAnimation();
@@ -233,12 +234,17 @@ public class Player : MonoBehaviour
     }
     private void SetReload()
     {
-        Animator.SetLayerWeight(Animator.GetLayerIndex("Shoot"), 0);
-        Animator.SetTrigger("Reload");
+        if(BulletCount != GameManager.GetPlayerBulletCount())
+        {
+            Animator.SetLayerWeight(Animator.GetLayerIndex("Reload"), 1);
+            Animator.SetLayerWeight(Animator.GetLayerIndex("Shoot"), 0);
+            Animator.SetTrigger("Reload");
+        }
     }
     private void Reloaded()
     {
         BulletCount = GameManager.GetPlayerBulletCount();
+        Animator.SetLayerWeight(Animator.GetLayerIndex("Reload"), 0);
         if (OnShoot != null)
         {
             OnShoot(this, EventArgs.Empty);

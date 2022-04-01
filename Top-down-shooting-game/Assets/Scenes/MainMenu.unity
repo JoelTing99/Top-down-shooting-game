@@ -567,6 +567,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
@@ -577,3 +578,73 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1001 &7181609487387202386
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8718712813513689551, guid: d10b862d65a23044a804971c404e00a1, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718712813513689551, guid: d10b862d65a23044a804971c404e00a1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.87203926
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718712813513689551, guid: d10b862d65a23044a804971c404e00a1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718712813513689551, guid: d10b862d65a23044a804971c404e00a1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.5478654
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718712813513689551, guid: d10b862d65a23044a804971c404e00a1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718712813513689551, guid: d10b862d65a23044a804971c404e00a1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718712813513689551, guid: d10b862d65a23044a804971c404e00a1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718712813513689551, guid: d10b862d65a23044a804971c404e00a1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718712813513689551, guid: d10b862d65a23044a804971c404e00a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718712813513689551, guid: d10b862d65a23044a804971c404e00a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718712813513689551, guid: d10b862d65a23044a804971c404e00a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718712813514053103, guid: d10b862d65a23044a804971c404e00a1, type: 3}
+      propertyPath: m_Name
+      value: UIPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718712813523543661, guid: d10b862d65a23044a804971c404e00a1, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e5030de8ad5e0cd47a1f0f5db7753f2b, type: 2}
+    - target: {fileID: 8718712813523543661, guid: d10b862d65a23044a804971c404e00a1, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'Headgear_Right'\n\tTransform 'Headgear_Left'\n\tTransform
+        'Headgear_Right'\n\tTransform 'Headgear_Left'\n\tTransform 'Headgear_Right'\n\tTransform
+        'Headgear_Left'\n\tFrom animation clip 'Idle_Guard_AR'\n\tFrom animation
+        clip 'Idle_gunMiddle_AR'"
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d10b862d65a23044a804971c404e00a1, type: 3}

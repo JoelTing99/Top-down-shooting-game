@@ -92,8 +92,8 @@ GameObject:
   - component: {fileID: 486698}
   - component: {fileID: 6482166}
   - component: {fileID: 20563618}
-  - component: {fileID: 1824780615476210024}
-  - component: {fileID: 5998908360852156790}
+  - component: {fileID: 17561468006478694}
+  - component: {fileID: 4475845407738997901}
   m_Layer: 0
   m_Name: decorative_chair
   m_TagString: Untagged
@@ -154,7 +154,7 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2350354}
   m_Enabled: 1
---- !u!54 &1824780615476210024
+--- !u!54 &17561468006478694
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,7 +170,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!208 &5998908360852156790
+--- !u!208 &4475845407738997901
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

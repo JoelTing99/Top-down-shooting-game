@@ -26,12 +26,20 @@ public class Spaceship : MonoBehaviour
 
     void Update()
     {
+        Dead();
         if (transform.position == Target)
         {
             Spawner.canSpawn = true;
             return;
         }
         transform.position = Vector3.MoveTowards(transform.position, Target, Time.deltaTime);
+    }
+    private void Dead()
+    {
+        if(healthSystem.GetHealth() <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
     public void TakeDamage(float Amount)
     {
