@@ -50,7 +50,7 @@ public class UIManager : MonoBehaviour
         SetExpBar();
         SetExpText();
 
-        Invoke("SetArrow", 6);
+        Invoke("SetArrow", 5);
     }
 
 

@@ -127,10 +127,6 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Touch");
         }
-        if(PlayerHealth.GetHealth() <= 0)
-        {
-            Destroy(GameObject.FindWithTag("Player"));
-        }
         Debug.Log($"HP = {PlayerHP}");
         Debug.Log($"Damge = {PlayerDamage_Return}");
         Debug.Log($"Speed = {PlayerSpeed_Return}");

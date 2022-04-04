@@ -5,10 +5,14 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] TypeOfEnemy;
+    [SerializeField] private Transform EnemyHolder;
     private SpawnManager spawnManager;
+    private GameObject Enemy;
+    private Animator animator;
     private float TimeBtwSpawn;
     private float SpawnPeriod;
     private bool CanSpawn = false;
+    private bool IsSpawning;
 
     public bool canSpawn 
     {
@@ -18,27 +22,42 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         spawnManager = GetComponent<SpawnManager>();
+        animator = GetComponent<Animator>();
     }
     private void Update()
     {
         if (CanSpawn)
         {
-            Spawn();
+            SpawnAnimation();
+        }
+        if (IsSpawning)
+        {
+            Enemy.transform.position = new Vector3(EnemyHolder.position.x, 0, EnemyHolder.position.z);
         }
     }
-    private void Spawn()
+    private void SpawnAnimation()
     {
-        SpawnPeriod = Random.Range(3f, 5f);
+        SpawnPeriod = Random.Range(5f, 10f);
         if (TimeBtwSpawn <= 0)
         {
-            Vector3 SpawnPos = transform.position + new Vector3(Random.Range(1f, 2f), 0, Random.Range(1f, 2f));
-            Instantiate(TypeOfEnemy[Random.Range(0, TypeOfEnemy.Length)], SpawnPos, Quaternion.identity);
+            animator.SetTrigger("Spawn");
             TimeBtwSpawn = SpawnPeriod;     
         }
         else
         {
             TimeBtwSpawn -= Time.deltaTime;
         }
-
+    }   
+    private void SpawnBegin()
+    {
+        Enemy = Instantiate(TypeOfEnemy[Random.Range(0, TypeOfEnemy.Length)], EnemyHolder.position, Quaternion.identity);
+        IsSpawning = true;
+    }
+    private void SpawnEnd()
+    {
+        IsSpawning = false;
+        Enemy.transform.parent = null;
+        Enemy = null;
+        EnemyHolder.localScale = Vector3.zero;
     }
 }

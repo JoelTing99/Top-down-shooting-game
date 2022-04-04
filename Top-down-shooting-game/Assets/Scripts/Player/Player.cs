@@ -78,6 +78,19 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Debug.Log(BulletCount);
+        if (GameManager.GetPlayerHealthSystem().GetHealth() <= 0)
+        {
+            Dead();
+        }
+        if (IsStun)
+        {
+            Animator.SetLayerWeight(Animator.GetLayerIndex("GetHit"), 1);
+            Animator.SetTrigger("Stun");
+        }
+        else
+        {
+            Animator.SetLayerWeight(Animator.GetLayerIndex("GetHit"), 0);
+        }
         if (rb.velocity.x == 0 || rb.velocity.y == 0)
         {
             RollEffect.SendEvent("Stop");
@@ -366,6 +379,13 @@ public class Player : MonoBehaviour
             }
         }
         Line.SetPositions(points.ToArray());
+    }
+    public void Dead()
+    {
+        if (Animator.GetBool("Dead") != true)
+        {
+            Animator.SetBool("Dead", true);
+        }
     }
     public float GetRollCoolDownImagefillAmount()
     {

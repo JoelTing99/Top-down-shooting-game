@@ -7,19 +7,17 @@ public class EnemyAI : MonoBehaviour
 {
     private Transform Player;
     private NavMeshAgent NavMeshAgent;
+
     private void Awake()
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
-        if (GameObject.FindWithTag("Player") != null)
-        {
-            Player = GameObject.FindWithTag("Player").transform;
-        }
+        Player = FindObjectOfType<Player>().transform;
     }
     private void Update()
     {
-        if (Player != null)
+        if (Player != null && NavMesh.Raycast(transform.position, Vector3.down, out NavMeshHit hit, 1))
         {
-            Player = GameObject.FindWithTag("Player").transform;
+            Player = FindObjectOfType<Player>().transform;
             NavMeshAgent.destination = Player.position;
             transform.LookAt(Player.position + new Vector3(0, 1.5f, 0));
         }

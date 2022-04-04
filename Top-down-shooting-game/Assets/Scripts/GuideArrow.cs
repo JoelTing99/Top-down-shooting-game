@@ -13,14 +13,17 @@ public class GuideArrow : MonoBehaviour
     {
          Player = FindObjectOfType<Player>();
     }
-    void LateUpdate()
+    void Update()
     {
-        if (Spawner == null)
+        if (Spawner != null)
         {
-            return;
+            LookTarget();
+            MoveToTarget();
         }
-        LookTarget();
-        MoveToTarget();
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     private void LookTarget()
     {
