@@ -6,8 +6,8 @@ using UnityEngine.VFX;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float Speed;
-    [SerializeField] private VisualEffect HitEffect;
-    [SerializeField] private VisualEffect FlyEffect;
+    //[SerializeField] private VisualEffect HitEffect;
+    //[SerializeField] private VisualEffect FlyEffect;
     private GameManager GameManager;
     private HealthSystem HealthSystem;
     private void Awake()
@@ -25,8 +25,8 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Wall"))
         {
             Speed = 0f;
-            FlyEffect.Stop();
-            HitEffect.SendEvent("Hit");
+            //FlyEffect.Stop();
+            //HitEffect.SendEvent("Hit");
             Destroy(gameObject, 3f);
         }
         else if(!other.isTrigger)
@@ -71,8 +71,8 @@ public class Bullet : MonoBehaviour
                 other.GetComponent<Rigidbody>().AddForce(-other.transform.forward * 2, ForceMode.Impulse);
             }
             Speed = 0f;
-            FlyEffect.Stop();
-            HitEffect.SendEvent("Hit");
+            //FlyEffect.Stop();
+            //HitEffect.SendEvent("Hit");
             transform.SetParent(other.transform);
             Destroy(gameObject, 3f);
         }
