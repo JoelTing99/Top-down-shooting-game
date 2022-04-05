@@ -32,6 +32,10 @@ public class EnemySpawner : MonoBehaviour
         }
         if (IsSpawning)
         {
+            if(EnemyHolder.localScale.x <= 1)
+            {
+                EnemyHolder.localScale += new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime);
+            }
             Enemy.transform.position = new Vector3(EnemyHolder.position.x, 0, EnemyHolder.position.z);
         }
     }
@@ -51,6 +55,8 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnBegin()
     {
         Enemy = Instantiate(TypeOfEnemy[Random.Range(0, TypeOfEnemy.Length)], EnemyHolder.position, Quaternion.identity);
+        Enemy.transform.parent = EnemyHolder.transform;
+        EnemyHolder.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         IsSpawning = true;
     }
     private void SpawnEnd()
@@ -58,6 +64,6 @@ public class EnemySpawner : MonoBehaviour
         IsSpawning = false;
         Enemy.transform.parent = null;
         Enemy = null;
-        EnemyHolder.localScale = Vector3.zero;
+        EnemyHolder.localScale = Vector3.one;
     }
 }

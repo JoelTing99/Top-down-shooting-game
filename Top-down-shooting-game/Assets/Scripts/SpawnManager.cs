@@ -40,7 +40,7 @@ public class SpawnManager : MonoBehaviour
             if (SpawnedPos.Contains(SpawnerPos)) return;
             Vector3 ShipPos = SpawnerPos + new Vector3(Random.Range(5, 10), Random.Range(12, 20), Random.Range(5, 10));
             GameObject spaceship = Instantiate(Spaceship, ShipPos, Quaternion.identity, transform);
-            spaceship.GetComponent<Spaceship>().target = SpawnerPos + new Vector3(0, 10, 0);
+            spaceship.GetComponent<Spaceship>().target = SpawnerPos + new Vector3(0, 7, 0);
             Spawners.Add(spaceship.transform);
             SpawnedPos.Add(SpawnerPos);
         }

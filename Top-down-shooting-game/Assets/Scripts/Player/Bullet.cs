@@ -68,7 +68,7 @@ public class Bullet : MonoBehaviour
             }
             if(other.GetComponent<Rigidbody>() != null)
             {
-                other.GetComponent<Rigidbody>().AddForce(-transform.forward * 100, ForceMode.Impulse);
+                other.GetComponent<Rigidbody>().AddForce(-other.transform.forward * 2, ForceMode.Impulse);
             }
             Speed = 0f;
             FlyEffect.Stop();
