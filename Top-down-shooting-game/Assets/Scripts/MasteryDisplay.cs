@@ -17,11 +17,13 @@ public class MasteryDisplay : MonoBehaviour
     private Text Description;
     private Text Title;
     private Text Requirement;
-    CanvasGroup Canvasgroup;
-    private float Count = 0.5f;
+    private CanvasGroup Canvasgroup;
+    private Animator Animator;
     private void Start()
     {
+        DescriptionImage.SetActive(false);
         Mastery.CurrentLevel = 0;
+        Animator = DescriptionImage.GetComponent<Animator>();
         Canvasgroup = DescriptionImage.GetComponent<CanvasGroup>();
         Description = DescriptionImage.transform.Find("Text").GetComponent<Text>();
         Title = DescriptionImage.transform.Find("Title").GetComponent<Text>();
@@ -79,11 +81,11 @@ public class MasteryDisplay : MonoBehaviour
     }
     public void SetDescriptionactive(bool Condition)
     {
+        
         StartCoroutine(SetDescriptionActive(Condition));
     }
     public IEnumerator SetDescriptionActive(bool Condition)
     {
-        float count = Count;
         if (Condition)
         {
             yield return new WaitForSecondsRealtime(1);
@@ -95,26 +97,11 @@ public class MasteryDisplay : MonoBehaviour
             {
                 Requirement.text = Mastery.Requirement;
             }
-            while (count >= 0)
-            {
-                if (!Condition)
-                {
-                    break;
-                }
-                count -= Time.deltaTime;
-                Canvasgroup.alpha += 3 * Time.deltaTime;
-                yield return null;
-            }
+            Animator.SetBool("Opened", true);
         }
         else
         {
-            while (count >= 0)
-            {
-                count -= Time.deltaTime;
-                Canvasgroup.alpha -= 5 * Time.deltaTime;
-                yield return null;
-            }
-            DescriptionImage.SetActive(false);
+            Animator.SetBool("Opened", false);
         }
     }
 }

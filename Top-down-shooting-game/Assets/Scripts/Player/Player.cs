@@ -215,7 +215,7 @@ public class Player : MonoBehaviour
     }
     private void Fire()
     {
-        ShootingEffect.SendEvent("Shoot");
+        ShootingEffect.Play();
         BulletCount--;
         Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
         if(OnShoot != null)

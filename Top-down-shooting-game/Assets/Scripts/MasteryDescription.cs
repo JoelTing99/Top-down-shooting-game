@@ -6,10 +6,9 @@ using UnityEngine.InputSystem;
 public class MasteryDescription : MonoBehaviour
 {
     private InputMaster InputSystem;
-    private void Start()
+    private void Awake()
     {
         InputSystem = new InputMaster();
-        InputSystem.Enable();
     }
     private void Update()
     {
