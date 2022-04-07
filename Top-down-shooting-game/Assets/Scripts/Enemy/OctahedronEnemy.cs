@@ -41,10 +41,13 @@ public class OctahedronEnemy : MonoBehaviour
     {
         if(Physics.Raycast(transform.position, transform.forward, out RaycastHit HIT, 5f) && !HIT.collider.CompareTag("Wall"))
         {
-            RaycastHit[] Hit = Physics.RaycastAll(transform.position, transform.TransformDirection(Vector3.forward), 5f);
+            RaycastHit[] Hit = Physics.RaycastAll(transform.position, transform.forward, 5f);
             foreach (var hit in Hit)
             {
-                Animator.SetBool("IsAttack", true);
+                if (hit.collider.CompareTag("Player"))
+                {
+                    Animator.SetBool("IsAttack", true);
+                }
             }
         }
         else

@@ -72,7 +72,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.5
+  m_Time: 0.1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.20822157
@@ -102,8 +102,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.9223361, g: 0.9245283, b: 0.047970813, a: 1}
-      key1: {r: 0.9245283, g: 0.5955844, b: 0.06541473, a: 1}
+      key0: {r: 0.9254902, g: 0.8596362, b: 0.066666655, a: 1}
+      key1: {r: 0.9254902, g: 0.8596362, b: 0.066666655, a: 1}
       key2: {r: 0.8867924, g: 0.16313636, b: 0.18483756, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -126,7 +126,7 @@ TrailRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 0
+      m_Mode: 1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995a0439143d0164f88dfae68ef57d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
+  Speed: 2000
   HitEffect: {fileID: 537114855309634019, guid: 21b9105755ab0e24988a2523afbdd2d9, type: 3}
 --- !u!65 &8560152500134689776
 BoxCollider:

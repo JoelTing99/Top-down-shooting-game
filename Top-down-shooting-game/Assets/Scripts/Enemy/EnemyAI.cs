@@ -15,7 +15,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void Update()
     {
-        if (Player != null && NavMesh.Raycast(transform.position, Vector3.down, out NavMeshHit hit, 1))
+        if (Player != null)
         {
             Player = FindObjectOfType<Player>().transform;
             NavMeshAgent.destination = Player.position;

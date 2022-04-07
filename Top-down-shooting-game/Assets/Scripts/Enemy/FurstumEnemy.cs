@@ -34,7 +34,7 @@ public class FurstumEnemy : MonoBehaviour
     }
     private void AttackAnimation()
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 1.5f) && hit.collider.CompareTag("Player"))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 2f) && hit.collider.CompareTag("Player"))
         {
             Animator.SetBool("IsAttack", true);
         }
@@ -45,7 +45,7 @@ public class FurstumEnemy : MonoBehaviour
     }
     private void StartAttack()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit Hit, 1.5f) && Hit.collider.CompareTag("Player") && AttackCount > 0)
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit Hit, 2f) && Hit.collider.CompareTag("Player") && AttackCount > 0)
         {
             GameManager.AttackPlayer(GameManager.GetFurstumDamage());
             AttackCount--;

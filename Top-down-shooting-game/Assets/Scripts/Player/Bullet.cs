@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+        GetComponent<Rigidbody>().velocity = transform.forward * Speed * Time.deltaTime;
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -59,7 +59,9 @@ public class Bullet : MonoBehaviour
         }
         if (collision.collider.GetComponent<Rigidbody>() != null)
         {
-            collision.collider.GetComponent<Rigidbody>().AddForce(-collision.collider.transform.forward * 2, ForceMode.Impulse);
+            Transform colliderTransform = collision.collider.transform;
+            colliderTransform.position -= colliderTransform.forward * 10 * Time.deltaTime;
+            colliderTransform.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
         if (collision.collider.GetComponent<Material>() != null)
         {

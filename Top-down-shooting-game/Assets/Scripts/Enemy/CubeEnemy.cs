@@ -34,7 +34,7 @@ public class CubeEnemy : MonoBehaviour
     }
     private void AttackAnimation()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1.5f) && hit.collider.CompareTag("Player"))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 2f) && hit.collider.CompareTag("Player"))
         {
             Animator.SetBool("IsAttack", true);
             if (Physics.SphereCast(transform.position, 1f, transform.forward, out RaycastHit Hit, 1.5f) && Hit.transform.CompareTag("Player"))

@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Grenade : MonoBehaviour
 {
     [SerializeField] private float ExplodeTime;
     [SerializeField] private float ExplodeForce;
+    [SerializeField] VisualEffect ExplosionEffect;
     private float GrenadeDamage;
     private bool HasExploded;
     private GameManager GameManager;
@@ -52,6 +54,8 @@ public class Grenade : MonoBehaviour
                 hit.GetComponent<Rigidbody>().AddExplosionForce(ExplodeForce, transform.position, GameManager.GetGrenadeExplodeRadius());
             }
         }
+        VisualEffect explosionEffect = Instantiate(ExplosionEffect, transform.position, Quaternion.identity);
+        Destroy(explosionEffect, 5);
         Destroy(gameObject);
     }
 }

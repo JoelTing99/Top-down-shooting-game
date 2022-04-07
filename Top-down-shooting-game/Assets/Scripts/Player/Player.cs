@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     private bool IsStun;
     private bool RollCoolDownImageActive;
     private bool GrenadeCoolDownImageActive;
+    private bool IsDead = false;
     private float VelocityX = 0;
     private float VelocityZ = 0;
     private float RotateAngle;
@@ -78,6 +79,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Debug.Log(BulletCount);
+        if (!IsDead) return;
         if (GameManager.GetPlayerHealthSystem().GetHealth() <= 0)
         {
             Dead();
@@ -382,9 +384,11 @@ public class Player : MonoBehaviour
     }
     public void Dead()
     {
-        if (Animator.GetBool("Dead") != true)
+        if (Animator.GetBool("Dead") != true && !IsDead)
         {
-            Animator.SetBool("Dead", true);
+            IsDead = true;
+            Line.positionCount = 0;
+            Animator.SetTrigger("Dead");
         }
     }
     public float GetRollCoolDownImagefillAmount()

@@ -33,7 +33,7 @@ public class DodecahedronEnemy : MonoBehaviour
     }
     private void AttackAnimation()
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 1f) && hit.collider.CompareTag("Player"))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 2f) && hit.collider.CompareTag("Player"))
         {
             Animator.SetBool("IsAttack", true);
         }
@@ -44,7 +44,7 @@ public class DodecahedronEnemy : MonoBehaviour
     }
     private void StartAttack()
     {
-        Collider[] Collide = Physics.OverlapSphere(transform.position, 1.5f);
+        Collider[] Collide = Physics.OverlapSphere(transform.position, 2f);
         foreach (var collide in Collide)
         {
             if (collide.CompareTag("Player") && AttackCount > 0)
