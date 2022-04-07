@@ -235,7 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995a0439143d0164f88dfae68ef57d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 100
+  Speed: 10
+  HitEffect: {fileID: 537114855309634019, guid: 21b9105755ab0e24988a2523afbdd2d9, type: 3}
 --- !u!65 &8560152500134689776
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -244,7 +245,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6743492481209777912}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.0009510565, y: 0.00095105637, z: 0.0013545085}
@@ -264,4 +265,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
