@@ -51,7 +51,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,35 +75,44 @@ TrailRenderer:
   m_Time: 0.1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.20822157
+    widthMultiplier: 0.081351645
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
-        inSlope: -0.99765825
-        outSlope: -0.99765825
-        tangentMode: 0
+        value: 0.5217444
+        inSlope: -0.28389513
+        outSlope: -0.28389513
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.1478873
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.36559522
+        value: 0.41795367
+        inSlope: -0.4713537
+        outSlope: -0.4713537
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: -0.79059654
-        outSlope: -0.79059654
-        tangentMode: 0
+        inSlope: -0.6588123
+        outSlope: -0.6588123
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0.18661982
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.9254902, g: 0.8596362, b: 0.066666655, a: 1}
-      key1: {r: 0.9254902, g: 0.8596362, b: 0.066666655, a: 1}
+      key0: {r: 0.9254902, g: 0.45691243, b: 0.066666655, a: 1}
+      key1: {r: 0.9254902, g: 0.8596362, b: 0.066666655, a: 0.7921569}
       key2: {r: 0.8867924, g: 0.16313636, b: 0.18483756, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -126,7 +135,7 @@ TrailRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 1
+      m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0

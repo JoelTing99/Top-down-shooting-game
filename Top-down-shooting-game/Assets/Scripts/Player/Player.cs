@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
         }
         if (rb.velocity.x == 0 || rb.velocity.y == 0)
         {
-            RollEffect.SendEvent("Stop");
+            //RollEffect.SendEvent("Stop");
         }
         if (HoldingThrow)
         {
@@ -269,11 +269,11 @@ public class Player : MonoBehaviour
     {
         if(CanRoll && !IsStun)
         {
+            RollEffect.Play();
             CanRoll = false;
             StartCoroutine(Rolling(1f, Distance));
             Animator.SetTrigger("Roll");
             StartCoroutine(RollCoolDownCount(GameManager.GetRollCoolDownTime()));
-            RollEffect.SendEvent("Roll");
         }
     }
     private IEnumerator Rolling(float time, float Distance)
