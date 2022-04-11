@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 public class FurstumEnemy : MonoBehaviour
 {
@@ -13,8 +14,12 @@ public class FurstumEnemy : MonoBehaviour
     private LevelSystem LevelSystem;
     private int AttackCount;
     [SerializeField] private GameObject Destroyed;
+    [SerializeField] private VisualEffect AttackEffect;
+    [SerializeField] private VisualEffect WalkEffect;
+
     private void Start()
     {
+        StopAttackEffect();
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetFurstumHP());
         LevelSystem = GameManager.GetLevelSystem();
@@ -54,6 +59,26 @@ public class FurstumEnemy : MonoBehaviour
     private void StopAttack()
     {
         AttackCount = 1;
+    }
+    private void PlayAttackEffect()
+    {
+        AttackEffect.Play();
+    }
+    private void StopAttackEffect()
+    {
+        AttackEffect.Stop();
+    }
+    private void PlayWalkEffect_1()
+    {
+        WalkEffect.transform.localPosition = new Vector3(-0.5f, -1, 0.3f);
+        WalkEffect.transform.localRotation = Quaternion.Euler(0, 30, 0);
+        WalkEffect.Play();
+    }
+    private void PlayWalkEffect_2()
+    {
+        WalkEffect.transform.localPosition = new Vector3(0.5f, -1, 0.3f);
+        WalkEffect.transform.localRotation = Quaternion.Euler(0, -30, 0);
+        WalkEffect.Play();
     }
     private void Dead()
     {
