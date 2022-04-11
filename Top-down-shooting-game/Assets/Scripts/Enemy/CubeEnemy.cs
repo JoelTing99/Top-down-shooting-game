@@ -14,8 +14,10 @@ public class CubeEnemy : MonoBehaviour
     private LevelSystem LevelSystem;
     [SerializeField] private GameObject Destroyed;
     [SerializeField] private VisualEffect AttactEffect;
+    [SerializeField] private VisualEffect WalkEffect;
     private void Start()
     {
+        AttactEffect.Stop();
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetCubeHP());
         LevelSystem = GameManager.GetLevelSystem();
@@ -49,11 +51,37 @@ public class CubeEnemy : MonoBehaviour
     }
     private void StartAttackEffect()
     {
-        AttactEffect.SendEvent("Attacking");
+        AttactEffect.Play();
     }
     private void StopAttackEffect()
     {
-        AttactEffect.SendEvent("StopAttacking");
+        AttactEffect.Stop();
+    }
+    private void PlayerWalkEffect_1()
+    {
+        WalkEffect.transform.localPosition = new Vector3(-1, -0.8f, 0);
+        WalkEffect.transform.Rotate(new Vector3(0, 90, 0));
+        WalkEffect.Play();
+    }
+    private void PlayerWalkEffect_2()
+    {
+        WalkEffect.transform.localPosition = new Vector3(0, -0.8f, 1);
+        WalkEffect.transform.Rotate(new Vector3(0, 90, 0));
+        WalkEffect.Play();
+    }
+    private void PlayerWalkEffect_3()
+    {
+
+        WalkEffect.transform.localPosition = new Vector3(1, -0.8f, 0);
+        WalkEffect.transform.Rotate(new Vector3(0, 90, 0));
+        WalkEffect.Play();
+    }
+    private void PlayerWalkEffect_4()
+    {
+
+        WalkEffect.transform.localPosition = new Vector3(0, -0.8f, -1);
+        WalkEffect.transform.Rotate(new Vector3(0, 90, 0));
+        WalkEffect.Play();
     }
     private void Dead()
     {
