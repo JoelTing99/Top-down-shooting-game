@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 public class DodecahedronEnemy : MonoBehaviour
 {
     private HealthSystem HealthSystem;
@@ -11,9 +12,12 @@ public class DodecahedronEnemy : MonoBehaviour
     private NavMeshAgent Agent;
     private LevelSystem LevelSystem;
     private int AttackCount;
+    private int EffectCount = 0;
     [SerializeField] private GameObject Destroyed;
+    [SerializeField] private VisualEffect AttackEffect;
     private void Start()
     {
+        AttackEffect.Stop();
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetDodecahedronHP());
         LevelSystem = GameManager.GetLevelSystem();
@@ -64,6 +68,28 @@ public class DodecahedronEnemy : MonoBehaviour
         if (FindObjectOfType<Player>() != null)
         {
             FindObjectOfType<Player>().isStun = false;
+        }
+    }
+    private void PlayAttackEffect()
+    {
+        AttackEffect.Play();
+    }
+    private void SetAttackEffectHeight()
+    {
+        EffectCount++;
+        switch (EffectCount)
+        {
+            case 1:
+                AttackEffect.SetFloat("Height", 1f);
+                break;
+            case 2:
+                AttackEffect.SetFloat("Height", 2f);
+                break;
+            case 3:
+                AttackEffect.SendEvent("Explode");
+                EffectCount = 0;
+                AttackEffect.Stop();
+                break;
         }
     }
     private void Dead()
