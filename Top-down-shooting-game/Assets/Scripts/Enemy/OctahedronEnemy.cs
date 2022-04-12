@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 public class OctahedronEnemy : MonoBehaviour
 {
@@ -15,10 +16,13 @@ public class OctahedronEnemy : MonoBehaviour
     [SerializeField] private GameObject Bullet;
     [SerializeField] private Transform FirePoint;
     [SerializeField] private GameObject Destroyed;
+    [SerializeField] private VisualEffect AttackEffect;
+    [SerializeField] private VisualEffect WalkEffect;
     private int BulletCount;
     private GameObject bullet;
     private void Start()
     {
+        StopAttackEffect();
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetOctahedronHP());
         LevelSystem = GameManager.GetLevelSystem();
@@ -47,12 +51,15 @@ public class OctahedronEnemy : MonoBehaviour
                 if (hit.collider.CompareTag("Player"))
                 {
                     Animator.SetBool("IsAttack", true);
+                    WalkEffect.Stop();
                 }
             }
         }
         else
         {
             Animator.SetBool("IsAttack", false);
+            WalkEffect.Play();
+            StopAttackEffect();
         }
     }
     private void Charging()
@@ -77,8 +84,17 @@ public class OctahedronEnemy : MonoBehaviour
         if (bullet != null)
         {
             bullet.GetComponent<EnemyBullet>().Fire();
+            AttackEffect.SendEvent("Fire");
             BulletCount = 0;
         }
+    }
+    private void PlayAttackEffect()
+    {
+        AttackEffect.Play();
+    }
+    private void StopAttackEffect()
+    {
+        AttackEffect.Stop();
     }
     private void Dead()
     {

@@ -24,7 +24,7 @@ public class EnemyBullet : MonoBehaviour
     public void Charge()
     {
         Speed = 0f;
-        if(transform.localScale.x < 0.3f || transform.localScale.y < 0.3f || transform.localScale.z < 0.3f)
+        if(transform.localScale.x < 0.25f || transform.localScale.y < 0.25f || transform.localScale.z < 0.25f)
         {
             transform.localScale *= 1.05f;
         }
