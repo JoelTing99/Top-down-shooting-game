@@ -18,6 +18,7 @@ public class OctahedronEnemy : MonoBehaviour
     [SerializeField] private GameObject Destroyed;
     [SerializeField] private VisualEffect AttackEffect;
     [SerializeField] private VisualEffect WalkEffect;
+    [SerializeField] private LayerMask CollidableLayer;
     private int BulletCount;
     private GameObject bullet;
     private void Start()
@@ -51,6 +52,7 @@ public class OctahedronEnemy : MonoBehaviour
                 if (hit.collider.CompareTag("Player"))
                 {
                     Animator.SetBool("IsAttack", true);
+                    DrawProjection();
                     WalkEffect.Stop();
                 }
             }
@@ -58,6 +60,7 @@ public class OctahedronEnemy : MonoBehaviour
         else
         {
             Animator.SetBool("IsAttack", false);
+            Line.positionCount = 0;
             WalkEffect.Play();
             StopAttackEffect();
         }
@@ -127,7 +130,7 @@ public class OctahedronEnemy : MonoBehaviour
         {
             Vector3 NewPoint = StartingPosition + i * StartingVelosity;
             points.Add(NewPoint);
-            if (Physics.OverlapSphere(NewPoint, 0.3f, 6).Length > 0)
+            if (Physics.OverlapSphere(NewPoint, 0.3f, CollidableLayer).Length > 0)
             {
                 Line.positionCount = points.Count;
                 break;
