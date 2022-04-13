@@ -18,6 +18,7 @@ public class OctahedronEnemy : MonoBehaviour
     [SerializeField] private GameObject Destroyed;
     [SerializeField] private VisualEffect AttackEffect;
     [SerializeField] private VisualEffect WalkEffect;
+    [SerializeField] private VisualEffect DeadEffect;
     [SerializeField] private LayerMask CollidableLayer;
     private int BulletCount;
     private GameObject bullet;
@@ -104,6 +105,7 @@ public class OctahedronEnemy : MonoBehaviour
         if (HealthSystem.GetHealth() <= 0)
         {
             GameObject destory = Instantiate(Destroyed, transform.position, transform.rotation);
+            VisualEffect deadeffect = Instantiate(DeadEffect, transform.position, transform.rotation);
             Collider[] Collider = Physics.OverlapSphere(transform.position, 2f);
             for (int i = 0; i < Random.Range(3, 5); i++)
             {
@@ -117,8 +119,9 @@ public class OctahedronEnemy : MonoBehaviour
                 }
             }
             LevelSystem.ObtainExp(GameManager.GetOctaedronExpAmount());
-            Destroy(gameObject);
+            Destroy(deadeffect, 3);
             Destroy(destory, 5);
+            Destroy(gameObject);
         }
     }
     private void DrawProjection()

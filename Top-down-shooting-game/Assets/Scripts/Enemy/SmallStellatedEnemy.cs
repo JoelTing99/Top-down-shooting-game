@@ -15,6 +15,8 @@ public class SmallStellatedEnemy : MonoBehaviour
     [SerializeField] private GameObject Destroyed;
     [SerializeField] private VisualEffect AttackEffeck;
     [SerializeField] private VisualEffect WalkEffeck;
+    [SerializeField] private VisualEffect DeadEffect;
+
     private void Start()
     {
         AttackEffeck.Stop();
@@ -57,12 +59,14 @@ public class SmallStellatedEnemy : MonoBehaviour
     {
         if (HealthSystem.GetHealth() <= 0)
         {
+            VisualEffect deadeffect = Instantiate(DeadEffect, transform.position, transform.rotation);
             for (int i = 0; i < Random.Range(6, 10); i++)
             {
                 Instantiate(GameManager.GetCoinsGameObject(), transform.position, Quaternion.identity);
             }
             GameObject destory = Instantiate(Destroyed, transform.position, transform.rotation);
             LevelSystem.ObtainExp(GameManager.GetSmallStellatedExpAmount());
+            Destroy(deadeffect, 3);
             Destroy(gameObject);
         }
     }

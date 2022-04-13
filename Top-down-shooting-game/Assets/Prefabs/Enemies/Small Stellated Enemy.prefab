@@ -984,6 +984,7 @@ MonoBehaviour:
   Destroyed: {fileID: 2448667900211520521, guid: afc808418dc34ea46a6d940a3a72f057, type: 3}
   AttackEffeck: {fileID: 8476333198008547033}
   WalkEffeck: {fileID: 9113395475739774294}
+  DeadEffect: {fileID: 8392948677169258612, guid: 74cbeda1162e39e459c454a39834448a, type: 3}
 --- !u!54 &775000562668591126
 Rigidbody:
   m_ObjectHideFlags: 0

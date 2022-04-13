@@ -1040,6 +1040,7 @@ MonoBehaviour:
   Destroyed: {fileID: 6464499444489142016, guid: f99f802446dd02844bb023aced02da6d, type: 3}
   AttackEffect: {fileID: 1958296317}
   WalkEffect: {fileID: 3922321538101801135}
+  DeadEffect: {fileID: 8392948677169258612, guid: 74cbeda1162e39e459c454a39834448a, type: 3}
 --- !u!54 &6938390457729740674
 Rigidbody:
   m_ObjectHideFlags: 0

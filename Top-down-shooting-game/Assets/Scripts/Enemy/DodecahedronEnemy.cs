@@ -16,6 +16,7 @@ public class DodecahedronEnemy : MonoBehaviour
     [SerializeField] private GameObject Destroyed;
     [SerializeField] private VisualEffect AttackEffect;
     [SerializeField] private VisualEffect WalkEffect;
+    [SerializeField] private VisualEffect DeadEffect;
     private void Start()
     {
         AttackEffect.Stop();
@@ -100,6 +101,7 @@ public class DodecahedronEnemy : MonoBehaviour
         if(HealthSystem.GetHealth() <= 0)
         {
             GameObject destory = Instantiate(Destroyed, transform.position, transform.rotation);
+            VisualEffect deadeffect = Instantiate(DeadEffect, transform.position, transform.rotation);
             Collider[] Collider = Physics.OverlapSphere(transform.position, 2f);
             for (int i = 0; i < Random.Range(4, 8); i++)
             {
@@ -113,8 +115,9 @@ public class DodecahedronEnemy : MonoBehaviour
                 }
             }
             LevelSystem.ObtainExp(GameManager.GetDodecahedronExpAmount());
-            Destroy(gameObject);
+            Destroy(deadeffect, 3);
             Destroy(destory, 5);
+            Destroy(gameObject);
         }
     }
     public void TakeDamage(float Damage)

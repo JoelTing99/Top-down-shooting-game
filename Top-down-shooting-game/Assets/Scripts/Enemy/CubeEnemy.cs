@@ -12,9 +12,11 @@ public class CubeEnemy : MonoBehaviour
     private GameManager GameManager;
     private NavMeshAgent Agent;
     private LevelSystem LevelSystem;
+    private int EffectCount;
     [SerializeField] private GameObject Destroyed;
     [SerializeField] private VisualEffect AttactEffect;
     [SerializeField] private VisualEffect WalkEffect;
+    [SerializeField] private VisualEffect DeadEffect;
     private void Start()
     {
         AttactEffect.Stop();
@@ -57,37 +59,40 @@ public class CubeEnemy : MonoBehaviour
     {
         AttactEffect.Stop();
     }
-    private void PlayerWalkEffect_1()
+    private void PlayerWalkEffect()
     {
-        WalkEffect.transform.localPosition = new Vector3(-1, -0.8f, 0);
-        WalkEffect.transform.Rotate(new Vector3(0, 90, 0));
-        WalkEffect.Play();
-    }
-    private void PlayerWalkEffect_2()
-    {
-        WalkEffect.transform.localPosition = new Vector3(0, -0.8f, 1);
-        WalkEffect.transform.Rotate(new Vector3(0, 90, 0));
-        WalkEffect.Play();
-    }
-    private void PlayerWalkEffect_3()
-    {
-
-        WalkEffect.transform.localPosition = new Vector3(1, -0.8f, 0);
-        WalkEffect.transform.Rotate(new Vector3(0, 90, 0));
-        WalkEffect.Play();
-    }
-    private void PlayerWalkEffect_4()
-    {
-
-        WalkEffect.transform.localPosition = new Vector3(0, -0.8f, -1);
-        WalkEffect.transform.Rotate(new Vector3(0, 90, 0));
-        WalkEffect.Play();
+        EffectCount++;
+        switch (EffectCount)
+        {
+            case 1:
+                WalkEffect.transform.localPosition = new Vector3(-1, -0.8f, 0);
+                WalkEffect.transform.Rotate(new Vector3(0, 90, 0));
+                WalkEffect.Play();
+                break;
+            case 2:
+                WalkEffect.transform.localPosition = new Vector3(0, -0.8f, 1);
+                WalkEffect.transform.Rotate(new Vector3(0, 90, 0));
+                WalkEffect.Play();
+                break;
+            case 3:
+                WalkEffect.transform.localPosition = new Vector3(1, -0.8f, 0);
+                WalkEffect.transform.Rotate(new Vector3(0, 90, 0));
+                WalkEffect.Play();
+                break;
+            case 4:
+                WalkEffect.transform.localPosition = new Vector3(0, -0.8f, -1);
+                WalkEffect.transform.Rotate(new Vector3(0, 90, 0));
+                WalkEffect.Play();
+                EffectCount = 0;
+                break;
+        }
     }
     private void Dead()
     {
         if (HealthSystem.GetHealth() <= 0)
         {
             GameObject destroy = Instantiate(Destroyed, transform.position, transform.rotation);
+            VisualEffect deadeffect = Instantiate(DeadEffect, transform.position, transform.rotation);
             Collider[] Collider = Physics.OverlapSphere(transform.position, 2f);
             for (int i = 0; i < Random.Range(2, 5); i++)
             {
@@ -101,8 +106,9 @@ public class CubeEnemy : MonoBehaviour
                 }
             }
             LevelSystem.ObtainExp(GameManager.GetCubeExpAmount());
-            Destroy(gameObject);
+            Destroy(deadeffect, 3);
             Destroy(destroy, 5);
+            Destroy(gameObject);
         }
     }
     public void TakeDamage(float Damage)

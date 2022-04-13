@@ -619,6 +619,7 @@ MonoBehaviour:
   Destroyed: {fileID: 8987601073146097167, guid: 2fbd3b93eb629c14687c150fdb9d9e46, type: 3}
   AttackEffect: {fileID: 7295033608958013784}
   WalkEffect: {fileID: 111494618}
+  DeadEffect: {fileID: 8392948677169258612, guid: 74cbeda1162e39e459c454a39834448a, type: 3}
   CollidableLayer:
     serializedVersion: 2
     m_Bits: 72
