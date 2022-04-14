@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     private float RollCoolDownImagefillAmount;
     private float GrenadeCoolDownImagefillAmount;
     private int BulletCount;
+    private int StunAnimaitonCount = 1;
     [SerializeField] private int NumPoints;
     [SerializeField] private bool MouseRotating;
     [SerializeField] private Transform FirePoint;
@@ -75,6 +76,7 @@ public class Player : MonoBehaviour
         changeVelocity();
         MoveMent();
         MoveAnimation();
+        StunAnimation();
     }
     private void Update()
     {
@@ -84,19 +86,6 @@ public class Player : MonoBehaviour
         {
             Dead();
         }
-        if (IsStun)
-        {
-            Animator.SetLayerWeight(Animator.GetLayerIndex("GetHit"), 1);
-            Animator.SetTrigger("Stun");
-        }
-        else
-        {
-            Animator.SetLayerWeight(Animator.GetLayerIndex("GetHit"), 0);
-        }
-        if (rb.velocity.x == 0 || rb.velocity.y == 0)
-        {
-            //RollEffect.SendEvent("Stop");
-        }
         if (HoldingThrow)
         {
             DrawGrenadeProjection();
@@ -104,14 +93,6 @@ public class Player : MonoBehaviour
         else
         {
             DrawProjection();
-        }
-        if (IsStun)
-        {
-            SetLayerWeight("GetHit", 1);
-        }
-        else
-        {
-            SetLayerWeight("GetHit", 0);
         }
     }
     private void changeVelocity()
@@ -163,7 +144,6 @@ public class Player : MonoBehaviour
         if (!IsStun)
         {
             Vector2 InputVector = Controls.Player.Movement.ReadValue<Vector2>();
-            //rb.AddForce(new Vector3(InputVector.x, 0, InputVector.y) * GameManager.GetPlayerSpeed() * Time.deltaTime);
             Vector3 velocity = rb.velocity;
             velocity.x = VelocityX * Time.deltaTime * GameManager.GetPlayerSpeed();
             velocity.z = VelocityZ * Time.deltaTime * GameManager.GetPlayerSpeed();
@@ -274,6 +254,23 @@ public class Player : MonoBehaviour
             StartCoroutine(Rolling(1f, Distance));
             Animator.SetTrigger("Roll");
             StartCoroutine(RollCoolDownCount(GameManager.GetRollCoolDownTime()));
+        }
+    }
+    private void StunAnimation()
+    {
+        if (IsStun)
+        {
+            Animator.SetLayerWeight(Animator.GetLayerIndex("GetHit"), 1);
+            if(StunAnimaitonCount > 0)
+            {
+                Animator.SetTrigger("Stun");
+                StunAnimaitonCount--;
+            }
+        }
+        else
+        {
+            Animator.SetLayerWeight(Animator.GetLayerIndex("GetHit"), 0);
+            StunAnimaitonCount = 1;
         }
     }
     private IEnumerator Rolling(float time, float Distance)

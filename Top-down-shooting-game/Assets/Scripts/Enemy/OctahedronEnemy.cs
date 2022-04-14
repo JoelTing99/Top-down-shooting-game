@@ -17,14 +17,13 @@ public class OctahedronEnemy : MonoBehaviour
     [SerializeField] private Transform FirePoint;
     [SerializeField] private GameObject Destroyed;
     [SerializeField] private VisualEffect AttackEffect;
-    [SerializeField] private VisualEffect WalkEffect;
     [SerializeField] private VisualEffect DeadEffect;
     [SerializeField] private LayerMask CollidableLayer;
     private int BulletCount;
     private GameObject bullet;
     private void Start()
     {
-        StopAttackEffect();
+        AttackEffect.Stop();
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetOctahedronHP());
         LevelSystem = GameManager.GetLevelSystem();
@@ -54,7 +53,6 @@ public class OctahedronEnemy : MonoBehaviour
                 {
                     Animator.SetBool("IsAttack", true);
                     DrawProjection();
-                    WalkEffect.Stop();
                 }
             }
         }
@@ -62,8 +60,7 @@ public class OctahedronEnemy : MonoBehaviour
         {
             Animator.SetBool("IsAttack", false);
             Line.positionCount = 0;
-            WalkEffect.Play();
-            StopAttackEffect();
+            AttackEffect.Stop();
         }
     }
     private void Charging()
@@ -71,7 +68,8 @@ public class OctahedronEnemy : MonoBehaviour
         if (BulletCount < 1)
         {
             bullet = Instantiate(Bullet, FirePoint.position, transform.rotation, transform);
-            if(bullet != null)
+            AttackEffect.Play();
+            if (bullet != null)
             {
                 bullet.GetComponent<EnemyBullet>().Charging = true;
                 BulletCount++;
@@ -85,20 +83,13 @@ public class OctahedronEnemy : MonoBehaviour
     }
     private void FireAction()
     {
+        AttackEffect.Stop();
         if (bullet != null)
         {
             bullet.GetComponent<EnemyBullet>().Fire();
             AttackEffect.SendEvent("Fire");
             BulletCount = 0;
         }
-    }
-    private void PlayAttackEffect()
-    {
-        AttackEffect.Play();
-    }
-    private void StopAttackEffect()
-    {
-        AttackEffect.Stop();
     }
     private void Dead()
     {

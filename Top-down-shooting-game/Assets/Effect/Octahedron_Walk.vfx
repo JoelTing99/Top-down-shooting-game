@@ -17,10 +17,10 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: 1207
+    x: 1158
     y: -649
-    width: 1385
-    height: 1771
+    width: 1438
+    height: 1600
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_InputSlots: []
   m_OutputSlots: []
   m_Label: 
-  m_Data: {fileID: 8926484042661614630}
+  m_Data: {fileID: 8926484042661614998}
   m_InputFlowSlot:
   - link: []
   - link: []
@@ -137,27 +137,6 @@ MonoBehaviour:
   loopCount: 0
   delayBeforeLoop: 0
   delayAfterLoop: 0
---- !u!114 &8926484042661614630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f68759077adc0b143b6e1c101e82065e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UIIgnoredErrors: []
-  m_Parent: {fileID: 114350483966674976}
-  m_Children: []
-  m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
-  m_UISuperCollapsed: 0
-  title: 
-  m_Owners:
-  - {fileID: 8926484042661614629}
 --- !u!114 &8926484042661614631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,7 +669,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614948}
   - {fileID: 8926484042661614880}
   - {fileID: 8926484042661614682}
-  m_UIPosition: {x: 1385, y: 632}
+  m_UIPosition: {x: 1385, y: 352}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -1251,8 +1230,8 @@ MonoBehaviour:
   - {fileID: 8926484042661614703}
   - {fileID: 8926484042661614725}
   dataType: 1
-  capacity: 2880
-  stripCapacity: 32
+  capacity: 9000
+  stripCapacity: 100
   particlePerStripCount: 90
   m_Space: 0
 --- !u!114 &8926484042661614699
@@ -1383,7 +1362,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 2158.5786, y: 20.373505}
+  m_UIPosition: {x: 2172, y: 107}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -2599,7 +2578,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614966}
       inputSlot: {fileID: 8926484042661614808}
-    position: {x: 1239, y: 372}
+    position: {x: 1215, y: 91}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661614966
@@ -2781,7 +2760,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614971}
       inputSlot: {fileID: 8926484042661614954}
-    position: {x: 1207, y: 715}
+    position: {x: 1158, y: 435}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661614971
@@ -2955,3 +2934,24 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
   m_Direction: 0
   m_LinkedSlots: []
+--- !u!114 &8926484042661614998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68759077adc0b143b6e1c101e82065e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 114350483966674976}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  title: 
+  m_Owners:
+  - {fileID: 8926484042661614629}

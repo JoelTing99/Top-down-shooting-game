@@ -15,7 +15,6 @@ public class DodecahedronEnemy : MonoBehaviour
     private int EffectCount = 0;
     [SerializeField] private GameObject Destroyed;
     [SerializeField] private VisualEffect AttackEffect;
-    [SerializeField] private VisualEffect WalkEffect;
     [SerializeField] private VisualEffect DeadEffect;
     private void Start()
     {
@@ -42,12 +41,10 @@ public class DodecahedronEnemy : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 2f) && hit.collider.CompareTag("Player"))
         {
             Animator.SetBool("IsAttack", true);
-            WalkEffect.Stop();
         }
         else
         {
             Animator.SetBool("IsAttack", false);
-            WalkEffect.Play();
         }
     }
     private void StartAttack()
@@ -58,9 +55,9 @@ public class DodecahedronEnemy : MonoBehaviour
             if (collide.CompareTag("Player") && AttackCount > 0)
             {
                 GameManager.AttackPlayer(GameManager.GetDodecahedronDamage());
-                if (FindObjectOfType<Player>() != null)
+                if (collide.GetComponent<Player>() != null)
                 {
-                    FindObjectOfType<Player>().isStun = true;
+                    collide.GetComponent<Player>().isStun = true;
                 }
             }
         }

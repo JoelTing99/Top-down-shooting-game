@@ -13,13 +13,10 @@ public class SmallStellatedEnemy : MonoBehaviour
     private NavMeshAgent Agent;
     private LevelSystem LevelSystem;
     [SerializeField] private GameObject Destroyed;
-    [SerializeField] private VisualEffect AttackEffeck;
-    [SerializeField] private VisualEffect WalkEffeck;
     [SerializeField] private VisualEffect DeadEffect;
 
     private void Start()
     {
-        AttackEffeck.Stop();
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetSmallStellatedHP());
         LevelSystem = GameManager.GetLevelSystem();
@@ -39,15 +36,11 @@ public class SmallStellatedEnemy : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 2f) && hit.collider.CompareTag("Player"))
         {
-            Animator.SetBool("IsAttack", true);
-            WalkEffeck.Stop();
-            AttackEffeck.Play();
+            Animator.SetBool("IsAttack", true);;
         }
         else
         {
             Animator.SetBool("IsAttack", false);
-            AttackEffeck.Stop();
-            WalkEffeck.Play();
         }
     }
     private void Attack()

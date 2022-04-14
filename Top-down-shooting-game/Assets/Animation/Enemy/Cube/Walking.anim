@@ -768,28 +768,28 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.53333336
-    functionName: PlayerWalkEffect_1
+    functionName: PlayerWalkEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.0666667
-    functionName: PlayerWalkEffect_2
+    functionName: PlayerWalkEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.4666667
-    functionName: PlayerWalkEffect_3
+    functionName: PlayerWalkEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 2
-    functionName: PlayerWalkEffect_4
+    functionName: PlayerWalkEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
