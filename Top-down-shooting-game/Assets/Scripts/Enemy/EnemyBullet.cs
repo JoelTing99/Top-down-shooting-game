@@ -14,7 +14,7 @@ public class EnemyBullet : MonoBehaviour
     }
     private void Update()
     {
-        transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+        transform.Translate(transform.right * Speed * Time.deltaTime);
         if (Charging)
         {
             Charge();

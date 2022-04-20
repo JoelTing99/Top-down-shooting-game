@@ -67,7 +67,7 @@ public class OctahedronEnemy : MonoBehaviour
     {
         if (BulletCount < 1)
         {
-            bullet = Instantiate(Bullet, FirePoint.position, transform.rotation, transform);
+            bullet = Instantiate(Bullet, FirePoint.position, FirePoint.rotation, transform);
             AttackEffect.Play();
             if (bullet != null)
             {

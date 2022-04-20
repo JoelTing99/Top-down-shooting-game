@@ -504,7 +504,6 @@ MonoBehaviour:
   FirePoint: {fileID: 727315708194702586}
   Destroyed: {fileID: 8987601073146097167, guid: 2fbd3b93eb629c14687c150fdb9d9e46, type: 3}
   AttackEffect: {fileID: 7295033608958013784}
-  WalkEffect: {fileID: 7693781352328435292}
   DeadEffect: {fileID: 8392948677169258612, guid: 74cbeda1162e39e459c454a39834448a, type: 3}
   CollidableLayer:
     serializedVersion: 2
@@ -1312,13 +1311,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8136889433227741062}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.5, z: 1.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5279142933367337241}
   m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &8806278493640469495
 GameObject:
   m_ObjectHideFlags: 0
