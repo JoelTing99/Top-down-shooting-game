@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Cube
-  m_Shader: {fileID: -6465566751694194690, guid: b9f23a69f4d91ff4aa6932bffc01fc67, type: 3}
+  m_Name: Octahedron side 1
+  m_Shader: {fileID: -6465566751694194690, guid: c3fec3eba7073aa46b2568daea07017a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -33,6 +33,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - Color_33d2d95e8f2c44a5a372f52d0a8f43ed: {r: 0.7830188, g: 0.7830188, b: 0.7830188, a: 0}
-    - Color_ac919232f7bf4077aafda5d13932e315: {r: 15.024777, g: 2.8445814, b: 1.630047, a: 0}
+    - Color_38f4b073a6d645b9a911b7f59301ae10: {r: 13.615686, g: 2.6352942, b: 12.172549, a: 0.60784316}
+    - Color_49d18ee63a9f487a8f2206617e78d182: {r: 0.4999555, g: 0.7792261, b: 0.990566, a: 1}
   m_BuildTextureStacks: []

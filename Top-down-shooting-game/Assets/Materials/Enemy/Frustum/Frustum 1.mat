@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Cube
-  m_Shader: {fileID: -6465566751694194690, guid: b9f23a69f4d91ff4aa6932bffc01fc67, type: 3}
+  m_Name: Frustum 1
+  m_Shader: {fileID: -6465566751694194690, guid: d273e80a67935c346a254698e714b217, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -33,6 +33,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - Color_33d2d95e8f2c44a5a372f52d0a8f43ed: {r: 0.7830188, g: 0.7830188, b: 0.7830188, a: 0}
-    - Color_ac919232f7bf4077aafda5d13932e315: {r: 15.024777, g: 2.8445814, b: 1.630047, a: 0}
+    - Color_94e1bb62f25247edb7aa7335b0c1a927: {r: 1, g: 1, b: 1, a: 0}
+    - Color_b1f1bff170404182be5e3929b9f67820: {r: 0, g: 0.028338002, b: 0.69428104, a: 0}
+    - Color_d6006701d3a04de4b801d92a18945fda: {r: 0.044979613, g: 0, b: 0.8396226, a: 0.2156863}
   m_BuildTextureStacks: []
