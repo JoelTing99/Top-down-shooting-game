@@ -13,10 +13,13 @@ public class SmallStellatedEnemy : MonoBehaviour
     private NavMeshAgent Agent;
     private LevelSystem LevelSystem;
     [SerializeField] private GameObject Destroyed;
+    [SerializeField] private VisualEffect AttackEffect;
+    [SerializeField] private VisualEffect WalkEffect;
     [SerializeField] private VisualEffect DeadEffect;
 
     private void Start()
     {
+        AttackEffect.Stop();
         GameManager = FindObjectOfType<GameManager>();
         HealthSystem = new HealthSystem(GameManager.GetSmallStellatedHP());
         LevelSystem = GameManager.GetLevelSystem();

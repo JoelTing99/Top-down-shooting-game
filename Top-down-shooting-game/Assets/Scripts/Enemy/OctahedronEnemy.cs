@@ -60,7 +60,7 @@ public class OctahedronEnemy : MonoBehaviour
         {
             Animator.SetBool("IsAttack", false);
             Line.positionCount = 0;
-            AttackEffect.Stop();
+            AttackEffect.SendEvent("StartCharge");
         }
     }
     private void Charging()
@@ -68,7 +68,7 @@ public class OctahedronEnemy : MonoBehaviour
         if (BulletCount < 1)
         {
             bullet = Instantiate(Bullet, FirePoint.position, FirePoint.rotation, transform);
-            AttackEffect.Play();
+            AttackEffect.SendEvent("StartCharge");
             if (bullet != null)
             {
                 bullet.GetComponent<EnemyBullet>().Charging = true;
@@ -83,7 +83,7 @@ public class OctahedronEnemy : MonoBehaviour
     }
     private void FireAction()
     {
-        AttackEffect.Stop();
+        AttackEffect.SendEvent("StopCharge");
         if (bullet != null)
         {
             bullet.GetComponent<EnemyBullet>().Fire();

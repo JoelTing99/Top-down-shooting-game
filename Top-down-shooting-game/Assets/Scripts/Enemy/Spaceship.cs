@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Spaceship : MonoBehaviour
 {
     [SerializeField] private GameObject Destroyed;
+    [SerializeField] private VisualEffect DeadEffect;
     private HealthSystem healthSystem;
     private LevelSystem levelSystem;
     private GameManager GameManager;
+    private SpawnManager SpawnManager;
     private Vector3 Target;
     private EnemySpawner Spawner;
     private EnemyHealthBar HealthBar;
@@ -25,6 +28,7 @@ public class Spaceship : MonoBehaviour
         Spawner = GetComponentInChildren<EnemySpawner>();
         healthSystem = new HealthSystem(300);
         HealthBar = GetComponentInChildren<EnemyHealthBar>();
+        SpawnManager = FindObjectOfType<SpawnManager>();
         HealthBar.SetHealthSystem(healthSystem);
         HealthBar.gameObject.SetActive(false);
     }
@@ -37,13 +41,14 @@ public class Spaceship : MonoBehaviour
             Spawner.canSpawn = true;
             return;
         }
-        transform.position = Vector3.MoveTowards(transform.position, Target, Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, Target, 3 * Time.deltaTime);
     }
     private void Dead()
     {
         if(healthSystem.GetHealth() <= 0)
         {
             GameObject destroy = Instantiate(Destroyed, transform.position, transform.rotation);
+            VisualEffect deadeffect = Instantiate(DeadEffect, transform.position, transform.rotation);
             Collider[] Collider = Physics.OverlapSphere(transform.position, 2f);
             for (int i = 0; i < Random.Range(5, 10); i++)
             {
@@ -58,6 +63,9 @@ public class Spaceship : MonoBehaviour
             }
             levelSystem.ObtainExp(GameManager.GetCubeExpAmount());
             Destroy(gameObject);
+            Destroy(destroy, 5);
+            Destroy(deadeffect, 3);
+            SpawnManager.GetSpawners().Remove(transform);
         }
     }
     public void TakeDamage(float Amount)

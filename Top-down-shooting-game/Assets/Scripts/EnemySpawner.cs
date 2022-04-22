@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] TypeOfEnemy;
+    [SerializeField] private GameObject[] SpawnEnemy;
     [SerializeField] private Transform EnemyHolder;
     private SpawnManager spawnManager;
     private GameObject Enemy;
@@ -13,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
     private float SpawnPeriod;
     private bool CanSpawn = false;
     private bool IsSpawning;
+    private int RandNum;
 
     public bool canSpawn 
     {
@@ -36,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 EnemyHolder.localScale += new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime);
             }
-            Enemy.transform.position = new Vector3(EnemyHolder.position.x, 0, EnemyHolder.position.z);
+            Enemy.transform.position = Enemy.transform.position;
         }
     }
     private void SpawnAnimation()
@@ -54,8 +56,8 @@ public class EnemySpawner : MonoBehaviour
     }   
     private void SpawnBegin()
     {
-        Enemy = Instantiate(TypeOfEnemy[Random.Range(0, TypeOfEnemy.Length)], EnemyHolder.position, Quaternion.identity);
-        Enemy.transform.parent = EnemyHolder.transform;
+        RandNum = Random.Range(0, TypeOfEnemy.Length);
+        Enemy = Instantiate(SpawnEnemy[RandNum], EnemyHolder.position, Quaternion.identity, EnemyHolder.transform);
         EnemyHolder.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         IsSpawning = true;
     }
@@ -63,6 +65,8 @@ public class EnemySpawner : MonoBehaviour
     {
         IsSpawning = false;
         Enemy.transform.parent = null;
+        Instantiate(TypeOfEnemy[RandNum], Enemy.transform.position, Enemy.transform.rotation);
+        Destroy(Enemy);
         Enemy = null;
         EnemyHolder.localScale = Vector3.one;
     }

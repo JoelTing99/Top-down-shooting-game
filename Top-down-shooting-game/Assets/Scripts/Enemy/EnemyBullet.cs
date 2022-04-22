@@ -14,7 +14,7 @@ public class EnemyBullet : MonoBehaviour
     }
     private void Update()
     {
-        transform.Translate(transform.right * Speed * Time.deltaTime);
+        transform.position += transform.right * Speed * Time.deltaTime;
         if (Charging)
         {
             Charge();
@@ -26,14 +26,14 @@ public class EnemyBullet : MonoBehaviour
         Speed = 0f;
         if(transform.localScale.x < 0.25f || transform.localScale.y < 0.25f || transform.localScale.z < 0.25f)
         {
-            transform.localScale *= 1.05f;
+            transform.localScale *= 1.04f;
         }
     }
     public void Fire()
     {
+        transform.SetParent(null);
         Charging = false;
         Speed = 10f;
-        transform.SetParent(null);
     }
 
     private void OnTriggerEnter(Collider other)

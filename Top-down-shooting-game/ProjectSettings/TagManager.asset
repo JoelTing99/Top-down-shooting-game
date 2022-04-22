@@ -18,6 +18,7 @@ TagManager:
   - Grenade
   - ConnectPoint
   - EnemyShip
+  - CameraHolder
   layers:
   - Default
   - TransparentFX

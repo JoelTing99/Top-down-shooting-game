@@ -144,6 +144,12 @@ MonoBehaviour:
   - {fileID: 4447998514530927520, guid: 6299552db5900594ba0a6fa6ba38f272, type: 3}
   - {fileID: 4758220319040203683, guid: b0f596398485071498729c6732dc1337, type: 3}
   - {fileID: 6144080961601415222, guid: 2bc4a915d92a1024e853f6a3c2d2bcb9, type: 3}
+  SpawnEnemy:
+  - {fileID: 5797565257032000693, guid: 064da54effd937e488533b3fb131d5a0, type: 3}
+  - {fileID: 4603319720326036968, guid: 1070b274b0db16a48a8ffe6ec4b5b525, type: 3}
+  - {fileID: 7707075610888941662, guid: fdfa9c04130e5964784f8fdf7045b056, type: 3}
+  - {fileID: 3865920489618169371, guid: 7d9a36547a5c43f4a96eaca96dde4c2d, type: 3}
+  - {fileID: 6598691980731707689, guid: 79cef4cab154a0648b7733078b2ed17f, type: 3}
   EnemyHolder: {fileID: 2180137655708693734}
 --- !u!1 &2558471219560737143
 GameObject:
@@ -269,6 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Destroyed: {fileID: 1526843072626958216, guid: 0dc09004d16bad64eaaa44b812a2061c, type: 3}
+  DeadEffect: {fileID: 8392948677169258612, guid: 74cbeda1162e39e459c454a39834448a, type: 3}
 --- !u!65 &8838234838986169766
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -512,7 +519,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7595241053813825195}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -6, z: 0}
+  m_LocalPosition: {x: 0, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1857530401324039840}
