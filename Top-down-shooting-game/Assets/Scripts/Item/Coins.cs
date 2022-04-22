@@ -22,6 +22,7 @@ public class Coins : MonoBehaviour
          if(transform.localPosition != point)
          {
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, point, 0.4f);
+            transform.localScale -= new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime);
          }
          else
          {
