@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     private bool IsShooting;
     private bool CanRoll = true;
     private bool CanThrowGrenade = true;
-    private bool HoldingThrow;
+    private bool HoldingThrow = false;
     private bool IsStun;
     private bool RollCoolDownImageActive;
     private bool GrenadeCoolDownImageActive;
@@ -77,6 +77,14 @@ public class Player : MonoBehaviour
         MoveMent();
         MoveAnimation();
         StunAnimation();
+        if (HoldingThrow)
+        {
+            DrawGrenadeProjection();
+        }
+        else
+        {
+            DrawProjection();
+        }
     }
     private void Update()
     {
@@ -85,14 +93,6 @@ public class Player : MonoBehaviour
         if (GameManager.GetPlayerHealthSystem().GetHealth() <= 0)
         {
             Dead();
-        }
-        if (HoldingThrow)
-        {
-            DrawGrenadeProjection();
-        }
-        else
-        {
-            DrawProjection();
         }
     }
     private void changeVelocity()
@@ -371,7 +371,7 @@ public class Player : MonoBehaviour
         {
             Vector3 NewPoint = StartingPosition + i * StartingVelosity;
             points.Add(NewPoint);
-            if (Physics.OverlapSphere(NewPoint, 1f, CollidableLayer).Length > 1)
+            if (Physics.OverlapSphere(NewPoint, 1f, CollidableLayer).Length > 0)
             {
                 Line.positionCount = points.Count;
                 break;
