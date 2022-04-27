@@ -70,7 +70,7 @@ public class Bullet : MonoBehaviour
         ContactPoint Contact = collision.contacts[0];
         Quaternion Rot = Quaternion.FromToRotation(Vector3.up, -Contact.normal);
         VisualEffect Hiteffect = Instantiate(HitEffect, Contact.point, Rot);
-        Destroy(Hiteffect, 2);
+        Destroy(Hiteffect.gameObject, 1);
         Destroy(gameObject);
 
     }

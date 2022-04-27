@@ -58,11 +58,12 @@ public class SmallStellatedEnemy : MonoBehaviour
             VisualEffect deadeffect = Instantiate(DeadEffect, transform.position, transform.rotation);
             for (int i = 0; i < Random.Range(6, 10); i++)
             {
-                Instantiate(GameManager.GetCoinsGameObject(), transform.position, Quaternion.identity);
+                Vector3 RandPos = new Vector3(Random.Range(-1f, 1f), Random.Range(0f, 1f), Random.Range(-1f, 1f));
+                Instantiate(GameManager.GetCoinsGameObject(), transform.position + RandPos, Quaternion.identity);
             }
             GameObject destory = Instantiate(Destroyed, transform.position, transform.rotation);
             LevelSystem.ObtainExp(GameManager.GetSmallStellatedExpAmount());
-            Destroy(deadeffect, 3);
+            Destroy(deadeffect.gameObject, 3);
             Destroy(gameObject);
         }
     }

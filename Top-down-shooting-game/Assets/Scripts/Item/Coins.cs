@@ -1,42 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
+
 
 public class Coins : MonoBehaviour
 {
-    private GameManager GameManager;
-    private bool Collected = false;
+    private GameManager gameManager;
+    [SerializeField] private VisualEffect CollectEffect;
+    private VisualEffect collectEffect;
     void Start()
     {
-        GameManager = FindObjectOfType<GameManager>();
+        gameManager = FindObjectOfType<GameManager>();
     }
-    private void Update()
-    {
-        if(Collected)
-        {
-            MovetoPoint(new Vector3(3.1f, 2f, 6f));
-        }
-    }
-    private void MovetoPoint(Vector3 point)
-    {
-         if(transform.localPosition != point)
-         {
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, point, 0.4f);
-            transform.localScale -= new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime);
-         }
-         else
-         {
-            GameManager.AddCoin(1);
-            Destroy(gameObject);
-         }
-    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             transform.SetParent(GameObject.FindWithTag("CameraHolder").transform);
             GetComponent<Rigidbody>().useGravity = false;
-            Collected = true;
+            collectEffect = Instantiate(CollectEffect, GameObject.FindWithTag("CameraHolder").transform);
+            collectEffect.resetSeedOnPlay = true;
+            collectEffect.SetVector3("SpawnPos", transform.localPosition);
+            gameManager.AddCoin(1);
+            Destroy(collectEffect.gameObject, 3);
+            Destroy(gameObject);
         }
     }
 }

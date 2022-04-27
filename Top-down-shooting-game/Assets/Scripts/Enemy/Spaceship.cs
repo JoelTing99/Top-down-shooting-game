@@ -52,7 +52,8 @@ public class Spaceship : MonoBehaviour
             Collider[] Collider = Physics.OverlapSphere(transform.position, 2f);
             for (int i = 0; i < Random.Range(5, 10); i++)
             {
-                Instantiate(GameManager.GetCoinsGameObject(), transform.position, Quaternion.identity);
+                Vector3 RandPos = new Vector3(Random.Range(-1f, 1f), Random.Range(0f, 1f), Random.Range(-1f, 1f));
+                Instantiate(GameManager.GetCoinsGameObject(), transform.position + RandPos, Quaternion.identity);
             }
             foreach (var collider in Collider)
             {

@@ -96,7 +96,8 @@ public class CubeEnemy : MonoBehaviour
             Collider[] Collider = Physics.OverlapSphere(transform.position, 2f);
             for (int i = 0; i < Random.Range(2, 5); i++)
             {
-                Instantiate(GameManager.GetCoinsGameObject(), transform.position, Quaternion.identity);
+                Vector3 RandPos = new Vector3(Random.Range(-1f, 1f), Random.Range(0f, 1f), Random.Range(-1f, 1f));
+                Instantiate(GameManager.GetCoinsGameObject(), transform.position + RandPos, Quaternion.identity);
             }
             foreach (var collider in Collider)
             {
@@ -106,7 +107,7 @@ public class CubeEnemy : MonoBehaviour
                 }
             }
             LevelSystem.ObtainExp(GameManager.GetCubeExpAmount());
-            Destroy(deadeffect, 3);
+            Destroy(deadeffect.gameObject, 3);
             Destroy(destroy, 5);
             Destroy(gameObject);
         }

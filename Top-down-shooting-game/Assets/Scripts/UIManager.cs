@@ -10,19 +10,20 @@ public class UIManager : MonoBehaviour
     private LevelSystem LevelSystem;
     private SpawnManager SpawnManager;
     private GameManager GameManager;
+    private Animator CoinAnimator;
     private Text WaveNum;
     private Text CoinAmount;
     private Text LevelText;
-    [SerializeField] private Text UpgradePoint;
-    [SerializeField] private GameObject MasteryTree;
-    [SerializeField] private GameObject QuitConfirmMenu;
-    [SerializeField] private GameObject Arrow;
     private GameObject GrenadeCoolDownImage;
     private GameObject RollCoolDownImage;
     private Image LevelImage;
     private List<Transform> Spawners;
     private bool MasteryTreeIsopened;
     private bool QuitConfirmIsopened;
+    [SerializeField] private Text UpgradePoint;
+    [SerializeField] private GameObject MasteryTree;
+    [SerializeField] private GameObject QuitConfirmMenu;
+    [SerializeField] private GameObject Arrow;
 
     void Start()
     {
@@ -39,6 +40,7 @@ public class UIManager : MonoBehaviour
 
         WaveNum = transform.Find("Wave Counter").Find("Wave").GetComponent<Text>();
         CoinAmount = transform.Find("Coins").Find("Amount").GetComponent<Text>();
+        CoinAnimator = transform.Find("Coins").GetComponent<Animator>();
         GrenadeCoolDownImage = transform.Find("Grenade").Find("GrenadeCooldown").gameObject;
         RollCoolDownImage = transform.Find("Roll").Find("RollCooldown").gameObject;
         LevelImage = transform.Find("Level").Find("Bar").GetComponent<Image>();
@@ -90,6 +92,7 @@ public class UIManager : MonoBehaviour
     private void GameManager_OnCollectedCoin(object sender, System.EventArgs e)
     {
         CoinAmount.text = GameManager.GetCoinAmount().ToString();
+        CoinAnimator.SetTrigger("Collected");
     }
     public void OpenMasteryTree()
     {

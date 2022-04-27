@@ -55,7 +55,7 @@ public class Grenade : MonoBehaviour
             }
         }
         VisualEffect explosionEffect = Instantiate(ExplosionEffect, transform.position, Quaternion.identity);
-        Destroy(explosionEffect, 5);
+        Destroy(explosionEffect.gameObject, 5);
         Destroy(gameObject);
     }
 }

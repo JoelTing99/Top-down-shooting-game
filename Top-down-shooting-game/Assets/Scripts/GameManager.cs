@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public event EventHandler OnCollectedCoin;
 
+    public Mesh _mesh;
+    public Material material;
+
     [SerializeField] private GameObject Coins;
     private HealthSystem PlayerHealth;
     private PlayerHealthBar PlayerHealthBar;

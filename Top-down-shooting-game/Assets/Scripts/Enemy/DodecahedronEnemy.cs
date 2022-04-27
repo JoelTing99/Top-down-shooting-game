@@ -102,7 +102,8 @@ public class DodecahedronEnemy : MonoBehaviour
             Collider[] Collider = Physics.OverlapSphere(transform.position, 2f);
             for (int i = 0; i < Random.Range(4, 8); i++)
             {
-                Instantiate(GameManager.GetCoinsGameObject(), transform.position, Quaternion.identity);
+                Vector3 RandPos = new Vector3(Random.Range(-1f, 1f), Random.Range(0f, 1f), Random.Range(-1f, 1f));
+                Instantiate(GameManager.GetCoinsGameObject(), transform.position + RandPos, Quaternion.identity);
             }
             foreach (var collider in Collider)
             {
@@ -112,7 +113,7 @@ public class DodecahedronEnemy : MonoBehaviour
                 }
             }
             LevelSystem.ObtainExp(GameManager.GetDodecahedronExpAmount());
-            Destroy(deadeffect, 3);
+            Destroy(deadeffect.gameObject, 3);
             Destroy(destory, 5);
             Destroy(gameObject);
         }
