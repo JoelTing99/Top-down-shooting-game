@@ -111,6 +111,7 @@ public class OctahedronEnemy : MonoBehaviour
                 }
             }
             LevelSystem.ObtainExp(GameManager.GetOctaedronExpAmount());
+            Textpopup.Create(FindObjectOfType<Player>().transform.position + new Vector3(0, 2, 0), GameManager.GetOctaedronExpAmount(), Color.green);
             Destroy(deadeffect.gameObject, 3);
             Destroy(destory, 5);
             Destroy(gameObject);

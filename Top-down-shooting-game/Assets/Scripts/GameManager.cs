@@ -6,11 +6,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public event EventHandler OnCollectedCoin;
-
-    public Mesh _mesh;
-    public Material material;
-
     [SerializeField] private GameObject Coins;
+    [SerializeField] private Transform textpopup;
     private HealthSystem PlayerHealth;
     private PlayerHealthBar PlayerHealthBar;
     private LevelSystem LevelSystem;
@@ -66,6 +63,7 @@ public class GameManager : MonoBehaviour
     private float FurstumHP = 140;
     private float OctahedronHP = 80;
     private float SmallStellatedHP = 80;
+    private float SpaceshipHP = 300;
 
     //Enemy Damage
     private float CubeDamage = 0.11f; // * 91
@@ -87,6 +85,7 @@ public class GameManager : MonoBehaviour
     private int FurstumExpAmount = 24;
     private int OctahedronExpAmount = 36;
     private int SmallStellatedExpAmount = 60;
+    private int SpaceshipExpAmount = 100;
 
     //Item
     [SerializeField] private GameObject[] BonusItem;
@@ -136,6 +135,12 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Armor = {PlayerArmor_Return}");
         Debug.Log($"Exp = {LevelSystem.GetExp()}");
     }
+    //Popup
+    public Transform GetTextPopup()
+    {
+        return textpopup;
+    }
+
     public GameObject GetCoinsGameObject()
     {
         return Coins;
@@ -308,6 +313,10 @@ public class GameManager : MonoBehaviour
     {
         return SmallStellatedHP;
     }
+    public float GetSpaceshipHP()
+    {
+        return SpaceshipHP;
+    }
     //Enemy Damage
     public float GetCubeDamage()
     {
@@ -370,6 +379,10 @@ public class GameManager : MonoBehaviour
     public int GetSmallStellatedExpAmount()
     {
         return SmallStellatedExpAmount;
+    }
+    public int GetSpaceshipExpAmount()
+    {
+        return SpaceshipExpAmount;
     }
     //Ability
     public float GetGrenadeDamage()

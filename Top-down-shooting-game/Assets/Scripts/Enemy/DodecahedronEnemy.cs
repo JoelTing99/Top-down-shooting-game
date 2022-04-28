@@ -55,6 +55,8 @@ public class DodecahedronEnemy : MonoBehaviour
             if (collide.CompareTag("Player") && AttackCount > 0)
             {
                 GameManager.AttackPlayer(GameManager.GetDodecahedronDamage());
+                Textpopup DamagePopup = Textpopup.Create(collide.transform.position + new Vector3(0, 2, 0), (int)GameManager.GetDodecahedronDamage(), Color.red);
+                DamagePopup.SetFontSize(5);
                 if (collide.GetComponent<Player>() != null)
                 {
                     collide.GetComponent<Player>().isStun = true;
@@ -113,6 +115,7 @@ public class DodecahedronEnemy : MonoBehaviour
                 }
             }
             LevelSystem.ObtainExp(GameManager.GetDodecahedronExpAmount());
+            Textpopup.Create(FindObjectOfType<Player>().transform.position + new Vector3(0, 2, 0), GameManager.GetDodecahedronExpAmount(), Color.green);
             Destroy(deadeffect.gameObject, 3);
             Destroy(destory, 5);
             Destroy(gameObject);

@@ -18,6 +18,8 @@ public class SmallStellatedAttack : MonoBehaviour
             if (collider.CompareTag("Player"))
             {
                 GameManager.AttackPlayer(GameManager.GetSmallStellatedDamage());
+                Textpopup DamagePopup = Textpopup.Create(collider.transform.position + new Vector3(0, 2, 0), (int)GameManager.GetSmallStellatedDamage(), Color.red);
+                DamagePopup.SetFontSize(5);
             }
         }
         Destroy(gameObject, 5);

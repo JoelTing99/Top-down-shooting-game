@@ -26,7 +26,7 @@ public class Spaceship : MonoBehaviour
         GameManager = FindObjectOfType<GameManager>();
         levelSystem = GameManager.GetLevelSystem();
         Spawner = GetComponentInChildren<EnemySpawner>();
-        healthSystem = new HealthSystem(300);
+        healthSystem = new HealthSystem(GameManager.GetSpaceshipHP());
         HealthBar = GetComponentInChildren<EnemyHealthBar>();
         SpawnManager = FindObjectOfType<SpawnManager>();
         HealthBar.SetHealthSystem(healthSystem);
@@ -62,7 +62,8 @@ public class Spaceship : MonoBehaviour
                     collider.GetComponent<Rigidbody>().AddExplosionForce(400, transform.position, 2);
                 }
             }
-            levelSystem.ObtainExp(GameManager.GetCubeExpAmount());
+            levelSystem.ObtainExp(GameManager.GetSpaceshipExpAmount());
+            Textpopup.Create(FindObjectOfType<Player>().transform.position + new Vector3(0, 2, 0), GameManager.GetSpaceshipExpAmount(), Color.green);
             Destroy(gameObject);
             Destroy(destroy, 5);
             Destroy(deadeffect, 3);

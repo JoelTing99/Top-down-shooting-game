@@ -21,7 +21,11 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        bool Popuped = false;
         float PlayerDamage = GameManager.GetPlayerDamage();
+        ContactPoint Contact = collision.contacts[0];
+        Quaternion Rot = Quaternion.FromToRotation(Vector3.up, -Contact.normal);
+        VisualEffect Hiteffect = Instantiate(HitEffect, Contact.point, Rot);
         if (GameManager.GetHaveLifeSteal())
         {
             HealthSystem.Heal(GameManager.GetPlayerDamage() * GameManager.GetPlayerLifeStealRate());
@@ -29,12 +33,26 @@ public class Bullet : MonoBehaviour
         if (Random.value <= GameManager.GetPlayerCritRate())
         {
             PlayerDamage = GameManager.GetPlayerDamage() * GameManager.GetPlayerCritDamageRate();
+            if (!Popuped)
+            {
+                Textpopup.Create(Contact.point, (int)PlayerDamage, Color.red);
+                Popuped = true;
+            }
             Debug.Log("Crit!");
         }
         if (Random.value <= GameManager.GetPlayerHeadShootRate())
         {
             PlayerDamage = 10000;
+            if (!Popuped)
+            {
+                Textpopup.Create(Contact.point, "HeadShot", Color.red);
+                Popuped = true;
+            }
             Debug.Log("HeadShot");
+        }
+        if (!Popuped)
+        {
+            Textpopup.Create(Contact.point, (int)PlayerDamage, Color.white);
         }
         switch (collision.collider.tag)
         {
@@ -67,9 +85,7 @@ public class Bullet : MonoBehaviour
         {
             HitEffect.SetVector4("HitedColor", collision.collider.GetComponent<Material>().color);
         }
-        ContactPoint Contact = collision.contacts[0];
-        Quaternion Rot = Quaternion.FromToRotation(Vector3.up, -Contact.normal);
-        VisualEffect Hiteffect = Instantiate(HitEffect, Contact.point, Rot);
+          
         Destroy(Hiteffect.gameObject, 1);
         Destroy(gameObject);
 

@@ -107,6 +107,7 @@ public class CubeEnemy : MonoBehaviour
                 }
             }
             LevelSystem.ObtainExp(GameManager.GetCubeExpAmount());
+            Textpopup.Create(FindObjectOfType<Player>().transform.position + new Vector3(0, 2, 0), GameManager.GetCubeExpAmount(), Color.green);
             Destroy(deadeffect.gameObject, 3);
             Destroy(destroy, 5);
             Destroy(gameObject);

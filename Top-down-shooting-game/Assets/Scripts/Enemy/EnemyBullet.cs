@@ -42,7 +42,10 @@ public class EnemyBullet : MonoBehaviour
         {
             Destroy(gameObject);
             GameManager.AttackPlayer(GameManager.GetOctahedronDamage());
-        }else if (other.CompareTag("Wall"))
+            Textpopup DamagePopup = Textpopup.Create(other.transform.position + new Vector3(0, 2, 0), (int)GameManager.GetOctahedronDamage(), Color.red);
+            DamagePopup.SetFontSize(5);
+        }
+        else if (other.CompareTag("Wall"))
         {
             Destroy(gameObject);
         }

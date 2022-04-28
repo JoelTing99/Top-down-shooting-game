@@ -63,6 +63,7 @@ public class SmallStellatedEnemy : MonoBehaviour
             }
             GameObject destory = Instantiate(Destroyed, transform.position, transform.rotation);
             LevelSystem.ObtainExp(GameManager.GetSmallStellatedExpAmount());
+            Textpopup.Create(FindObjectOfType<Player>().transform.position + new Vector3(0, 2, 0), GameManager.GetSmallStellatedExpAmount(), Color.green);
             Destroy(deadeffect.gameObject, 3);
             Destroy(gameObject);
         }

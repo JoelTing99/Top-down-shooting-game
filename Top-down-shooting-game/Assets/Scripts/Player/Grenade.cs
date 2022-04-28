@@ -53,6 +53,10 @@ public class Grenade : MonoBehaviour
             {
                 hit.GetComponent<Rigidbody>().AddExplosionForce(ExplodeForce, transform.position, GameManager.GetGrenadeExplodeRadius());
             }
+            if(hit.gameObject.layer == 7)
+            {
+                Textpopup.Create(hit.transform.position, (int)GrenadeDamage, Color.red);
+            }
         }
         VisualEffect explosionEffect = Instantiate(ExplosionEffect, transform.position, Quaternion.identity);
         Destroy(explosionEffect.gameObject, 5);
