@@ -132,6 +132,10 @@ public class UIManager : MonoBehaviour
             QuitConfirmMenu.SetActive(true);
         }
     }
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     public void Quit()
     {
         SceneManager.LoadScene(0);

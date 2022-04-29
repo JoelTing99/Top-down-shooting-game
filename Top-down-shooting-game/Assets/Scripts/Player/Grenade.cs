@@ -58,6 +58,7 @@ public class Grenade : MonoBehaviour
                 Textpopup.Create(hit.transform.position, (int)GrenadeDamage, Color.red);
             }
         }
+        Camera.main.GetComponent<Animator>().SetTrigger("Shake");
         VisualEffect explosionEffect = Instantiate(ExplosionEffect, transform.position, Quaternion.identity);
         Destroy(explosionEffect.gameObject, 5);
         Destroy(gameObject);

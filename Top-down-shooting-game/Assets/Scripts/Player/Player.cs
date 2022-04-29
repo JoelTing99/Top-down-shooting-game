@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private InputMaster Controls;
     private Animator Animator;
     private LineRenderer Line;
+    private HealthSystem PlayerHealthSystem;
     private bool IsShooting;
     private bool CanRoll = true;
     private bool CanThrowGrenade = true;
@@ -22,7 +23,7 @@ public class Player : MonoBehaviour
     private bool IsStun;
     private bool RollCoolDownImageActive;
     private bool GrenadeCoolDownImageActive;
-    private bool IsDead = false;
+    private static bool IsDead = false;
     private float VelocityX = 0;
     private float VelocityZ = 0;
     private float RotateAngle;
@@ -47,6 +48,10 @@ public class Player : MonoBehaviour
         get { return IsStun; }
         set { IsStun = value; }
     }
+    public static bool isdead
+    {
+        get { return IsDead; }
+    }
     private void Awake()
     {
         GameManager = FindObjectOfType<GameManager>();
@@ -70,9 +75,11 @@ public class Player : MonoBehaviour
     private void Start()
     {
         BulletCount = GameManager.GetPlayerBulletCount();
+        PlayerHealthSystem = GameManager.GetPlayerHealthSystem();
     }
     private void FixedUpdate()
     {
+        if (IsDead) return;
         changeVelocity();
         MoveMent();
         MoveAnimation();
@@ -89,8 +96,8 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Debug.Log(BulletCount);
-        if (!IsDead) return;
-        if (GameManager.GetPlayerHealthSystem().GetHealth() <= 0)
+        if (IsDead) return;
+        if (PlayerHealthSystem.GetHealth() <= 0)
         {
             Dead();
         }
@@ -381,12 +388,9 @@ public class Player : MonoBehaviour
     }
     public void Dead()
     {
-        if (!IsDead)
-        {
-            IsDead = true;
-            Line.positionCount = 0;
-            Animator.SetTrigger("Dead");
-        }
+        IsDead = true;
+        Line.positionCount = 0;
+        Animator.SetTrigger("Dead");
     }
     public float GetRollCoolDownImagefillAmount()
     {

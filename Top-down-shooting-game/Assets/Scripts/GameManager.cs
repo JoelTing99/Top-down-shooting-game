@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Touch");
         }
-        Debug.Log($"HP = {PlayerHP}");
+        Debug.Log($"HP = {PlayerHealth.GetHealth()}");
         Debug.Log($"Damge = {PlayerDamage_Return}");
         Debug.Log($"Speed = {PlayerSpeed_Return}");
         Debug.Log($"Armor = {PlayerArmor_Return}");

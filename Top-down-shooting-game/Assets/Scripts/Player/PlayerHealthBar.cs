@@ -24,6 +24,10 @@ public class PlayerHealthBar : MonoBehaviour
     }
     private void Update()
     {
+        if (Player.isdead)
+        {
+            Destroy(gameObject);
+        }
         Timer -= Time.deltaTime;
         if (Timer <= 0 && Bar.fillAmount <= DamageBar.fillAmount)
         {

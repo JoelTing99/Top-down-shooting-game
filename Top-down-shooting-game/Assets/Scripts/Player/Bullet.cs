@@ -28,7 +28,9 @@ public class Bullet : MonoBehaviour
         VisualEffect Hiteffect = Instantiate(HitEffect, Contact.point, Rot);
         if (GameManager.GetHaveLifeSteal())
         {
-            HealthSystem.Heal(GameManager.GetPlayerDamage() * GameManager.GetPlayerLifeStealRate());
+            float StealAmount = GameManager.GetPlayerDamage() * GameManager.GetPlayerLifeStealRate();
+            HealthSystem.Heal(StealAmount);
+            Textpopup.Create(FindObjectOfType<Player>().transform.position + new Vector3(0, 2, 0), (int)StealAmount, Color.red);
         }
         if (Random.value <= GameManager.GetPlayerCritRate())
         {
