@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine.UI;
 
 public class SpawnManager : MonoBehaviour
 {
+    public event EventHandler OnNextWave; 
+
     [SerializeField] private List<Transform> Spawners;
     [SerializeField] private GameObject Spaceship;
     [SerializeField] private float WaitTime;
@@ -37,6 +40,10 @@ public class SpawnManager : MonoBehaviour
                 WaveNum++;
                 AddSpawner();
                 waitTime = WaitTime;
+                if(OnNextWave != null)
+                {
+                    OnNextWave(this, EventArgs.Empty);
+                }
             }
             else
             {
@@ -48,8 +55,8 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < WaveNum; i++)
         {
-            int XPos = Random.Range(-17, 17);
-            int ZPos = Random.Range(-12, 12);
+            int XPos = UnityEngine.Random.Range(-17, 17);
+            int ZPos = UnityEngine.Random.Range(-12, 12);
             Vector3 SpawnPos = new Vector3(XPos, 20, ZPos);
             GameObject spaceship = Instantiate(Spaceship, SpawnPos, Quaternion.identity);
             Spawners.Add(spaceship.transform);

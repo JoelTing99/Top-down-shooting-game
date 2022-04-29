@@ -381,7 +381,7 @@ public class Player : MonoBehaviour
     }
     public void Dead()
     {
-        if (Animator.GetBool("Dead") != true && !IsDead)
+        if (!IsDead)
         {
             IsDead = true;
             Line.positionCount = 0;

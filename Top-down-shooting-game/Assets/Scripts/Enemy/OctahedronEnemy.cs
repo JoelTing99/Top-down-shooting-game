@@ -35,8 +35,6 @@ public class OctahedronEnemy : MonoBehaviour
         Agent.speed = GameManager.GetOctahedronSpeed();
         transform.Find("HealthBar").gameObject.SetActive(false);
     }
-
-
     private void Update()
     {
         AttackAnimation();

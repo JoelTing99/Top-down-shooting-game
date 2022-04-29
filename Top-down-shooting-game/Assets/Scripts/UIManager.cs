@@ -11,9 +11,10 @@ public class UIManager : MonoBehaviour
     private SpawnManager SpawnManager;
     private GameManager GameManager;
     private Animator CoinAnimator;
-    private Text WaveNum;
+    private Animator WaveCounterAnimator;
     private Text CoinAmount;
     private Text LevelText;
+    private Text WaveText;
     private GameObject GrenadeCoolDownImage;
     private GameObject RollCoolDownImage;
     private Image LevelImage;
@@ -21,6 +22,7 @@ public class UIManager : MonoBehaviour
     private bool MasteryTreeIsopened;
     private bool QuitConfirmIsopened;
     [SerializeField] private Text UpgradePoint;
+    [SerializeField] private GameObject WaveCounter;
     [SerializeField] private GameObject MasteryTree;
     [SerializeField] private GameObject QuitConfirmMenu;
     [SerializeField] private GameObject Arrow;
@@ -37,17 +39,20 @@ public class UIManager : MonoBehaviour
         LevelSystem.OnGetExp += LevelSystem_OnGetExp;
         LevelSystem.OnLevelUp += LevelSystem_OnLevelUp;
         LevelSystem.OnUsedUpgradePoint += LevelSystem_OnUsedUpgradePoint;
-
-        WaveNum = transform.Find("Wave Counter").Find("Wave").GetComponent<Text>();
+        SpawnManager.OnNextWave += SpawnManager_OnNextWave;
+;
         CoinAmount = transform.Find("Coins").Find("Amount").GetComponent<Text>();
         CoinAnimator = transform.Find("Coins").GetComponent<Animator>();
+        WaveCounterAnimator = WaveCounter.GetComponent<Animator>();
         GrenadeCoolDownImage = transform.Find("Grenade").Find("GrenadeCooldown").gameObject;
         RollCoolDownImage = transform.Find("Roll").Find("RollCooldown").gameObject;
         LevelImage = transform.Find("Level").Find("Bar").GetComponent<Image>();
         LevelText = transform.Find("Level").Find("Level").GetComponent<Text>();
+        WaveText = WaveCounter.GetComponentInChildren<Text>();
         Spawners = SpawnManager.GetSpawners();
 
         UpgradePoint.text = LevelSystem.GetUpgradePoint().ToString();
+
 
         SetExpBar();
         SetExpText();
@@ -65,8 +70,11 @@ public class UIManager : MonoBehaviour
         GrenadeCoolDownImage.GetComponent<Image>().fillAmount = Player.GetGrenadeCoolDownImagefillAmount();
         RollCoolDownImage.SetActive(Player.GetRollCoolDownImageActive());
         RollCoolDownImage.GetComponent<Image>().fillAmount = Player.GetRollCoolDownImagefillAmount();
-        WaveNum.text = SpawnManager.GetWaveCount();
-        
+    }
+    private void SpawnManager_OnNextWave(object sender, System.EventArgs e)
+    {
+         WaveText.text = SpawnManager.GetWaveCount();
+         WaveCounterAnimator.SetTrigger("Popup");
     }
     private void SetExpBar()
     {

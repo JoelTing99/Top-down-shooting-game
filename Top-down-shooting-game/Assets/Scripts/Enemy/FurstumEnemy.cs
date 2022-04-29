@@ -54,8 +54,6 @@ public class FurstumEnemy : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit Hit, 2f) && Hit.collider.CompareTag("Player") && AttackCount > 0)
         {
             GameManager.AttackPlayer(GameManager.GetFurstumDamage());
-            Textpopup DamagePopup = Textpopup.Create(Hit.transform.position + new Vector3(0, 2, 0), (int)GameManager.GetFurstumDamage(), Color.red);
-            DamagePopup.SetFontSize(5);
             AttackCount--;
         }
     }
